@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Mail, Instagram, Twitter, Linkedin, Send, Github } from 'lucide-react';
+import { ArrowRight, Mail, Linkedin, Send, Github } from 'lucide-react';
 import { BentoCard } from './ui/BentoCard';
 
 export const Contact: React.FC = () => {
