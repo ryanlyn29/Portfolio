@@ -38,15 +38,24 @@ export const Contact: React.FC = () => {
          </div>
          
          <div className="space-y-4 mt-12">
-           {['/ryanlyn29', '/in/ryanlyncee'].map((handle, i) => (
-             <a key={i} href="#" className="flex items-center gap-4 text-orange-900/80 dark:text-orange-100/80 hover:text-orange-950 dark:hover:text-white transition-colors group">
+            {[
+              { url: 'https://github.com/ryanlyn29', icon: <Github size={16} />, handle: '/ryanlyn29' },
+              { url: 'https://www.linkedin.com/in/ryanlyncee', icon: <Linkedin size={16} />, handle: '/in/ryanlyncee' }
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-orange-900/80 dark:text-orange-100/80 hover:text-orange-950 dark:hover:text-white transition-colors group"
+              >
                 <div className="w-8 h-8 flex items-center justify-center bg-orange-950/10 dark:bg-orange-100/10 group-hover:bg-orange-950/20 dark:group-hover:bg-orange-100/20 rounded-lg">
-                   { i === 0 ? <Github size={16}/> : <Linkedin size={16}/>}
+                  {item.icon}
                 </div>
-                <span className="font-mono text-xs tracking-wider">{handle}</span>
-             </a>
-           ))}
-         </div>
+                <span className="font-mono text-xs tracking-wider">{item.handle}</span>
+              </a>
+            ))}
+          </div>
       </BentoCard>
 
       <BentoCard 
