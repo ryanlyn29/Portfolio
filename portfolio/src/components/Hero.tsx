@@ -59,13 +59,13 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
      <BentoCard 
         colSpan="md:col-span-1" 
         rowSpan="md:row-span-2" 
-        className="order-2 md:order-2 min-h-60 md:min-h-0 p-0 relative group bg-black border border-gray-800/60 rounded-2xl flex items-center justify-center"
+        className="order-2 md:order-2 min-h-[240px] md:min-h-0 p-0 relative group bg-black border border-gray-800/60 rounded-2xl flex items-center justify-center"
     >
         <TreePalm 
             className="w-24 h-24 text-black dark:text-teal-300 opacity-80 group-hover:opacity-100 transition-all duration-700" 
         />
 
-        <div className="absolute inset-0 bg-linear-to-t from-zinc-600 via-transparent to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-90" />
 
         <div className="absolute bottom-6 left-6 pl-4">
             <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-300 mb-1">Operator</p>
