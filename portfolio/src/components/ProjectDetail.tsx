@@ -57,7 +57,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
         <div className="relative w-full h-[60vh] md:h-[70vh] z-10">
             {project.id === '3' ? (
                 <video
-                    src="/videos/Clinix.mp4"
+                    src="/videos/ClinixHome.mp4"
                     autoPlay
                     loop
                     muted
