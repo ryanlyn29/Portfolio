@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
-  colSpan?: number | string; 
+  colSpan?: number | string;
   rowSpan?: number | string; 
   delay?: number;
   onClick?: () => void;
@@ -24,18 +24,30 @@ export const BentoCard: React.FC<BentoCardProps> = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+      initial={{ opacity: 0, y: 30, scale: 0.98 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4, delay, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ 
+        duration: 0.6,
+        ease: [0.2, 0.8, 0.2, 1], 
+        delay: delay 
+      }}
+      whileHover={{ 
+        y: -4,
+        scale: 1.005,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
       onClick={onClick}
       className={`
         ${hideDefaultBackground ? '' : defaultStyles}
         rounded-2xl 
-        transition-all duration-300
+        transition-colors duration-300
         overflow-hidden relative flex flex-col
         ${colSpan} ${rowSpan} ${className}
+        will-change-transform
+        cursor-default
       `}
+      style={{ willChange: "transform, opacity" }}
     >
         {children}
     </motion.div>

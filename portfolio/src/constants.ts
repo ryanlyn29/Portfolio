@@ -17,8 +17,8 @@ export const PROJECTS: Project[] = [
         '/images/WhiteFlowRoom.png'
     ],
     themeColor: '#4f46e5', 
-    darkThemeColor: '#0c0a1f', 
-    lightThemeColor: '#EEF2FF', 
+    darkThemeColor: '#100C08', 
+    lightThemeColor: '#f8f6f4',
     tags: ['Socket.io', 'Redis', 'HTML5 Canvas', 'Node.js'],
   },
   {
@@ -36,9 +36,9 @@ export const PROJECTS: Project[] = [
         '/images/AgentGuardDashboard.png',
         '/images/AgentGuardProjectOverview.png'
     ],
-    themeColor: '#b91c1c', 
-    darkThemeColor: '#1f0505', 
-    lightThemeColor: '#FEF2F2', 
+    themeColor: '#0ea5e9',
+    darkThemeColor: '#0c0a1f',
+    lightThemeColor: '#F0F9FF',
     tags: ['React', 'PostgreSQL', 'Gemini API', 'Security'],
   },
   {
@@ -56,9 +56,9 @@ export const PROJECTS: Project[] = [
         '/images/ClinicMobileMenu.png',
         '/images/ClinixChat.png'
     ],
-    themeColor: '#0d9488', 
-    darkThemeColor: '#041412',
-    lightThemeColor: '#F0FDFA', 
+    themeColor: '#7F3535',
+    darkThemeColor: '#2D1717',
+    lightThemeColor: '#FFFFFF', 
     tags: ['FastAPI', 'Docker', 'React', 'Cloud'],
   },
   {
@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
     title: 'INIT Build',
     category: 'Agile Development',
     description: 'Collaborative development initiative focusing on component modularity and API design.',
-    longDescription: 'As a Build Team Member at INIT (Shellhacks), I collaborated in an agile workflow to design and deploy interactive web applications. This role focused heavily on component modularity, responsive state management, and engaging in technical workshops covering backend architecture. Additionally, as a member of Code Crunch and ColorStack, I actively engage in algorithm optimization and technical interview preparation.',
+    longDescription: 'As a Build Team Member at INIT and ShellHacks participant, I collaborated in an agile workflow to design and deploy interactive web applications. This role focused heavily on component modularity, responsive state management, and engaging in technical workshops covering backend architecture. Additionally, as a member of Code Crunch and ColorStack, I actively engage in algorithm optimization and technical interview preparation.',
     role: 'Team Member',
     year: '2025',
     liveUrl: '#',
@@ -76,9 +76,9 @@ export const PROJECTS: Project[] = [
         '/images/WhiteFlowLogin.png',
         '/images/WhiteFlowRoom.png'
     ],
-    themeColor: '#d97706', 
+    themeColor: '#d97706',
     darkThemeColor: '#1f1005', 
-    lightThemeColor: '#FFF7DA', 
+    lightThemeColor: '#FFFBEB', 
     tags: ['Agile', 'Teamwork', 'Algorithms', 'Hackathon'],
   },
 ];

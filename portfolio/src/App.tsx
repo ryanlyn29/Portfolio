@@ -4,9 +4,11 @@ import { Background } from './components/Background';
 import { Navbar } from './components/NavBar';
 import { Hero } from './components/Hero';
 import { Projects } from './components/Projects';
+import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { ProjectDetail } from './components/ProjectDetail';
 import type { Project } from './types';
+
 
 function App() {
   const [activeColor, setActiveColor] = useState<string | null>(null);
@@ -23,7 +25,7 @@ function App() {
     }
   };
 
-  
+ 
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
@@ -37,28 +39,30 @@ function App() {
     }
   }, [selectedProject]);
 
-  
   const defaultDarkColor = "#18181b"; 
   const defaultLightColor = "#F8F9FA"; 
 
-  
   const currentBgColor = activeColor || (theme === 'dark' ? defaultDarkColor : defaultLightColor);
 
   return (
     <div className="relative text-zinc-900 dark:text-white min-h-screen selection:bg-orange-500 selection:text-white font-sans">
-      
       <Background color={currentBgColor} />
 
       <Navbar />
 
       <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-32 flex flex-col gap-4 w-full">
-        <Hero toggleTheme={toggleTheme} isDark={theme === 'dark'} />
+        <Hero 
+          toggleTheme={toggleTheme} 
+          isDark={theme === 'dark'} 
+        />
         
         <Projects 
             onHoverProject={setActiveColor} 
             onSelectProject={setSelectedProject}
             isDark={theme === 'dark'}
         />
+
+        <About />
         
         <Contact />
 
@@ -71,7 +75,8 @@ function App() {
         {selectedProject && (
             <ProjectDetail 
                 project={selectedProject} 
-                onClose={() => setSelectedProject(null)} 
+                onClose={() => setSelectedProject(null)}
+                onSelectProject={setSelectedProject}
             />
         )}
       </AnimatePresence>

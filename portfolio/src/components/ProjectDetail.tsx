@@ -2,18 +2,20 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Calendar, Layers, User } from 'lucide-react';
 import type { Project } from "../types";
+import { NextProjectMenu } from './NextProjectMenu';
 
 interface ProjectDetailProps {
   project: Project;
   onClose: () => void;
+  onSelectProject: (project: Project) => void;
 }
 
-export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
+export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose, onSelectProject }) => {
   
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [project.id]); 
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -24,6 +26,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
 
   return (
     <motion.div 
+      key={project.id} 
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 100 }}
@@ -36,7 +39,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
                 onClick={onClose}
-                className="pointer-events-auto bg-white/80 dark:bg-black/50 backdrop-blur-md border border-black/10 dark:border-white/10 text-zinc-900 dark:text-white px-6 py-3 rounded-xl font-mono text-xs uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-white dark:hover:bg-zinc-800 transition-colors shadow-lg"
+                className="pointer-events-auto cursor-pointer bg-white/80 dark:bg-black/50 backdrop-blur-md border border-black/10 dark:border-white/10 text-zinc-900 dark:text-white px-6 py-3 rounded-xl font-mono text-xs uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-white dark:hover:bg-zinc-800 transition-colors shadow-lg"
             >
                 <ArrowLeft size={16} />
                 Back to Grid
@@ -47,7 +50,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="pointer-events-auto bg-zinc-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-mono text-xs uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-lg"
+                className="pointer-events-auto cursor-pointer bg-zinc-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-mono text-xs uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-lg"
             >
                 Visit Site
                 <ArrowUpRight size={16} />
@@ -205,14 +208,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
                                 autoPlay 
                                 loop 
                                 muted 
-                                controls
-                                className="w-full h-auto hover:scale-105 transition-transform duration-700"
+                                
+                                className="w-full h-auto scale-[1.05] hover:scale-105 transition-transform duration-700"
                             />
                         ) : (
                             <img 
                                 src={item} 
                                 alt={`Gallery ${i}`} 
-                                className="w-full h-auto hover:scale-105 transition-transform duration-700"
+                                className="w-full h-auto scale-102 hover:scale-105 transition-transform duration-700"
                             />
                         )}
                     </motion.div>
@@ -220,12 +223,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }
             </div>
         </div>
 
-        <div className="bg-zinc-200 dark:bg-zinc-900 py-24 text-center relative z-10">
-            <p className="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-4">Next Case Study</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-zinc-900 dark:text-white cursor-pointer hover:opacity-50 transition-opacity" onClick={onClose}>
-                View Next Project
-            </h2>
-        </div>
+        <NextProjectMenu currentProjectId={project.id} onSelectProject={onSelectProject} />
     </motion.div>
   );
 };

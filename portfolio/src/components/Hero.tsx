@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDownRight, MapPin, ArrowUpRight, TreePalm, Moon, Sun, Terminal, MessageCircle } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDownRight, MapPin, ArrowUpRight, TreePalm, Moon, Sun, Terminal, MessageCircle, Globe, Wifi } from 'lucide-react';
 import { BentoCard } from './ui/BentoCard';
 import { SKILLS } from '../constants';
 
@@ -10,15 +10,21 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
+  const { scrollY } = useScroll();
+  
+  
+  const bgY = useTransform(scrollY, [0, 500], ['0%', '20%']);
+  const palmY = useTransform(scrollY, [0, 500], [0, -50]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 min-h-[800px]">
-      
       
       <BentoCard 
         colSpan="md:col-span-2 lg:col-span-2" 
         rowSpan="md:row-span-2" 
         hideDefaultBackground
-        className="order-1 md:order-1 p-8 md:p-12 justify-between group 
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        className="order-1 md:order-1 p-8 md:p-12 justify-between group cursor-pointer
         bg-teal-100/60 dark:bg-teal-900/30 backdrop-blur-md border border-teal-400 dark:border-teal-800 
         hover:bg-teal-200/70 dark:hover:bg-teal-900/50 transition-colors duration-500 rounded-2xl"
       >
@@ -32,14 +38,13 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
               <span className="w-1.5 h-1.5 rounded-full bg-teal-900 dark:bg-white animate-pulse" />
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-teal-900 dark:text-white">System Online</span>
             </motion.div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.85] text-teal-950 dark:text-white mb-4">
+            <h1 className="text-5xl font-display md:text-7xl font-bold tracking-tighter leading-[0.85] text-teal-950 dark:text-white mb-4">
               RYAN<span className="text-teal-600 dark:text-teal-400">_</span>
             </h1>
         </div>
         <div className="mt-8 border-t border-teal-950/10 dark:border-white/10 pt-8 relative">
-          
           <div className="absolute -left-6 top-8 bottom-0 w-px bg-teal-900/20 dark:bg-teal-400/10 hidden sm:block">
-            <div className="absolute top-0 -left-1 w-2 h-px bg-teal-900/30 dark:bg-teal-400/20" />
+            <div className="absolute top-0 -left-1 w-2 h-px-teal-900/30 dark:bg-teal-400/20" />
             <div className="absolute bottom-0 -left-1 w-2 h-px bg-teal-900/30 dark:bg-teal-400/20" />
             <div className="absolute top-1/2 -translate-y-1/2 -left-4 origin-center -rotate-90">
                 <span className="text-[8px] font-mono text-teal-900/50 dark:text-teal-400/30 uppercase tracking-widest whitespace-nowrap">COORD.Z-09</span>
@@ -55,26 +60,65 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
         </div>
       </BentoCard>
 
-     
      <BentoCard 
         colSpan="md:col-span-1" 
         rowSpan="md:row-span-2" 
-        className="order-2 md:order-2 min-h-[240px] md:min-h-0 p-0 relative group bg-black border border-gray-800/60 rounded-2xl flex items-center justify-center"
+        delay={0.1}
+        className="order-2 md:order-2 min-h-60 md:min-h-0 p-0 relative group border border-gray-800/60 rounded-2xl flex flex-col justify-end overflow-hidden"
     >
-        <TreePalm 
-            className="w-24 h-24 text-black dark:text-teal-300 opacity-80 group-hover:opacity-100 transition-all duration-700" 
-        />
+        <div className="absolute inset-0 bg-zinc-900 overflow-hidden">
+            <motion.div 
+                style={{ y: bgY, willChange: "transform" }} 
+                className="absolute inset-0 h-[120%] -top-[10%]"
+            >
+                <img 
+                    src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?q=80&w=800&auto=format&fit=crop" 
+                    alt="South Florida"
+                    className="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out"
+                />
+            </motion.div>
+            <motion.div 
+                className="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent h-[20%]"
+                animate={{ top: ['-20%', '120%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                style={{ opacity: 0.2 }}
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
+        </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-90" />
+        <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+            <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[10px] font-mono text-white/90 uppercase tracking-widest">Active</span>
+            </div>
+             <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center gap-2 text-white/90">
+                <Wifi size={12} />
+                <span className="text-[10px] font-mono">5G</span>
+            </div>
+        </div>
 
-        <div className="absolute bottom-6 left-6 pl-4">
-            <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-300 mb-1">Operator</p>
-            <p className="text-xl font-bold text-white dark:text-teal-300 tracking-tight">South<br/>Florida</p>
+        <div className="relative z-10 p-6 w-full">
+            <div className="flex items-center gap-2 mb-2">
+                <motion.div style={{ y: palmY, willChange: "transform" }}>
+                    <TreePalm className="w-5 h-5 text-teal-400" />
+                </motion.div>
+                <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-300">Operator</p>
+            </div>
+            
+            <div className="flex items-end justify-between">
+                <div>
+                    <p className="text-3xl font-bold text-white tracking-tight leading-none group-hover:translate-x-2 transition-transform duration-300">
+                        South<br/><span className="text-teal-400">Florida</span>
+                    </p>
+                </div>
+                <Globe size={32} className="text-white/20 group-hover:text-teal-400/50 group-hover:rotate-180 transition-all duration-700" />
+            </div>
         </div>
       </BentoCard>
 
       <BentoCard 
         colSpan="md:col-span-1" 
+        delay={0.2}
         hideDefaultBackground
         className="order-3 md:order-3 lg:order-3 p-6 justify-between 
         bg-cyan-200/60 dark:bg-cyan-900/40 backdrop-blur-md border border-cyan-400 dark:border-cyan-800 
@@ -94,6 +138,7 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
 
       <BentoCard 
         colSpan="md:col-span-1"
+        delay={0.3}
         onClick={toggleTheme}
         hideDefaultBackground
         className={`order-6 md:order-6 lg:order-4 p-6 flex flex-col items-center justify-center gap-4 cursor-pointer group border border-amber-400 transition-colors duration-500 rounded-2xl backdrop-blur-md
@@ -116,30 +161,74 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
 
       <BentoCard 
         colSpan="md:col-span-2 lg:col-span-2" 
+        delay={0.4}
         hideDefaultBackground
-        className="order-7 md:order-7 lg:order-5 p-0 overflow-hidden relative flex items-center 
+        className="order-7 md:order-7 lg:order-5 p-6 overflow-hidden relative flex flex-col justify-center gap-4
         bg-indigo-200/60 dark:bg-indigo-900/40 backdrop-blur-md border border-indigo-300 dark:border-indigo-800 
-        hover:bg-indigo-300/70 dark:hover:bg-indigo-800 transition-colors rounded-2xl"
+        hover:bg-indigo-300/70 dark:hover:bg-indigo-800 transition-colors rounded-2xl group"
       >
+          <div className="absolute inset-0 opacity-10 dark:opacity-20 pointer-events-none" 
+               style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '16px 16px', color: 'currentColor' }} 
+          />
+
+          <div className="absolute top-4 left-6 flex items-center gap-2 opacity-60">
+             <div className="w-2 h-2 bg-indigo-500 dark:bg-indigo-400 rounded-full animate-ping" />
+             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-900 dark:text-indigo-200">Live_Stack_Trace</span>
+          </div>
+
+          <div className="absolute top-4 right-6 flex gap-4 sm:flex">
+             <div className="text-[8px] font-mono text-indigo-800 dark:text-indigo-300">
+                <span className="opacity-50">CPU</span> 12%
+             </div>
+             <div className="text-[8px] font-mono text-indigo-800 dark:text-indigo-300">
+                 <span className="opacity-50">MEM</span> 64MB
+             </div>
+          </div>
+          
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-indigo-200/80 dark:from-indigo-900/80 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-indigo-200/80 dark:from-indigo-900/80 to-transparent z-10 pointer-events-none" />
           
-          <motion.div 
-             className="flex gap-12 whitespace-nowrap px-8"
-             animate={{ x: [0, -1000] }}
-             transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-          >
-             {[...SKILLS, ...SKILLS, ...SKILLS].map((skill, i) => (
-                <div key={i} className="flex items-center gap-4 text-indigo-400 dark:text-indigo-600/50 text-3xl font-bold uppercase tracking-tight font-mono">
-                   <span className={i % 2 === 0 ? "text-indigo-950 dark:text-white/80" : "text-indigo-500/50 dark:text-indigo-400/50"}>{skill.name}</span> 
-                   <span className="text-amber-500 text-sm">///</span>
-                </div>
-             ))}
-          </motion.div>
+          <div className="relative w-full overflow-hidden">
+              <motion.div 
+                 className="flex gap-8 whitespace-nowrap"
+                 animate={{ x: [0, -1000] }}
+                 transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+              >
+                 {[...SKILLS, ...SKILLS, ...SKILLS, ...SKILLS].map((skill, i) => (
+                    <div key={`r1-${i}`} className="flex items-center gap-3">
+                       <span className={`text-2xl md:text-3xl font-bold uppercase tracking-tight font-display 
+                          ${i % 2 === 0 ? 'text-indigo-950 dark:text-white' : 'text-transparent'}`}
+                          style={i % 2 !== 0 ? { WebkitTextStroke: '1px currentColor' } : {}}
+                       >
+                          {skill.name}
+                       </span> 
+                       <span className="text-indigo-400/50 text-xs">●</span>
+                    </div>
+                 ))}
+              </motion.div>
+          </div>
+
+           <div className="relative w-full overflow-hidden opacity-40"> 
+              <motion.div 
+                 className="flex gap-8 whitespace-nowrap"
+                 animate={{ x: [-1000, 0] }}
+                 transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
+              >
+                 {[...SKILLS, ...SKILLS, ...SKILLS, ...SKILLS].reverse().map((skill, i) => (
+                    <div key={`r2-${i}`} className="flex items-center gap-3">
+                       <span className="text-xl md:text-2xl font-bold uppercase tracking-tight font-mono text-indigo-800/60 dark:text-indigo-300/60">
+                          {skill.name}
+                       </span> 
+                       <span className="text-indigo-400/30 text-xs">+</span>
+                    </div>
+                 ))}
+              </motion.div>
+          </div>
       </BentoCard>
 
       <BentoCard 
         colSpan="md:col-span-1" 
+        delay={0.5}
         hideDefaultBackground
         className="order-5 md:order-5 lg:order-6 p-6 justify-between group 
         bg-violet-200/60 dark:bg-violet-900/40 backdrop-blur-md border border-violet-300 dark:border-violet-800 
@@ -159,6 +248,7 @@ export const Hero: React.FC<HeroProps> = ({ toggleTheme, isDark }) => {
 
       <BentoCard 
         colSpan="md:col-span-1" 
+        delay={0.6}
         onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
         hideDefaultBackground
         className="order-4 md:order-4 lg:order-7 p-6 justify-center items-center gap-4 group cursor-pointer text-center 
