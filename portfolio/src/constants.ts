@@ -99,7 +99,7 @@ export const VIDEO_ITEMS = [
   {
     id: 'v1',
     title: "WhiteFlow Demo",
-    channel: "Ryan Lyn",
+    channel: "Ryan Lyncee",
     subs: "Lead Architect",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
     video: "/videos/WhiteFlowDemo.mp4",
