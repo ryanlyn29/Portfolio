@@ -237,7 +237,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
           <img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+          className="w-full h-full object-cover scale-101 group-hover:scale-105 transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent opacity-90" />
           
@@ -389,7 +389,7 @@ const AboutContent = () => (
        <div className="md:col-span-7 space-y-8">
           <div>
             <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">Biography</h3>
-                <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">Biography</h3>
+            
                 <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg mb-4">
                     I’m a Computer Engineering student at Florida International University, graduating in 2028, with a 3.96 GPA. I’ve been on the Dean’s List during my time at FIU.
                 </p>

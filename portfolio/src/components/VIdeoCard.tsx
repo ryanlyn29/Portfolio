@@ -25,14 +25,14 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
     <BentoCard 
       colSpan="md:col-span-7" 
       noPadding={true} 
-      className="min-h-[320px] group relative bg-zinc-900 dark:bg-[#111] cursor-pointer"
+      className="min-h-[320px] group relative z-5 bg-zinc-900 dark:bg-[#111] cursor-pointer"
       layoutId="card-playlist"
       onClick={onClick}
     >
         <img
             src={currentVideo.poster}
             alt={currentVideo.title}
-            className="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700"
+            className="absolute inset-0 w-full h-full object-cover z-0 scale-101 group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
         />
         

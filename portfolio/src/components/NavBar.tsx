@@ -36,7 +36,7 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
               {item.icon}
             </div>
           
-            <span className="absolute -top-14 left-1/2 -translate-x-1/2 bg-zinc-900 text-white dark:bg-white dark:text-black text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-lg">
+            <span className="absolute -top-14 left-1/2 -translate-x-1/2 bg-zinc-900 text-white dark:bg-white dark:text-black  text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-lg">
               {item.label}
               <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 dark:bg-white rotate-45"></div>
             </span>

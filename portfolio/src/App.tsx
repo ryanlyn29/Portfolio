@@ -171,7 +171,7 @@ const ToolsPage = () => (
           <div className="flex flex-col h-full">
               <div className="flex-1 flex flex-col justify-end items-end mb-6 space-y-1">
                   <span className="text-zinc-400 text-xs font-mono">1,240 + 350</span>
-                  <span className="text-4xl font-light tracking-tight text-zinc-900 dark:text-white">1,590</span>
+                  <span className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-white">1,590</span>
               </div>
               <div className="grid grid-cols-4 gap-3">
                   {['C', '±', '%', '÷', 7, 8, 9, '×', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '='].map((btn, i) => (
@@ -311,7 +311,7 @@ const AppLibraryPage = ({
                                         <button 
                                             key={i} 
                                             onClick={app.action}
-                                            className="flex flex-col items-center gap-1.5 group focus:outline-none"
+                                            className="flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
                                         >
                                             <div className={`
                                                 w-[3.75rem] h-[3.75rem] rounded-[14px] shadow-sm 
@@ -494,15 +494,15 @@ const HomePage = ({
                   </AnimatePresence>
 
                   <div className="flex justify-between items-end">
-                    <button className={`${buttonBg} px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-lg`}>
+                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-lg`}>
                         View Project
                     </button>
 
                     <div className="flex gap-2">
-                        <button onClick={prevProject} className={`p-2 rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
+                        <button onClick={prevProject} className={`p-2  cursor-pointer rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
                             <ChevronLeft size={16} />
                         </button>
-                        <button onClick={nextProject} className={`p-2 rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
+                        <button onClick={nextProject} className={`p-2 cursor-pointer rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
                             <ChevronRight size={16} />
                         </button>
                     </div>
@@ -858,7 +858,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20 pointer-events-none">
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 ring-1 ring-black/5 dark:ring-white/10">
             {[0, 1, 2].map((idx) => (
                 <button
                 key={idx} 
@@ -866,7 +866,7 @@ export default function App() {
                     if (idx === page) return;
                     setPage([idx, idx > page ? 1 : -1]);
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 shadow-sm pointer-events-auto hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-900 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
+                className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 shadow-sm pointer-events-auto hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
                 aria-label={`Go to page ${idx + 1}`}
                 />
             ))}
