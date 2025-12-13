@@ -112,7 +112,7 @@ export const VIDEO_ITEMS = [
   {
     id: 'v2',
     title: "AgentGuard Demo",
-    channel: "Ryan Lyn",
+    channel: "Ryan Lyncee",
     subs: "Frontend Developer",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
     video: "/videos/AgentGuardDemo.mp4",
@@ -123,7 +123,7 @@ export const VIDEO_ITEMS = [
   {
     id: 'v3',
     title: "Clinix Walkthrough",
-    channel: "Ryan Lyn",
+    channel: "Ryan Lyncee",
     subs: "Frontend Developer",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
     video: "/videos/ClinixDemo.mp4",
