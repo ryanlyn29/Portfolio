@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavBar } from './components/NavBar';
 import { BentoCard } from './components/BentoCard';
-import { VideoCard } from './components/VIdeoCard';
+import { VideoCard } from  "./VideoCard.tsx";
 import { PROJECTS, VIDEO_ITEMS } from './constants';
 import { 
   ArrowUpRight, Plus, ChevronLeft, ChevronRight,
