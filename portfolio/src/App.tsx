@@ -388,7 +388,7 @@ const HomePage = ({
               id="about"
               colSpan="md:col-span-6" 
               layoutId="card-about"
-              className="relative overflow-hidden bg-[#ff4500] text-white group cursor-pointer border-none !p-8"
+              className="relative overflow-hidden bg-[#F57B22] text-white group cursor-pointer border-none !p-8"
               onClick={() => openModal('about')}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
@@ -560,7 +560,7 @@ const HomePage = ({
               </div>
             </BentoCard>
 
-            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#0c0c0e] border border-zinc-800 flex flex-col items-center justify-center p-4 min-h-[200px]">
+            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#18181B] border border-zinc-800 flex flex-col items-center justify-center p-4 min-h-[200px]">
                 <div className="flex flex-row items-center justify-center w-full h-full gap-5">
                     <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
@@ -620,7 +620,7 @@ const HomePage = ({
             <BentoCard 
               colSpan="md:col-span-5" 
               id="contact" 
-              className="bg-rose-600 text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
+              className="bg-[#F4405F] text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
               onClick={copyEmail}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
