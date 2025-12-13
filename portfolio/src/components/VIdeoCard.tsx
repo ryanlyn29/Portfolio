@@ -9,12 +9,12 @@ interface VideoCardProps {
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
-  const currentVideo = VIDEO_ITEMS[0]; 
-  
+  const currentVideo = VIDEO_ITEMS[0]; // Show the first video as the featured one
+  // Default to dark mode (white text) if no override provided
   const textColor = (currentVideo as any).textColor || 'text-white';
   const gradient = (currentVideo as any).overlayGradient || 'from-zinc-900 via-zinc-900/40 to-transparent';
   
-  
+  // Derived colors for UI elements based on text color preference
   const isDarkText = textColor.includes('zinc-900') || textColor.includes('black');
   const tagBg = isDarkText ? 'bg-green-600/10 text-green-700 border-green-600/20' : 'bg-green-500/20 text-green-400 border-green-500/20';
   const metaColor = isDarkText ? 'text-zinc-600' : 'text-zinc-100';
@@ -47,8 +47,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
           <h3 className={`font-bold text-2xl md:text-4xl mb-2 leading-tight max-w-lg ${shadowClass}`}>{currentVideo.title}</h3>
           
           <div className="flex items-center gap-3">
-             <div className="w-8 h-8 rounded-full bg-blue-500 overflow-hidden border border-white/20">
-                 <img src={currentVideo.avatar} className="w-full h-full object-cover" alt="Channel" />
+             <div className="w-8 h-8 rounded-full bg-[#1DB954] flex items-center justify-center border border-white/20 shrink-0 shadow-sm">
+                 <span className="text-black font-bold text-sm leading-none pt-[1px]">R</span>
              </div>
              <div>
                 <p className={`text-sm font-bold ${metaColor}`}>{currentVideo.channel}</p>
@@ -57,7 +57,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
           </div>
         </div>
 
-        
+        {/* Play Button Overlay */}
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}
