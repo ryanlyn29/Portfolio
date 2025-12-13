@@ -7,7 +7,7 @@ import {
   ArrowUpRight, Plus, ChevronLeft, ChevronRight,
   Github, Code2, Linkedin, User, Layers, Mail, Copy, CheckCircle,
   Calendar as CalendarIcon, Cloud, Calculator, CheckSquare, Music, Twitter,
-  Search, Grid, Settings, Smartphone, Wifi, BatteryFull
+  Search, Grid, Settings, Smartphone, Wifi, BatteryFull, X
 } from 'lucide-react';
 import { Modal } from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,6 +17,8 @@ type ModalState = {
   type: 'project' | 'about' | 'skills' | 'playlist' | null;
   data: any;
 };
+
+
 
 
 const StatusBar = () => {
@@ -53,193 +55,377 @@ const StatusBar = () => {
 
 
 
-const ToolsPage = () => (
-  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-14 pb-32 content-start w-full max-w-[1920px] mx-auto">
-      
+const ToolsPage = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const monthIndex = now.getMonth();
+  const today = now.getDate();
+  const monthName = now.toLocaleString('en-US', { month: 'long' });
+  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+  const firstDayOfMonth = new Date(year, monthIndex, 1).getDay();
+
+  const [display, setDisplay] = useState('0');
+  const [expression, setExpression] = useState('');
+  const [waitingForOperand, setWaitingForOperand] = useState(false);
+
+
+    const compute = (exp: string) => {
+    try {
+        const sanitized = exp.replace(/×/g, '*').replace(/÷/g, '/');
+        const result = Function(`"use strict"; return (${sanitized})`)();
+        return Number.isFinite(result) ? result.toString() : 'Error';
+    } catch {
+        return 'Error';
+    }
+    };
+
+
+    const handlePress = (value: any) => {
+        if (value === 'C') {
+            setDisplay('0');
+            setExpression('');
+            setWaitingForOperand(false);
+            return;
+        }
+
+        if (value === '±') {
+            setDisplay(prev => (prev.startsWith('-') ? prev.slice(1) : `-${prev}`));
+            return;
+        }
+
+        if (value === '%') {
+            setDisplay(prev => (parseFloat(prev) / 100).toString());
+            return;
+        }
+
+        if (['+', '-', '×', '÷'].includes(value)) {
+            setExpression(prev =>
+            prev
+                ? `${prev} ${value}`
+                : `${display} ${value}`
+            );
+            setWaitingForOperand(true);
+            return;
+        }
+
+        if (value === '=') {
+            if (!expression) return;
+            const result = compute(`${expression} ${display}`);
+            setDisplay(result);
+            setExpression('');
+            setWaitingForOperand(false);
+            return;
+        }
+
+        if (value === '.') {
+            if (display.includes('.')) return;
+            setDisplay(prev => prev + '.');
+            return;
+        }
+
+        setDisplay(prev =>
+            waitingForOperand || prev === '0'
+            ? value.toString()
+            : prev + value.toString()
+        );
+        setWaitingForOperand(false);
+    };
+
+    const [tasks, setTasks] = useState([
+    { id: 1, txt: 'Review PRs', done: true },
+    { id: 2, txt: 'Update Portfolio', done: false },
+    { id: 3, txt: 'Client Meeting', done: false }
+    ]);
+
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [draftText, setDraftText] = useState('');
+
+    const pendingCount = tasks.filter(t => !t.done).length;
+
+    const toggleTask = (id: number) => {
+    setTasks(prev =>
+        prev.map(t => (t.id === id ? { ...t, done: !t.done } : t))
+    );
+    };
+
+    const addTask = () => {
+    const id = Date.now();
+    setTasks(prev => [...prev, { id, txt: 'New Task', done: false }]);
+    setEditingId(id);
+    setDraftText('New Task');
+    };
+
+    const removeTask = (id: number) => {
+    setTasks(prev => prev.filter(t => t.id !== id));
+    };
+
+    const startEdit = (task: any) => {
+    setEditingId(task.id);
+    setDraftText(task.txt);
+    };
+
+    const saveEdit = () => {
+    if (editingId === null) return;
+    setTasks(prev =>
+        prev.map(t =>
+        t.id === editingId ? { ...t, txt: draftText.trim() || t.txt } : t
+        )
+    );
+    setEditingId(null);
+    };
+
+    const cancelEdit = () => {
+    setEditingId(null);
+    setDraftText('');
+};
+
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 content-start w-full max-w-[1920px] mx-auto">
       <BentoCard colSpan="md:col-span-8" className="bg-zinc-100 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 min-h-[140px] !p-6">
-          <div className="flex flex-row items-center justify-between w-full h-full">
-            <div>
-              <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Workspace</h2>
-              <p className="text-zinc-500 text-sm mt-1">Productivity & Utilities</p>
-            </div>
-            <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center shrink-0">
-               <Calculator className="text-blue-500" size={32} />
-            </div>
+        <div className="flex flex-row items-center justify-between w-full h-full">
+          <div>
+            <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Workspace</h2>
+            <p className="text-zinc-500 text-sm mt-1">Productivity & Utilities</p>
           </div>
+          <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center shrink-0">
+            <Calculator className="text-blue-500" size={32} />
+          </div>
+        </div>
       </BentoCard>
 
       <BentoCard colSpan="md:col-span-4" className="bg-sky-500 text-white border-sky-400 relative overflow-hidden min-h-[140px] !p-6">
-          <div className="absolute top-[-20px] right-[-20px] w-32 h-32 bg-white/20 rounded-full blur-2xl" />
-          <div className="relative z-10 flex flex-col justify-between h-full">
-             <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-2">
-                      <Cloud size={20} className="text-white/90" />
-                      <span className="text-sm font-medium text-white/90">Miami, FL</span>
-                  </div>
-                  <div className="text-right">
-                       <div className="text-xs font-medium text-sky-100">H:85° L:76°</div>
-                  </div>
-             </div>
-             <div className="flex items-end justify-between mt-2">
-                <div className="text-5xl font-bold tracking-tighter">82°</div>
-                <p className="text-sky-100 text-sm font-medium">Partly Cloudy</p>
-             </div>
+        <div className="absolute top-[-20px] right-[-20px] w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+        <div className="relative z-10 flex flex-col justify-between h-full">
+          <div className="flex justify-between items-start">
+            <div className="flex items-center gap-2">
+              <Cloud size={20} className="text-white/90" />
+              <span className="text-sm font-medium text-white/90">Miami, FL</span>
+            </div>
+            <div className="text-right">
+              <div className="text-xs font-medium text-sky-100">H:85° L:76°</div>
+            </div>
           </div>
+          <div className="flex items-end justify-between mt-2">
+            <div className="text-5xl font-bold tracking-tighter">82°</div>
+            <p className="text-sky-100 text-sm font-medium">Partly Cloudy</p>
+          </div>
+        </div>
       </BentoCard>
 
       <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-white dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 p-5 !p-5">
-          <div className="flex justify-between items-center mb-4 px-4 pt-4">
-              <span className="font-bold text-lg text-zinc-900 dark:text-white">October</span>
-              <div className="flex items-center gap-2">
-                  <span className="text-sm text-zinc-400 font-medium">2025</span>
-                  <div className="p-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full">
-                      <CalendarIcon size={14} className="text-zinc-500 dark:text-zinc-400" />
-                  </div>
-              </div>
+        <div className="flex justify-between items-center mb-4 px-4 pt-4">
+          <span className="font-bold text-lg text-zinc-900 dark:text-white">{monthName}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-zinc-400 font-medium">{year}</span>
+            <div className="p-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full">
+              <CalendarIcon size={14} className="text-zinc-500 dark:text-zinc-400" />
+            </div>
           </div>
-              <div className="flex flex-col gap-2">
-                <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-zinc-500">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day}>{day}</div>
-                  ))}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-zinc-500">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+              <div key={d}>{d}</div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-7 gap-1 text-center">
+            {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+              <div key={`empty-${i}`} />
+            ))}
+
+            {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
+              <div
+                key={day}
+                className={`flex items-center justify-center w-10 h-10 rounded-full text-xs font-medium transition-all mx-auto
+                  ${
+                    day === today
+                      ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-500/30'
+                      : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 cursor-pointer'
+                  }`}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50">
+            <div className="w-1 h-8 bg-blue-500 rounded-full" />
+            <div className="flex-1">
+              <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wide">Next Up</p>
+              <p className="text-xs font-semibold text-zinc-900 dark:text-white truncate">Project Launch Meeting</p>
+            </div>
+            <span className="text-[10px] text-zinc-400 font-mono">10:00</span>
+          </div>
+        </div>
+      </BentoCard>
+
+      <BentoCard colSpan="md:col-span-4" noPadding className="flex flex-col border-none">
+        <div className="bg-[#facc15] p-6 pb-3">
+            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+                <div className="p-2 bg-black/5 rounded-lg">
+                <CheckSquare size={18} className="text-zinc-900" />
+                </div>
+                <h3 className="font-bold text-lg text-zinc-900">Tasks</h3>
+            </div>
+            <span className="px-2 py-1 bg-white/30 rounded-md text-xs font-bold text-zinc-900 backdrop-blur-md">
+                {pendingCount} Pending
+            </span>
+            </div>
+        </div>
+
+        <div className="flex-1 bg-white dark:bg-[#1c1c1e] p-6 pt-4">
+            <div className="space-y-3">
+            {tasks.map(task => (
+                <div
+                key={task.id}
+                onClick={() => toggleTask(task.id)}
+                className="group flex items-center gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                >
+                <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all
+                    ${
+                        task.done
+                        ? 'bg-zinc-900 border-zinc-900 dark:bg-white dark:border-white'
+                        : 'border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-900 dark:group-hover:border-white'
+                    }`}
+                >
+                    {task.done && (
+                    <Plus size={12} className="text-white dark:text-black rotate-45 stroke-[4]" />
+                    )}
                 </div>
 
-                <div className="grid grid-cols-7 gap-1 text-center">
-                  {Array.from({ length: 31 }, (_, i) => i + 1).map(day => (
-                    <div
-                      key={day}
-                      className={`flex items-center justify-center
-                        w-10 h-10 rounded-full
-                        text-xs font-medium transition-all mx-auto
-                        ${
-                          day === 14
-                            ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-500/30'
-                            : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 cursor-pointer'
-                        }
-                      `}
+                {editingId === task.id ? (
+                    <input
+                    value={draftText}
+                    autoFocus
+                    onChange={e => setDraftText(e.target.value)}
+                    onBlur={saveEdit}
+                    onKeyDown={e => {
+                        if (e.key === 'Enter') saveEdit();
+                        if (e.key === 'Escape') cancelEdit();
+                    }}
+                    onClick={e => e.stopPropagation()}
+                    className="flex-1 bg-transparent text-sm font-medium text-zinc-700 dark:text-zinc-200 outline-none border-b border-zinc-300 dark:border-zinc-600"
+                    />
+                ) : (
+                    <span
+                    onClick={e => {
+                        e.stopPropagation();
+                        startEdit(task);
+                    }}
+                    className={`flex-1 text-sm font-medium
+                        ${task.done ? 'line-through opacity-50' : 'opacity-90'}
+                        text-zinc-700 dark:text-zinc-200`}
                     >
-                      {day}
-                    </div>
-                  ))}
+                    {task.txt}
+                    </span>
+                )}
+
+                <button
+                    onClick={e => {
+                    e.stopPropagation();
+                    removeTask(task.id);
+                    }}
+                    className="opacity-0 cursor-pointer group-hover:opacity-100 transition-opacity text-zinc-400 hover:text-red-500"
+                >
+                    <X size={14} />
+                </button>
                 </div>
-              </div>
+            ))}
+            </div>
 
-          <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-              <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50">
-                  <div className="w-1 h-8 bg-blue-500 rounded-full" />
-                  <div className="flex-1">
-                      <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wide">Next Up</p>
-                      <p className="text-xs font-semibold text-zinc-900 dark:text-white truncate">Project Launch Meeting</p>
-                  </div>
-                  <span className="text-[10px] text-zinc-400 font-mono">10:00</span>
-              </div>
-          </div>
-      </BentoCard>
-
-      <BentoCard colSpan="md:col-span-4" noPadding={true} className="flex flex-col border-none">
-          <div className="bg-[#facc15] p-6 pb-3">
-              <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                      <div className="p-2 bg-black/5 rounded-lg">
-                        <CheckSquare size={18} className="text-zinc-900" />
-                      </div>
-                      <h3 className="font-bold text-lg text-zinc-900">Tasks</h3>
-                  </div>
-                  <span className="px-2 py-1 bg-white/30 rounded-md text-xs font-bold text-zinc-900 backdrop-blur-md">3 Pending</span>
-              </div>
-          </div>
-          
-          <div className="flex-1 bg-white dark:bg-[#1c1c1e] p-6 pt-4">
-              <div className="space-y-3">
-                  {[
-                      { txt: 'Review PRs', done: true },
-                      { txt: 'Update Portfolio', done: false },
-                      { txt: 'Client Meeting', done: false }
-                  ].map((task, i) => (
-                      <div key={i} className="group flex items-center gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer">
-                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${task.done ? 'bg-zinc-900 border-zinc-900 dark:bg-white dark:border-white' : 'border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-900 dark:group-hover:border-white'}`}>
-                              {task.done && <Plus size={12} className="text-white dark:text-black rotate-45 stroke-[4]" />}
-                          </div>
-                          <span className={`text-sm font-medium text-zinc-700 dark:text-zinc-200 ${task.done ? 'line-through opacity-50' : 'opacity-90'}`}>{task.txt}</span>
-                      </div>
-                  ))}
-              </div>
-          </div>
-      </BentoCard>
+            <button
+            onClick={addTask}
+            className="mt-4 w-full py-2 cursor-pointer rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-sm font-bold text-zinc-700 dark:text-zinc-200 transition-all"
+            >
+            Add Task
+            </button>
+        </div>
+        </BentoCard>
 
       <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-100 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white !p-6">
-          <div className="flex flex-col h-full">
-              <div className="flex-1 flex flex-col justify-end items-end mb-6 space-y-1">
-                  <span className="text-zinc-400 text-xs font-mono">1,240 + 350</span>
-                  <span className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-white">1,590</span>
-              </div>
-              <div className="grid grid-cols-4 gap-3">
-                  {['C', '±', '%', '÷', 7, 8, 9, '×', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '='].map((btn, i) => (
-                      <button key={i} className={`
-                          h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all active:scale-95 shadow-sm
-                          ${btn === '=' 
-                             ? 'col-span-2 bg-orange-500 hover:bg-orange-600 text-white' 
-                             : typeof btn === 'number' || btn === '.' 
-                                ? 'bg-white dark:bg-[#2c2c2e] hover:bg-zinc-50 dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100' 
-                                : 'bg-zinc-200 dark:bg-[#3a3a3c] text-zinc-900 dark:text-orange-400 font-bold'
-                          }
-                      `}>
-                          {btn}
-                      </button>
-                  ))}
-              </div>
+        <div className="flex flex-col h-full">
+          <div className="flex-1 flex flex-col justify-end items-end mb-6 space-y-1">
+            <span className="text-zinc-400 text-xs font-mono">{expression}</span>
+            <span className="text-4xl font-semibold tracking-tight">{display}</span>
           </div>
+          <div className="grid grid-cols-4 gap-3">
+            {['C', '±', '%', '÷', 7, 8, 9, '×', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '='].map((btn, i) => (
+              <button
+                key={i}
+                onClick={() => handlePress(btn)}
+                className={`
+                  h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all active:scale-95 shadow-sm
+                  ${btn === '='
+                    ? 'col-span-2 bg-orange-500 hover:bg-orange-600 text-white'
+                    : typeof btn === 'number' || btn === '.'
+                      ? 'bg-white dark:bg-[#2c2c2e] hover:bg-zinc-50 dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100'
+                      : 'bg-zinc-200 dark:bg-[#3a3a3c] text-zinc-900 dark:text-orange-400 font-bold'}
+                `}
+              >
+                {btn}
+              </button>
+            ))}
+          </div>
+        </div>
       </BentoCard>
 
       <BentoCard colSpan="md:col-span-4" className="bg-white dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 flex flex-col justify-between gap-8 !p-6">
-           
-           <div className="flex flex-col gap-2 mb-5">
-               <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                      <div className="p-1.5 bg-purple-500/10 rounded-lg">
-                        <Layers size={14} className="text-purple-500" />
-                      </div>
-                      <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Memory</span>
-                  </div>
-                  <span className="text-xs font-mono font-medium text-zinc-400">14.2 GB</span>
-               </div>
-               <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-purple-500 w-[70%] rounded-full" />
-               </div>
-           </div>
+        <div className="flex flex-col gap-2 mb-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 bg-purple-500/10 rounded-lg">
+                <Layers size={14} className="text-purple-500" />
+              </div>
+              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Memory</span>
+            </div>
+            <span className="text-xs font-mono font-medium text-zinc-400">14.2 GB</span>
+          </div>
+          <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-full bg-purple-500 w-[70%] rounded-full" />
+          </div>
+        </div>
 
-           <div className="flex flex-col gap-2 mb-5">
-               <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                      <div className="p-1.5 bg-green-500/10 rounded-lg">
-                        <Grid size={14} className="text-green-500" />
-                      </div>
-                      <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Storage</span>
-                  </div>
-                  <span className="text-xs font-mono font-medium text-zinc-400">1.1 TB</span>
-               </div>
-               <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-green-500 w-[45%] rounded-full" />
-               </div>
-           </div>
+        <div className="flex flex-col gap-2 mb-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 bg-green-500/10 rounded-lg">
+                <Grid size={14} className="text-green-500" />
+              </div>
+              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Storage</span>
+            </div>
+            <span className="text-xs font-mono font-medium text-zinc-400">1.1 TB</span>
+          </div>
+          <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-full bg-green-500 w-[45%] rounded-full" />
+          </div>
+        </div>
 
-           <div className="flex flex-col gap-2">
-               <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                      <div className="p-1.5 bg-blue-500/10 rounded-lg">
-                        <Cloud size={14} className="text-blue-500" />
-                      </div>
-                      <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Network</span>
-                  </div>
-                  <span className="text-xs font-mono font-medium text-zinc-400">850 Mbps</span>
-               </div>
-               <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-500 w-[90%] rounded-full" />
-               </div>
-           </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 bg-blue-500/10 rounded-lg">
+                <Cloud size={14} className="text-blue-500" />
+              </div>
+              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-300">Network</span>
+            </div>
+            <span className="text-xs font-mono font-medium text-zinc-400">850 Mbps</span>
+          </div>
+          <div className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-full bg-blue-500 w-[90%] rounded-full" />
+          </div>
+        </div>
       </BentoCard>
-  </div>
-);
+    </div>
+  );
+};
+
 
 const AppLibraryPage = ({ 
     openModal, 
@@ -254,6 +440,8 @@ const AppLibraryPage = ({
     scrollToSection: (id: string) => void,
     currentProject: any
 }) => {
+
+    const [query, setQuery] = useState('');
 
     const apps = [
         {
@@ -283,8 +471,17 @@ const AppLibraryPage = ({
         }
     ];
 
+    const filteredApps = apps
+        .map(section => ({
+            ...section,
+            items: section.items.filter(app =>
+                app.name.toLowerCase().includes(query.toLowerCase())
+            )
+        }))
+        .filter(section => section.items.length > 0);
+
     return (
-        <div className="px-6 pt-14 pb-32 w-full h-full content-start flex flex-col">
+        <div className="px-6 pt-16 pb-32 w-full h-full content-start flex flex-col">
             
             <div className="w-full mb-8">
                 <div className="relative group max-w-full mx-auto">
@@ -294,17 +491,20 @@ const AppLibraryPage = ({
                     <input 
                         type="text" 
                         placeholder="App Library" 
-                        className="block w-full pl-9 pr-4 py-2.5 rounded-xl bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-md border-none focus:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal shadow-sm transition-all"
-                        readOnly
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        className="block w-full pl-9 pr-4 py-2.5 rounded-2xl bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-md border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 active:outline-none active:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal shadow-sm transition-all"
                     />
                 </div>
             </div>
 
             <div className="flex-1 overflow-y-auto custom-scrollbar">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
-                    {apps.map((section, idx) => (
+                    {filteredApps.map((section, idx) => (
                         <div key={idx} className="flex flex-col gap-3">
-                            <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wide ml-4">{section.category}</h3>
+                            <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wide ml-4">
+                                {section.category}
+                            </h3>
                             <div className="bg-white/40 dark:bg-zinc-800/40 backdrop-blur-xl rounded-[2rem] p-5 border border-white/20 dark:border-white/5 shadow-sm">
                                 <div className="grid grid-cols-4 gap-4">
                                     {section.items.map((app, i) => (
@@ -320,7 +520,9 @@ const AppLibraryPage = ({
                                                 ${app.color} relative overflow-hidden
                                                 ring-1 ring-black/5 dark:ring-white/10
                                             `}>
-                                                <div className="relative z-10">{React.cloneElement(app.icon as any, { size: 24 })}</div>
+                                                <div className="relative z-10">
+                                                    {React.cloneElement(app.icon as any, { size: 24 })}
+                                                </div>
                                                 <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
                                             </div>
                                             <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate w-full text-center tracking-tight">
@@ -354,6 +556,7 @@ const AppLibraryPage = ({
 };
 
 
+
 const HomePage = ({ 
     heroIndex, 
     setHeroIndex, 
@@ -383,12 +586,12 @@ const HomePage = ({
       };
 
     return (
-        <div id="hero" className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-14 pb-32 flex-1 content-start">
+        <div id="hero" className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 flex-1 content-start">
             <BentoCard 
               id="about"
               colSpan="md:col-span-6" 
               layoutId="card-about"
-              className="relative overflow-hidden bg-[#F57B22] text-white group cursor-pointer border-none !p-8"
+              className="relative overflow-hidden bg-[#F57D28] text-white group cursor-pointer border-none !p-8"
               onClick={() => openModal('about')}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
@@ -409,7 +612,7 @@ const HomePage = ({
 
                   <div>
                       <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter leading-[0.85] mb-6">
-                         Creative<br/>Dev.
+                         Software<br/>Dev.
                       </h2>
                       
                       <div className="grid grid-cols-2 gap-8 border-t border-white/20 pt-5">
@@ -620,7 +823,7 @@ const HomePage = ({
             <BentoCard 
               colSpan="md:col-span-5" 
               id="contact" 
-              className="bg-[#F4405F] text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
+              className="bg-[#F85671] text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
               onClick={copyEmail}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
@@ -686,7 +889,7 @@ const HomePage = ({
               
               <div className="text-right">
                   <div className="text-[10px] text-zinc-400 font-bold mb-1 uppercase tracking-widest">Portfolio</div>
-                  <div className="text-xl font-bold text-zinc-900 dark:text-white font-mono">2025©</div>
+                  <div className="text-xl font-bold text-zinc-900 dark:text-white font-mono">2025</div>
               </div>
             </BentoCard>
 
@@ -793,9 +996,9 @@ export default function App() {
   }
 
   return (
-    <div className={isDarkMode ? 'dark' : ''}>
-      <div className="w-full h-screen bg-[#fdfbf7] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">
-        
+    
+   <div className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#fdfbf7] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}>
+  <div className="w-full h-full md:px-5 bg-[#fdfbf7] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
         <StatusBar />
         
         <Modal 
@@ -858,7 +1061,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 ring-1 ring-black/5 dark:ring-white/10">
+        <div className="absolute bottom-23 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 ring-1 ring-black/5 dark:ring-white/10">
             {[0, 1, 2].map((idx) => (
                 <button
                 key={idx} 
@@ -877,5 +1080,6 @@ export default function App() {
         </div>
       </div>
     </div>
+    
   );
 }

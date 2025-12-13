@@ -9,12 +9,12 @@ interface VideoCardProps {
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
-  const currentVideo = VIDEO_ITEMS[0]; // Show the first video as the featured one
-  // Default to dark mode (white text) if no override provided
+  const currentVideo = VIDEO_ITEMS[0]; 
+ 
   const textColor = (currentVideo as any).textColor || 'text-white';
   const gradient = (currentVideo as any).overlayGradient || 'from-zinc-900 via-zinc-900/40 to-transparent';
   
-  // Derived colors for UI elements based on text color preference
+  
   const isDarkText = textColor.includes('zinc-900') || textColor.includes('black');
   const tagBg = isDarkText ? 'bg-green-600/10 text-green-700 border-green-600/20' : 'bg-green-500/20 text-green-400 border-green-500/20';
   const metaColor = isDarkText ? 'text-zinc-600' : 'text-zinc-100';
@@ -25,7 +25,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
     <BentoCard 
       colSpan="md:col-span-7" 
       noPadding={true} 
-      className="min-h-[320px] group relative z-5 bg-zinc-900 dark:bg-[#111] cursor-pointer"
+      className="min-h-[320px] group relative z-5 bg-zinc-900 dark:bg-[#111] border border-zinc-500 cursor-pointer"
       layoutId="card-playlist"
       onClick={onClick}
     >
@@ -57,7 +57,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
           </div>
         </div>
 
-        {/* Play Button Overlay */}
+        
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}

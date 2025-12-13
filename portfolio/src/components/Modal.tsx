@@ -38,27 +38,27 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNav
       {isOpen && type && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="absolute inset-0 bg-zinc-100/80 dark:bg-black/80 backdrop-blur-xl pointer-events-auto"
+            className="absolute inset-0 bg-zinc-100/90 dark:bg-black/90 pointer-events-auto"
           />
           <motion.div
-            layoutId={type === 'project' ? `card-${data?.id}` : type === 'playlist' ? 'card-playlist' : `card-${type}`}
+            layoutId={type === 'project' ? undefined : `card-${type}`}
             transition={{ type: 'spring', stiffness: 90, damping: 15, mass: 1 }}
             style={{ willChange: 'transform, opacity' }}
-            className="relative w-full max-w-6xl max-h-[85vh] overflow-hidden bg-[#fdfbf7] dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl z-10 flex flex-col pointer-events-auto transform-gpu"
+            className="relative w-full max-w-6xl max-h-[85vh] overflow-hidden bg-[#fdfbf7] dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl z-10 flex flex-col pointer-events-auto transform-gpu contain-layout contain-paint"
           >
             <button 
               onClick={onClose}
-              className="absolute top-6 right-8 z-50 p-2.5 bg-white/50 dark:bg-black/50 backdrop-blur-md rounded-full text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-zinc-800 transition-all hover:scale-110 border border-black/5 dark:border-white/10 group"
+              className="absolute cursor-pointer top-6 right-8 z-50 p-2.5 bg-white/50 dark:bg-black/50 backdrop-blur-md rounded-full text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-zinc-800 transition-all hover:scale-110 border border-black/5 dark:border-white/10 group"
             >
               <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
             </button>
             
-            <div className="w-full h-full overflow-y-auto custom-scrollbar">
+            <div className="w-full h-full overflow-y-auto custom-scrollbar contain-layout contain-paint">
                {renderContent()}
             </div>
           </motion.div>
@@ -107,8 +107,10 @@ const PlaylistContent = () => {
         
         <div className="w-full lg:w-8/12 bg-black relative flex flex-col group/player">
             <div className="flex-1 relative bg-zinc-900 overflow-hidden">
-                 <div className="absolute inset-0 bg-cover bg-center blur-3xl opacity-30" style={{ backgroundImage: `url(${currentVideo.poster})` }} />
-                 
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-25 scale-110"
+              style={{ backgroundImage: `url(${currentVideo.poster})` }}
+            />                 
                  <video
                     ref={videoRef}
                     src={currentVideo.video}
@@ -121,7 +123,7 @@ const PlaylistContent = () => {
                  
                  <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20 opacity-0 group-hover/player:opacity-100 transition-all duration-300 translate-y-4 group-hover/player:translate-y-0">
                      <div className="flex items-center gap-6">
-                        <button onClick={togglePlay} className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg hover:shadow-white/20">
+                        <button onClick={togglePlay} className="w-14 h-14 rounded-full cursor-pointer bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg hover:shadow-white/20">
                             {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" className="ml-1" />}
                         </button>
                         <div className="flex-1">
@@ -237,7 +239,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
           <img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-full object-cover scale-101 group-hover:scale-105 transition-transform duration-1000"
+          className="w-full h-full object-cover scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent opacity-90" />
           
@@ -365,15 +367,17 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
 
 const AboutContent = () => (
   <>
-    <div className="relative h-64 md:h-80 w-full overflow-hidden shrink-0 group">
+<div className="relative h-64 md:h-80 w-full overflow-hidden shrink-0 contain-layout contain-paint">
        <img 
-         src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" 
-         alt="Workspace" 
-         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-         loading="lazy"
-       />
-       <div className="absolute inset-0 bg-zinc-900/50" />
-       <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent" />
+        src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" 
+        alt="Workspace" 
+        className="w-full h-full object-cover scale-105 transition-transform duration-700 will-change-transform"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent pointer-events-none" />
        
        <div className="absolute bottom-0 left-0 p-8 md:p-12">
           <h2 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
@@ -415,7 +419,7 @@ const AboutContent = () => (
                     desc: 'Led frontend architecture for WhiteFlow in a 12-person agile team, architecting a custom SPA framework using the History API. Collaborated with backend engineers to standardize Socket.io events and resolved critical HTML5 Canvas rendering bottlenecks to improve collaboration performance.' 
                   }
                 ].map((job, i) => (
-                   <div key={i} className="pl-4 border-l-2 border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                   <div key={i} className="pl-4 border-l-2 border-zinc-200 dark:border-zinc-800 transition-colors">
                       <div className="flex justify-between items-baseline mb-1">
                          <h4 className="font-bold text-zinc-900 dark:text-white">{job.role}</h4>
                          <span className="text-xs font-mono text-zinc-500">{job.year}</span>
@@ -429,7 +433,7 @@ const AboutContent = () => (
        </div>
 
        <div className="md:col-span-5 space-y-6">
-           <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+           <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm contain-layout contain-paint">
               <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 mb-6">Connect</h4>
               <ul className="space-y-4">
                  <li className="flex items-center gap-3 text-zinc-900 dark:text-white">
@@ -508,7 +512,7 @@ const SkillsContent = () => {
                         {SKILLS.filter(s => s.category === category).map((skill, i) => (
                             <div key={i} className="group">
                                 <div className="flex justify-between items-end mb-2">
-                                    <span className="font-bold text-zinc-900 dark:text-zinc-100 text-lg group-hover:translate-x-1 transition-transform">{skill.name}</span>
+                                    <span className="font-bold text-zinc-900 dark:text-zinc-100 text-lg transition-transform will-change-transform">{skill.name}</span>
                                     <span className="text-xs font-mono text-zinc-400">{skill.level}%</span>
                                 </div>
                                 <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
