@@ -37,12 +37,12 @@ export const PROJECTS: Project[] = [
         '/images/WhiteFlowRoom.png'
     ],
     themeColor: '#4f46e5', 
-    tags: ['Socket.io', 'Redis', 'Canvas', 'Node.js'],
+    tags: ['Socket.io', 'Redis', 'Node.js', 'HTML5 Canvas', 'JavaScript', 'Node.js'],
     textColor: 'text-zinc-900',
     overlayGradient: 'from-[#fdfbf7] via-[#fdfbf7]/95 to-transparent'
   },
   {
-    id: '2',
+    id: '3',
     title: 'AgentGuard',
     category: 'AI Security',
     description: 'LLM vulnerability scanning dashboard for red-teaming and automated remediation.',
@@ -57,11 +57,11 @@ export const PROJECTS: Project[] = [
         '/images/AgentGuardProjectOverview.png'
     ],
     themeColor: '#0ea5e9',
-    tags: ['React', 'PostgreSQL', 'Gemini', 'Security'],
+    tags: ['React', 'PostgreSQL', 'Gemini', 'Redis', 'Tailwind CSS', 'Gemini API', 'JWT'],
     overlayGradient: 'from-black via-black/80 to-transparent'
   },
   {
-    id: '3',
+    id: '4',
     title: 'Clinix',
     category: 'Health Tech',
     description: 'Modular AI healthcare assistant containerized with Docker and FastAPI.',
@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
         '/images/ClinixChat.png'
     ],
     themeColor: '#7F3535',
-    tags: ['FastAPI', 'Docker', 'React', 'Cloud'],
+    tags: ['FastAPI', 'Docker', 'React', 'Cloud', ' Gemini API'],
     textColor: 'text-zinc-900',
     overlayGradient: 'from-white via-white/95 to-transparent'
   },

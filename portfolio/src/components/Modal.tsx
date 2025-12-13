@@ -377,7 +377,7 @@ const AboutContent = () => (
        
        <div className="absolute bottom-0 left-0 p-8 md:p-12">
           <h2 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
-            Ryan <span className="text-zinc-500">Lyn</span>
+            Ryan <span className="text-zinc-500">Lyncee</span>
           </h2>
           <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 font-medium">
             Computer Engineering Student & Frontend Developer

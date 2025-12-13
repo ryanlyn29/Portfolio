@@ -276,8 +276,8 @@ const AppLibraryPage = ({
         {
             category: "Social",
             items: [
-                { name: 'GitHub', icon: <Github />, color: 'bg-[#181717]', action: () => window.open('https://github.com', '_blank') },
-                { name: 'LinkedIn', icon: <Linkedin />, color: 'bg-[#0077b5]', action: () => window.open('https://linkedin.com', '_blank') },
+                { name: 'GitHub', icon: <Github />, color: 'bg-[#181717]', action: () => window.open('https://github.com/ryanlyn29', '_blank') },
+                { name: 'LinkedIn', icon: <Linkedin />, color: 'bg-[#0077b5]', action: () => window.open('https://linkedin.com/in/ryanlyncee', '_blank') },
                 { name: 'Twitter', icon: <Twitter />, color: 'bg-[#1DA1F2]', action: () => window.open('https://twitter.com', '_blank') },
             ]
         }
@@ -399,7 +399,7 @@ const HomePage = ({
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Identity</span>
                         <div className="flex items-center gap-2">
                              <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                             <span className="font-bold text-sm tracking-wide">Ryan Lyn</span>
+                             <span className="font-bold text-sm tracking-wide">Ryan Lyncee</span>
                         </div>
                     </div>
                     <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[#ff4500] transition-colors">
@@ -587,7 +587,7 @@ const HomePage = ({
             <BentoCard 
               colSpan="md:col-span-2" 
               className="bg-[#6e5494] text-white relative group cursor-pointer border border-[#5d467e] min-h-[200px]"
-              onClick={() => window.open('https://github.com', '_blank')}
+              onClick={() => window.open('https://github.com/ryanlyn29', '_blank')}
             >
               <div className="absolute top-4 right-4 p-1.5 bg-white/10 rounded-full border border-white/10 group-hover:bg-white group-hover:text-[#6e5494] transition-colors">
                   <ArrowUpRight size={14} />
@@ -602,7 +602,7 @@ const HomePage = ({
              <BentoCard 
               colSpan="md:col-span-2" 
               className="bg-[#0077b5] text-white relative group cursor-pointer border border-[#005e93] min-h-[200px]"
-              onClick={() => window.open('https://linkedin.com', '_blank')}
+              onClick={() => window.open('https://linkedin.com/in/ryanlyncee', '_blank')}
             >
               <div className="absolute top-4 right-4 p-1.5 bg-white/10 rounded-full border border-white/10 group-hover:bg-white group-hover:text-[#0077b5] transition-colors">
                   <ArrowUpRight size={14} />
@@ -654,7 +654,7 @@ const HomePage = ({
                           </div>
                           <div>
                               <p className="text-[10px] uppercase tracking-wider text-white/60 mb-1">Email</p>
-                              <p className="text-sm font-medium truncate" title="contact@ryanlyn.dev">contact@ryanlyn.dev</p>
+                              <p className="text-sm font-medium truncate" title="ryanlyncee29@gmail.com">ryanlyncee29@gmail.com</p>
                           </div>
                       </div>
                   </div>
@@ -725,7 +725,7 @@ export default function App() {
 
   const copyEmail = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigator.clipboard.writeText("contact@ryanlyn.dev");
+    navigator.clipboard.writeText("ryanlyncee29@gmail.com");
     setEmailCopied(true);
     setTimeout(() => setEmailCopied(false), 2000);
   };
