@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Calendar, Tag, ChevronRight, MapPin, Briefcase, GraduationCap, Download, Play, Pause, SkipBack, SkipForward, Clock, Heart, MoreHorizontal, Music2, BarChart2 } from 'lucide-react';
-import type { Project, Skill } from '../types';
+import { X, ExternalLink, Calendar, ChevronRight, MapPin, Briefcase, GraduationCap, Download, Play, Pause, Heart, MoreHorizontal, Music2, BarChart2 } from 'lucide-react';
+import type { Project } from '../types';
 import { SKILLS, VIDEO_ITEMS, PROJECTS } from '../constants';
 
 type ModalType = 'project' | 'about' | 'skills' | 'playlist';

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { NavBar } from './components/NavBar';
 import { BentoCard } from './components/BentoCard';
 import { VideoCard } from './components/VIdeoCard';
-import { PROJECTS, VIDEO_ITEMS } from './constants';
+import { PROJECTS} from './constants';
 import { 
   ArrowUpRight, Plus, ChevronLeft, ChevronRight,
   Github, Code2, Linkedin, User, Layers, Mail, Copy, CheckCircle,
-  Calendar as CalendarIcon, Cloud, Calculator, CheckSquare, Music, Camera, Twitter, Quote,
-  Search, Grid, Settings, Smartphone, ExternalLink, Wifi, BatteryFull
+  Calendar as CalendarIcon, Cloud, Calculator, CheckSquare, Music, Twitter,
+  Search, Grid, Settings, Smartphone, Wifi, BatteryFull
 } from 'lucide-react';
 import { Modal } from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -53,7 +53,7 @@ const StatusBar = () => {
 
 
 
-const ToolsPage = ({ openModal }: { openModal: any }) => (
+const ToolsPage = () => (
   <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-14 pb-32 content-start w-full max-w-[1920px] mx-auto">
       
       <BentoCard colSpan="md:col-span-8" className="bg-zinc-100 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 min-h-[140px] !p-6">
@@ -834,7 +834,7 @@ export default function App() {
                 className="w-full h-full overflow-y-auto custom-scrollbar"
             >
                 <div className="w-full h-full max-w-[1920px] mx-auto relative">
-                    {page === 0 && <ToolsPage openModal={openModal} />}
+                    {page === 0 && <ToolsPage />}
                     {page === 1 && (
                         <HomePage 
                             heroIndex={heroIndex} 
