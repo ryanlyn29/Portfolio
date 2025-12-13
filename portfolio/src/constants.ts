@@ -1,8 +1,28 @@
 import type { Project, Skill } from './types';
 
 export const PROJECTS: Project[] = [
-  {
+    {
     id: '1',
+    title: 'INIT Build',
+    category: 'Agile Development',
+    description: 'Collaborative development initiative focusing on component modularity and API design.',
+    longDescription: 'As a Build Team Member at INIT and ShellHacks participant, I collaborated in an agile workflow to design and deploy interactive web applications. This role focused heavily on component modularity, responsive state management, and engaging in technical workshops covering backend architecture. Additionally, as a member of Code Crunch and ColorStack, I actively engage in algorithm optimization and technical interview preparation.',
+    role: 'Team Member',
+    year: '2025',
+    liveUrl: '#',
+    image: '/images/INITBuild.png',
+    gallery: [
+        '/videos/WhiteFlowDemo.mp4',
+        '/images/WhiteFlowLogin.png',
+        '/images/WhiteFlowRoom.png'
+    ],
+    themeColor: '#d97706',
+    tags: ['Agile', 'Teamwork', 'Algorithms'],
+  
+    overlayGradient: 'from-black via-black/80 to-transparent'
+  },
+  {
+    id: '2',
     title: 'WhiteFlow',
     category: 'Real-Time Infrastructure',
     description: 'High-performance collaborative canvas engine using Socket.io and custom state management.',
@@ -17,9 +37,9 @@ export const PROJECTS: Project[] = [
         '/images/WhiteFlowRoom.png'
     ],
     themeColor: '#4f46e5', 
-    darkThemeColor: '#100C08', 
-    lightThemeColor: '#f8f6f4',
-    tags: ['Socket.io', 'Redis', 'HTML5 Canvas', 'Node.js'],
+    tags: ['Socket.io', 'Redis', 'Canvas', 'Node.js'],
+    textColor: 'text-zinc-900',
+    overlayGradient: 'from-[#fdfbf7] via-[#fdfbf7]/95 to-transparent'
   },
   {
     id: '2',
@@ -37,9 +57,8 @@ export const PROJECTS: Project[] = [
         '/images/AgentGuardProjectOverview.png'
     ],
     themeColor: '#0ea5e9',
-    darkThemeColor: '#0c0a1f',
-    lightThemeColor: '#F0F9FF',
-    tags: ['React', 'PostgreSQL', 'Gemini API', 'Security'],
+    tags: ['React', 'PostgreSQL', 'Gemini', 'Security'],
+    overlayGradient: 'from-black via-black/80 to-transparent'
   },
   {
     id: '3',
@@ -57,30 +76,11 @@ export const PROJECTS: Project[] = [
         '/images/ClinixChat.png'
     ],
     themeColor: '#7F3535',
-    darkThemeColor: '#2D1717',
-    lightThemeColor: '#FFFFFF', 
     tags: ['FastAPI', 'Docker', 'React', 'Cloud'],
+    textColor: 'text-zinc-900',
+    overlayGradient: 'from-white via-white/95 to-transparent'
   },
-  {
-    id: '4',
-    title: 'INIT Build',
-    category: 'Agile Development',
-    description: 'Collaborative development initiative focusing on component modularity and API design.',
-    longDescription: 'As a Build Team Member at INIT and ShellHacks participant, I collaborated in an agile workflow to design and deploy interactive web applications. This role focused heavily on component modularity, responsive state management, and engaging in technical workshops covering backend architecture. Additionally, as a member of Code Crunch and ColorStack, I actively engage in algorithm optimization and technical interview preparation.',
-    role: 'Team Member',
-    year: '2025',
-    liveUrl: '#',
-    image: '/images/INITBuild.png',
-    gallery: [
-        '/videos/WhiteFlowDemo.mp4',
-        '/images/WhiteFlowLogin.png',
-        '/images/WhiteFlowRoom.png'
-    ],
-    themeColor: '#d97706',
-    darkThemeColor: '#1f1005', 
-    lightThemeColor: '#FFFBEB', 
-    tags: ['Agile', 'Teamwork', 'Algorithms', 'Hackathon'],
-  },
+
 ];
 
 export const SKILLS: Skill[] = [
@@ -95,4 +95,40 @@ export const SKILLS: Skill[] = [
   { name: 'Figma', level: 75, category: 'Soft' },
 ];
 
-export const HERO_WORDS = ["Architect.", "Optimize.", "Scale.", "Deploy."];
+export const VIDEO_ITEMS = [
+  {
+    id: 'v1',
+    title: "WhiteFlow Demo",
+    channel: "Ryan Lyn",
+    subs: "Lead Architect",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+    video: "/videos/WhiteFlowDemo.mp4",
+    poster: "/images/WhiteFlowHome.png",
+    duration: "2:30",
+    plays: "Featured",
+    textColor: 'text-zinc-900',
+    overlayGradient: 'from-[#fdfbf7] via-[#fdfbf7]/90 to-transparent'
+  },
+  {
+    id: 'v2',
+    title: "AgentGuard Demo",
+    channel: "Ryan Lyn",
+    subs: "Frontend Developer",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+    video: "/videos/AgentGuardDemo.mp4",
+    poster: "/images/AgentGuardHome.png",
+    duration: "1:45",
+    plays: "Featured"
+  },
+  {
+    id: 'v3',
+    title: "Clinix Walkthrough",
+    channel: "Ryan Lyn",
+    subs: "Frontend Developer",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80",
+    video: "/videos/ClinixDemo.mp4",
+    poster: "/images/ClinixHome.png",
+    duration: "1:15",
+    plays: "Featured"
+  }
+];

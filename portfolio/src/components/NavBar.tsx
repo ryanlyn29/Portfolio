@@ -1,75 +1,59 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { MobileMenu } from './MobileMenu';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Home, User, Folder, Mail, Sun, Moon, Grid } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
-  const [hidden, setHidden] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
+interface NavBarProps {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+  onNavigate: (id: string) => void;
+}
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() || 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-  });
+export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavigate }) => {
+  const navItems = [
+    { id: 'hero', icon: <Home size={18} />, label: 'Home' },
+    { id: 'projects', icon: <Folder size={18} />, label: 'Projects' },
+    { id: 'about', icon: <User size={18} />, label: 'About' },
+    { id: 'apps', icon: <Grid size={18} />, label: 'Apps' },
+    { id: 'contact', icon: <Mail size={18} />, label: 'Contact' },
+  ];
 
   return (
-    <>
-      <motion.nav 
-        variants={{
-          visible: { y: 0 },
-          hidden: { y: -100 }
-        }}
-        animate={hidden ? "hidden" : "visible"}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-6"
+    <div className="flex justify-center w-full pointer-events-none">
+      <motion.div 
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, type: 'spring', stiffness: 200, damping: 20 }}
+        className="pointer-events-auto flex items-center gap-1 px-2 py-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 rounded-[1.25em] shadow-2xl shadow-black/20 ring-1 ring-black/5 dark:ring-white/10"
       >
-        <div className="absolute top-1/2 -translate-y-1/2 left-8 hidden xl:flex flex-col gap-1 pointer-events-none">
-           <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-zinc-900/20 dark:bg-white/20 rounded-full animate-pulse" />
-              <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">SYS.NAV.01</span>
-           </div>
-           <div className="w-24 h-[px] bg-zinc-400/20 dark:bg-zinc-600/20" />
-           <span className="text-[8px] font-mono text-zinc-300 dark:text-zinc-700 uppercase tracking-widest pl-4">X: 1024.45</span>
-        </div>
-
-        <div className="absolute top-1/2 -translate-y-1/2 right-8 hidden xl:flex flex-col gap-1 items-end pointer-events-none">
-           <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">GRID.ACTIVE</span>
-              <div className="w-2 h-2 border border-zinc-900/20 dark:border-white/20 rounded-full" />
-           </div>
-           <div className="w-24 h-[px] bg-zinc-400/20 dark:bg-zinc-600/20" />
-           <span className="text-[8px] font-mono text-zinc-300 dark:text-zinc-700 uppercase tracking-widest pr-4">Y: 0042.88</span>
-        </div>
-
-        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-300 dark:border-white/10 rounded-2xl px-6 py-3 flex items-center gap-8 pointer-events-auto shadow-xl">
-          <a href="#" className="font-bold text-xl tracking-tighter text-zinc-900 dark:text-white font-display">RYAN<span className="text-zinc-400">_</span></a>
-          
-          <div className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">
-            {['Projects', 'About', 'Contact'].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase().replace('works', 'projects')}`}
-                className="hover:text-zinc-900 dark:hover:text-white transition-colors"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-
-          <button 
-            onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden text-zinc-900 cursor-pointer dark:text-white font-mono uppercase text-xs font-bold"
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onNavigate(item.id)}
+            className="relative px-3 py-2.5 cursor-pointer rounded-2xl group hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-out"
           >
-            [MENU]
+            <span className="sr-only">{item.label}</span>
+            <div className="text-zinc-500 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white group-hover:scale-110 transition-all duration-300">
+              {item.icon}
+            </div>
+          
+            <span className="absolute -top-14 left-1/2 -translate-x-1/2 bg-zinc-900 text-white dark:bg-white dark:text-black text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-lg">
+              {item.label}
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 dark:bg-white rotate-45"></div>
+            </span>
           </button>
-        </div>
-      </motion.nav>
+        ))}
 
-      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-    </>
+        <div className="w-px h-6 bg-zinc-300 dark:bg-zinc-700 mx-2"></div>
+
+        <button
+          onClick={toggleTheme}
+          className="relative px-3 py-2.5 rounded-2xl group hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-out"
+        >
+          <div className="text-zinc-500 cursor-pointer dark:text-zinc-400 group-hover:text-orange-500 dark:group-hover:text-orange-400 group-hover:rotate-12 transition-all duration-300">
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </div>
+        </button>
+      </motion.div>
+    </div>
   );
 };
