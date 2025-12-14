@@ -10,10 +10,9 @@ interface VideoCardProps {
 
 export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
   const currentVideo = VIDEO_ITEMS[0]; 
- 
+  
   const textColor = (currentVideo as any).textColor || 'text-white';
   const gradient = (currentVideo as any).overlayGradient || 'from-zinc-900 via-zinc-900/40 to-transparent';
-  
   
   const isDarkText = textColor.includes('zinc-900') || textColor.includes('black');
   const tagBg = isDarkText ? 'bg-green-600/10 text-green-700 border-green-600/20' : 'bg-green-500/20 text-green-400 border-green-500/20';
@@ -25,14 +24,14 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
     <BentoCard 
       colSpan="md:col-span-7" 
       noPadding={true} 
-      className="min-h-[320px] group relative z-5 bg-zinc-900 dark:bg-[#111] border border-zinc-500 cursor-pointer"
+      className="min-h-[320px] group relative border-2 border-zinc-300  bg-zinc-900 dark:bg-[#111] cursor-pointer"
       layoutId="card-playlist"
       onClick={onClick}
     >
         <img
             src={currentVideo.poster}
             alt={currentVideo.title}
-            className="absolute inset-0 w-full h-full object-cover z-0 scale-101 group-hover:scale-105 transition-transform duration-700"
+            className="absolute scale-101 inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
         />
         
@@ -57,7 +56,6 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
           </div>
         </div>
 
-        
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}

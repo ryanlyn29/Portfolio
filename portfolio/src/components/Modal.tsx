@@ -46,10 +46,10 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNav
             className="absolute inset-0 bg-zinc-100/90 dark:bg-black/90 pointer-events-auto"
           />
           <motion.div
-            layoutId={type === 'project' ? undefined : `card-${type}`}
+            layoutId={type === 'project' && data ? `card-${data.id}` : `card-${type}`}
             transition={{ type: 'spring', stiffness: 90, damping: 15, mass: 1 }}
             style={{ willChange: 'transform, opacity' }}
-            className="relative w-full max-w-6xl max-h-[85vh] overflow-hidden bg-[#fdfbf7] dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl z-10 flex flex-col pointer-events-auto transform-gpu contain-layout contain-paint"
+            className="relative w-full max-w-6xl max-h-[85vh] overflow-hidden bg-[#fdfbf7] dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl z-10 flex flex-col pointer-events-auto transform-gpu"
           >
             <button 
               onClick={onClose}
@@ -58,7 +58,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNav
               <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
             </button>
             
-            <div className="w-full h-full overflow-y-auto custom-scrollbar contain-layout contain-paint">
+            <div className="w-full h-full overflow-y-auto custom-scrollbar ">
                {renderContent()}
             </div>
           </motion.div>
@@ -367,7 +367,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
 
 const AboutContent = () => (
   <>
-<div className="relative h-64 md:h-80 w-full overflow-hidden shrink-0 contain-layout contain-paint">
+<div className="relative h-64 md:h-80 w-full overflow-hidden shrink-0 ">
        <img 
         src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" 
         alt="Workspace" 
@@ -375,8 +375,6 @@ const AboutContent = () => (
         loading="lazy"
       />
       <div className="absolute inset-0 bg-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent pointer-events-none" />
        
        <div className="absolute bottom-0 left-0 p-8 md:p-12">
@@ -433,7 +431,7 @@ const AboutContent = () => (
        </div>
 
        <div className="md:col-span-5 space-y-6">
-           <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm contain-layout contain-paint">
+           <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm">
               <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 mb-6">Connect</h4>
               <ul className="space-y-4">
                  <li className="flex items-center gap-3 text-zinc-900 dark:text-white">

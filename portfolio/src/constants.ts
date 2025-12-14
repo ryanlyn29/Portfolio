@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
         '/images/WhiteFlowRoom.png'
     ],
     themeColor: '#4f46e5', 
-    tags: ['Socket.io', 'Redis', 'Node.js', 'HTML5 Canvas', 'JavaScript', 'Node.js'],
+    tags: ['Socket.io', 'Redis', 'Node.js', 'HTML5 Canvas', 'JavaScript'],
     textColor: 'text-zinc-900',
     overlayGradient: 'from-[#fdfbf7] via-[#fdfbf7]/95 to-transparent'
   },

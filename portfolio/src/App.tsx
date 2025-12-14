@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavBar } from './components/NavBar';
 import { BentoCard } from './components/BentoCard';
 import { VideoCard } from './components/VIdeoCard';
-import { PROJECTS} from './constants';
+import { PROJECTS } from './constants';
 import { 
   ArrowUpRight, Plus, ChevronLeft, ChevronRight,
   Github, Code2, Linkedin, User, Layers, Mail, Copy, CheckCircle,
@@ -17,9 +17,6 @@ type ModalState = {
   type: 'project' | 'about' | 'skills' | 'playlist' | null;
   data: any;
 };
-
-
-
 
 const StatusBar = () => {
   const [date, setDate] = useState(new Date());
@@ -52,8 +49,6 @@ const StatusBar = () => {
     </div>
   );
 };
-
-
 
 const ToolsPage = () => {
   const now = new Date();
@@ -443,14 +438,23 @@ const AppLibraryPage = ({
 
     const [query, setQuery] = useState('');
 
-    const apps = [
+    const apps: { 
+      category: string; 
+      items: { 
+        name: string; 
+        icon: React.ReactElement; 
+        color: string; 
+        action: () => void; 
+        layoutId?: string; 
+      }[] 
+    }[] = [
         {
             category: "Suggestions",
             items: [
-                { name: 'Profile', icon: <User />, color: 'bg-gradient-to-br from-orange-400 to-orange-600', action: () => openModal('about') },
+                { name: 'Profile', icon: <User />, color: 'bg-gradient-to-br from-orange-400 to-orange-600', action: () => openModal('about'), layoutId: 'card-about' },
                 { name: 'Projects', icon: <Code2 />, color: 'bg-gradient-to-br from-zinc-800 to-black dark:from-zinc-100 dark:to-zinc-300 text-white dark:text-black', action: () => openModal('project', currentProject) },
-                { name: 'Music', icon: <Music />, color: 'bg-gradient-to-br from-green-400 to-green-600', action: () => openModal('playlist') },
-                { name: 'Stack', icon: <Layers />, color: 'bg-gradient-to-br from-violet-500 to-violet-700', action: () => openModal('skills') },
+                { name: 'Music', icon: <Music />, color: 'bg-gradient-to-br from-green-400 to-green-600', action: () => openModal('playlist'), layoutId: 'card-playlist' },
+                { name: 'Stack', icon: <Layers />, color: 'bg-gradient-to-br from-violet-500 to-violet-700', action: () => openModal('skills'), layoutId: 'card-skills' },
             ]
         },
         {
@@ -508,8 +512,9 @@ const AppLibraryPage = ({
                             <div className="bg-white/40 dark:bg-zinc-800/40 backdrop-blur-xl rounded-[2rem] p-5 border border-white/20 dark:border-white/5 shadow-sm">
                                 <div className="grid grid-cols-4 gap-4">
                                     {section.items.map((app, i) => (
-                                        <button 
+                                        <motion.button 
                                             key={i} 
+                                            layoutId={app.layoutId}
                                             onClick={app.action}
                                             className="flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
                                         >
@@ -528,7 +533,7 @@ const AppLibraryPage = ({
                                             <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate w-full text-center tracking-tight">
                                                 {app.name}
                                             </span>
-                                        </button>
+                                        </motion.button>
                                     ))}
                                 </div>
                             </div>
@@ -591,7 +596,7 @@ const HomePage = ({
               id="about"
               colSpan="md:col-span-6" 
               layoutId="card-about"
-              className="relative overflow-hidden bg-[#F57D28] text-white group cursor-pointer border-none !p-8"
+              className="relative overflow-hidden bg-[#F57D28] text-white group cursor-pointer border-none !p-8 transform-gpu"
               onClick={() => openModal('about')}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
@@ -651,7 +656,16 @@ const HomePage = ({
                   />
               </AnimatePresence>
 
-              <div className={`absolute inset-0 bg-gradient-to-t ${gradient} z-10`} />
+              <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    className={`absolute inset-0 bg-gradient-to-t ${gradient} z-10`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  />
+              </AnimatePresence>
               
               <div className={`relative z-20 flex flex-col justify-between h-full p-8 ${textColor}`}>
                 <div className="">
@@ -963,6 +977,11 @@ export default function App() {
   };
 
   const handleNavClick = (id: string) => {
+    if (id === 'workspace') {
+        setPage([0, -1]);
+        return;
+    }
+
     if (id === 'about') {
         openModal('about');
         return;
