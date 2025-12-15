@@ -11,10 +11,12 @@ interface ModalProps {
   onClose: () => void;
   type: ModalType | null;
   data: any; 
-  onNavigate?: (type: ModalType, data: any) => void;
+  onNavigate?: (type: ModalType, data: any, layoutId?: string) => void;
+  layoutId?: string;
+  isFullScreen?: boolean;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNavigate }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNavigate, layoutId }) => {
   useEffect(() => {
     
   }, [isOpen]);
@@ -33,27 +35,32 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNav
     }
   };
 
+  const finalLayoutId = layoutId || (type === 'project' && data ? `hero-card-${data.id}` : `hero-card-${type}`);
+
   return (
     <AnimatePresence>
       {isOpen && type && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="absolute inset-0 bg-zinc-100/90 dark:bg-black/90 pointer-events-auto"
+            className="absolute inset-0 bg-zinc-100/90 dark:bg-black/90 pointer-events-auto backdrop-blur-sm"
           />
           <motion.div
-            layoutId={type === 'project' && data ? `card-${data.id}` : `card-${type}`}
+            layoutId={finalLayoutId}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 90, damping: 15, mass: 1 }}
             style={{ willChange: 'transform, opacity' }}
             className="relative w-full max-w-6xl max-h-[85vh] overflow-hidden bg-[#fdfbf7] dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl z-10 flex flex-col pointer-events-auto transform-gpu"
           >
             <button 
               onClick={onClose}
-              className="absolute cursor-pointer top-6 right-8 z-50 p-2.5 bg-white/50 dark:bg-black/50 backdrop-blur-md rounded-full text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-zinc-800 transition-all hover:scale-110 border border-black/5 dark:border-white/10 group"
+              className="absolute cursor-pointer top-6 right-8 z-50 p-2.5 bg-white/50 dark:bg-black/50 backdrop-blur-md rounded-full text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-zinc-800 transition-all hover:scale-110  group"
             >
               <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
             </button>
@@ -199,8 +206,12 @@ const PlaylistContent = () => {
                                         </div>
                                      ) : <Pause size={16} className="text-green-500 fill-current" />
                                  ) : (
-                                     <Play size={16} className="text-white fill-current opacity-0 group-hover:opacity-100 transition-opacity scale-90 group-hover:scale-100" />
-                                 )}
+                                      <Play size={16}
+                                        className={`${
+                                          index % 2 === 0 ? 'text-green-500' : 'text-white'
+                                        } fill-current opacity-0 group-hover:opacity-100 transition-opacity scale-90 group-hover:scale-100`}
+                                      />                                 
+        )}
                              </div>
                          </div>
                          
@@ -233,7 +244,7 @@ const PlaylistContent = () => {
   );
 };
 
-const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?: (type: ModalType, data: any) => void }) => {
+const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?: (type: ModalType, data: any, layoutId?: string) => void }) => {
   const isOdd = (project.gallery?.length || 0) % 2 !== 0;
 
   if (!project) return null; 
@@ -253,7 +264,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
           alt={project.title} 
           className="w-full h-full object-cover scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] dark:from-[#09090b] via-[#fdfbf7]/80 dark:via-[#09090b]/80 to-transparent" />
           
           <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full">
             <span 
@@ -358,7 +369,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
                {otherProjects.map(p => (
                   <div 
                     key={p.id} 
-                    onClick={() => onNavigate('project', p)} 
+                    onClick={() => onNavigate('project', p, `hero-card-${p.id}`)} 
                     className="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:scale-[1.02] transition-all group"
                   >
                       <img src={p.image} className="w-12 h-12 rounded-xl object-cover" alt={p.title} />

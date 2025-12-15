@@ -6,6 +6,16 @@
 @theme {
   --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-portfolio-yellow: #f7e07a;
+  --color-portfolio-orange: #ea864c;
+  --color-portfolio-teal: #80eec9;
+  --color-portfolio-blue: #6ca9ff;
+  --color-portfolio-purple: #d8b4fe;
+  --color-portfolio-cyan: #8ae6fb;
+  --color-portfolio-black: #111111;
+
+  --radius-4xl: 2.5rem;
 }
 
 html {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { NavBar } from './components/NavBar';
 import { BentoCard } from './components/BentoCard';
 import { VideoCard } from './components/VIdeoCard';
@@ -16,6 +16,7 @@ type ModalState = {
   isOpen: boolean;
   type: 'project' | 'about' | 'skills' | 'playlist' | null;
   data: any;
+  layoutId?: string;
 };
 
 const StatusBar = () => {
@@ -451,10 +452,10 @@ const AppLibraryPage = ({
         {
             category: "Suggestions",
             items: [
-                { name: 'Profile', icon: <User />, color: 'bg-gradient-to-br from-orange-400 to-orange-600', action: () => openModal('about'), layoutId: 'card-about' },
-                { name: 'Projects', icon: <Code2 />, color: 'bg-gradient-to-br from-zinc-800 to-black dark:from-zinc-100 dark:to-zinc-300 text-white dark:text-black', action: () => openModal('project', currentProject) },
-                { name: 'Music', icon: <Music />, color: 'bg-gradient-to-br from-green-400 to-green-600', action: () => openModal('playlist'), layoutId: 'card-playlist' },
-                { name: 'Stack', icon: <Layers />, color: 'bg-gradient-to-br from-violet-500 to-violet-700', action: () => openModal('skills'), layoutId: 'card-skills' },
+                { name: 'Profile', icon: <User />, color: 'bg-gradient-to-br from-orange-400 to-orange-600', action: () => openModal('about', null, 'app-icon-about'), layoutId: 'app-icon-about' },
+                { name: 'Projects', icon: <Code2 />, color: 'bg-gradient-to-br from-zinc-800 to-black dark:from-zinc-100 dark:to-zinc-300 text-white dark:text-black', action: () => openModal('project', currentProject, 'app-icon-projects'), layoutId: 'app-icon-projects' },
+                { name: 'Music', icon: <Music />, color: 'bg-gradient-to-br from-green-400 to-green-600', action: () => openModal('playlist', null, 'app-icon-playlist'), layoutId: 'app-icon-playlist' },
+                { name: 'Stack', icon: <Layers />, color: 'bg-gradient-to-br from-violet-500 to-violet-700', action: () => openModal('skills', null, 'app-icon-skills'), layoutId: 'app-icon-skills' },
             ]
         },
         {
@@ -595,9 +596,9 @@ const HomePage = ({
             <BentoCard 
               id="about"
               colSpan="md:col-span-6" 
-              layoutId="card-about"
+              layoutId="hero-card-about"
               className="relative overflow-hidden bg-[#F57D28] text-white group cursor-pointer border-none !p-8 transform-gpu"
-              onClick={() => openModal('about')}
+              onClick={() => openModal('about', null, 'hero-card-about')}
             >
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
                 
@@ -635,13 +636,14 @@ const HomePage = ({
             </BentoCard>
 
             <BentoCard 
+              key={currentProject.id}
               id="work"
               colSpan="md:col-span-4" 
               rowSpan="md:row-span-2" 
               noPadding={true}
-              layoutId={`card-${currentProject.id}`}
+              layoutId={`hero-card-${currentProject.id}`}
               className="relative group min-h-[420px] cursor-pointer"
-              onClick={() => openModal('project', currentProject)}
+              onClick={() => openModal('project', currentProject, `hero-card-${currentProject.id}`)}
             >
               <AnimatePresence mode="wait">
                 <motion.img 
@@ -711,7 +713,7 @@ const HomePage = ({
                   </AnimatePresence>
 
                   <div className="flex justify-between items-end">
-                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm hover:bg-zinc-700 transition-all`}>
+                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm ${Number(currentProject.id) %2 !== 0 ? 'hover:bg-zinc-300' :'hover:bg-zinc-700'} transition-all`}>
                         View Project
                     </button>
 
@@ -741,9 +743,9 @@ const HomePage = ({
               colSpan="md:col-span-2" 
               rowSpan="md:row-span-2" 
               noPadding={true} 
-              layoutId="card-skills"
+              layoutId="hero-card-skills"
               className="bg-violet-600 relative overflow-hidden group min-h-[420px] cursor-pointer"
-              onClick={() => openModal('skills')}
+              onClick={() => openModal('skills', null, 'hero-card-skills')}
             >
               <img 
                   src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop" 
@@ -832,7 +834,7 @@ const HomePage = ({
             </BentoCard>
 
 
-            <VideoCard onClick={() => openModal('playlist')} />
+            <VideoCard onClick={() => openModal('playlist', null, 'hero-card-playlist')} />
 
             <BentoCard 
               colSpan="md:col-span-5" 
@@ -916,7 +918,8 @@ export default function App() {
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
     type: null,
-    data: null
+    data: null,
+    layoutId: undefined
   });
   
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -927,8 +930,8 @@ export default function App() {
   
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  const openModal = (type: 'project' | 'about' | 'skills' | 'playlist', data: any = null) => {
-    setModalState({ isOpen: true, type, data });
+  const openModal = (type: 'project' | 'about' | 'skills' | 'playlist', data: any = null, layoutId?: string) => {
+    setModalState({ isOpen: true, type, data, layoutId });
     
     if (type === 'project' && data) {
         const idx = PROJECTS.findIndex(p => p.id === data.id);
@@ -947,17 +950,28 @@ export default function App() {
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity;
-  };
+  const lastSwipeTime = useRef(0);
+  const onWheel = useCallback((e: React.WheelEvent) => {
+      const now = Date.now();
+      if (now - lastSwipeTime.current < 500) return; 
 
-  const paginate = (newDirection: number) => {
-    const newPage = page + newDirection;
-    if (newPage >= 0 && newPage <= 2) {
-      setPage([newPage, newDirection]);
-    }
-  };
+      const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      const threshold = 20;
+
+      if (isHorizontal && Math.abs(e.deltaX) > threshold) {
+          if (e.deltaX > 0) {
+              if (page < 2) {
+                  setPage([page + 1, 1]);
+                  lastSwipeTime.current = now;
+              }
+          } else {
+              if (page > 0) {
+                  setPage([page - 1, -1]);
+                  lastSwipeTime.current = now;
+              }
+          }
+      }
+  }, [page]);
 
   const variants = {
     enter: (direction: number) => ({
@@ -983,12 +997,13 @@ export default function App() {
     }
 
     if (id === 'about') {
-        openModal('about');
+        openModal('about', null, 'hero-card-about');
         return;
     }
     
     if (id === 'projects') {
-        openModal('project', PROJECTS[heroIndex]);
+        const proj = PROJECTS[heroIndex];
+        openModal('project', proj, `hero-card-${proj.id}`);
         return;
     }
     
@@ -1016,17 +1031,27 @@ export default function App() {
 
   return (
     
-   <div className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#F5F5F5] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}>
-  <div className="w-full h-full md:px-5 bg-[#F5F5F5] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
+   <div 
+     className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#F5F5F5] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}
+     onWheel={onWheel} 
+   >
+    <div className="w-full h-full md:px-5 bg-[#F5F5F5] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
         <StatusBar />
         
-        <Modal 
-        isOpen={modalState.isOpen} 
-        onClose={closeModal} 
-        type={modalState.type}
-        data={modalState.data}
-        onNavigate={openModal}
-        />
+        <AnimatePresence>
+            {modalState.isOpen && (
+                     <Modal 
+                        key={modalState.data?.id || modalState.type}
+                        isOpen={modalState.isOpen} 
+                        onClose={closeModal} 
+                        type={modalState.type}
+                        data={modalState.data}
+                        onNavigate={openModal}
+                        layoutId={modalState.layoutId}
+                        isFullScreen={true}
+                    />
+            )}
+        </AnimatePresence>
         
         <div className="flex-1 w-full h-full relative overflow-hidden">
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
@@ -1040,18 +1065,6 @@ export default function App() {
                 transition={{
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 }
-                }}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
-                onDragEnd={(_e, { offset, velocity }) => {
-                    const swipe = swipePower(offset.x, velocity.x);
-
-                    if (swipe < -swipeConfidenceThreshold) {
-                        paginate(1); 
-                    } else if (swipe > swipeConfidenceThreshold) {
-                        paginate(-1); 
-                    }
                 }}
                 className="w-full h-full overflow-y-auto custom-scrollbar"
             >
@@ -1080,22 +1093,24 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-23 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20">
-            {[0, 1, 2].map((idx) => (
-                <button
-                key={idx} 
-                onClick={() => {
-                    if (idx === page) return;
-                    setPage([idx, idx > page ? 1 : -1]);
-                }}
-                className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300  pointer-events-auto hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
-                aria-label={`Go to page ${idx + 1}`}
-                />
-            ))}
+        <div className="absolute bottom-25 w-full flex justify-center gap-2 z-50 pointer-events-none">
+            <div className="flex gap-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto">
+                {[0, 1, 2].map((idx) => (
+                    <button
+                    key={idx} 
+                    onClick={() => {
+                        if (idx === page) return;
+                        setPage([idx, idx > page ? 1 : -1]);
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
+                    aria-label={`Go to page ${idx + 1}`}
+                    />
+                ))}
+            </div>
         </div>
 
-        <div className="absolute bottom-6 left-0 right-0 z-50 pointer-events-none">
-        <NavBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onNavigate={handleNavClick} />
+        <div className="absolute bottom-6 w-full flex justify-center z-50 pointer-events-none">
+            <NavBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onNavigate={handleNavClick} />
         </div>
       </div>
     </div>

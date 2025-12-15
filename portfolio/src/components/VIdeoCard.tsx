@@ -25,7 +25,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
       colSpan="md:col-span-7" 
       noPadding={true} 
       className="min-h-[320px] group relative border border-zinc-100 bg-zinc-900 dark:bg-[#111] cursor-pointer"
-      layoutId="card-playlist"
+      layoutId="hero-card-playlist"
       onClick={onClick}
     >
         <img

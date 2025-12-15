@@ -24,7 +24,7 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5, type: 'spring', stiffness: 200, damping: 20 }}
-        className="pointer-events-auto flex items-center gap-1 px-2 py-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300/90 dark:border-zinc-800 rounded-[1.25em] shadow-2xl shadow-black/20"
+        className="pointer-events-auto flex items-center gap-1 px-2 py-1.5 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300/90 dark:border-zinc-800 rounded-[1.25em] shadow-2xl shadow-black/20"
       >
         {navItems.map((item) => (
           <button
