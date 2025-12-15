@@ -177,7 +177,7 @@ const ToolsPage = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 content-start w-full max-w-[1920px] mx-auto">
-      <BentoCard colSpan="md:col-span-8" className="bg-zinc-100 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 min-h-[140px] !p-6">
+      <BentoCard colSpan="md:col-span-8" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 min-h-[140px] !p-6">
         <div className="flex flex-row items-center justify-between w-full h-full">
           <div>
             <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Workspace</h2>
@@ -208,12 +208,12 @@ const ToolsPage = () => {
         </div>
       </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-white dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 p-5 !p-5">
+      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 p-5 !p-5">
         <div className="flex justify-between items-center mb-4 px-4 pt-4">
           <span className="font-bold text-lg text-zinc-900 dark:text-white">{monthName}</span>
           <div className="flex items-center gap-2">
             <span className="text-sm text-zinc-400 font-medium">{year}</span>
-            <div className="p-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full">
+            <div className="p-1.5  bg-zinc-100 dark:bg-zinc-800 rounded-full">
               <CalendarIcon size={14} className="text-zinc-500 dark:text-zinc-400" />
             </div>
           </div>
@@ -237,7 +237,7 @@ const ToolsPage = () => {
                 className={`flex items-center justify-center w-10 h-10 rounded-full text-xs font-medium transition-all mx-auto
                   ${
                     day === today
-                      ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-500/30'
+                      ? 'bg-[#318CE7]  text-white font-bold cursor-pointer'
                       : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 cursor-pointer'
                   }`}
               >
@@ -249,7 +249,7 @@ const ToolsPage = () => {
 
         <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
           <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50">
-            <div className="w-1 h-8 bg-blue-500 rounded-full" />
+            <div className="w-1 h-8 bg-[#318CE7] rounded-full" />
             <div className="flex-1">
               <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wide">Next Up</p>
               <p className="text-xs font-semibold text-zinc-900 dark:text-white truncate">Project Launch Meeting</p>
@@ -274,7 +274,7 @@ const ToolsPage = () => {
             </div>
         </div>
 
-        <div className="flex-1 bg-white dark:bg-[#1c1c1e] p-6 pt-4">
+        <div className="flex-1 bg-zinc-200/60 dark:bg-[#1c1c1e] p-6 pt-4">
             <div className="space-y-3">
             {tasks.map(task => (
                 <div
@@ -344,7 +344,7 @@ const ToolsPage = () => {
         </div>
         </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-100 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white !p-6">
+      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white !p-6">
         <div className="flex flex-col h-full">
           <div className="flex-1 flex flex-col justify-end items-end mb-6 space-y-1">
             <span className="text-zinc-400 text-xs font-mono">{expression}</span>
@@ -356,12 +356,12 @@ const ToolsPage = () => {
                 key={i}
                 onClick={() => handlePress(btn)}
                 className={`
-                  h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all active:scale-95 shadow-sm
+                  h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all active:scale-95 cursor-pointer
                   ${btn === '='
-                    ? 'col-span-2 bg-orange-500 hover:bg-orange-600 text-white'
+                    ? 'col-span-2 bg-[#F57D28] hover:bg-[#e06d1a] text-white'
                     : typeof btn === 'number' || btn === '.'
-                      ? 'bg-white dark:bg-[#2c2c2e] hover:bg-zinc-50 dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100'
-                      : 'bg-zinc-200 dark:bg-[#3a3a3c] text-zinc-900 dark:text-orange-400 font-bold'}
+                      ? 'bg-white dark:bg-[#2c2c2e] hover:bg-[#F7F7F7] dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100'
+                      : 'bg-zinc-300 hover:bg-zinc-400/45 dark:bg-[#3a3a3c] dark:hover:bg-[#4a4a4c] text-zinc-900 dark:text-orange-400 font-bold'}
                 `}
               >
                 {btn}
@@ -371,7 +371,7 @@ const ToolsPage = () => {
         </div>
       </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" className="bg-white dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 flex flex-col justify-between gap-8 !p-6">
+      <BentoCard colSpan="md:col-span-4" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 flex flex-col justify-between gap-8 !p-6">
         <div className="flex flex-col gap-2 mb-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -460,7 +460,7 @@ const AppLibraryPage = ({
         {
             category: "Utilities",
             items: [
-                { name: 'Workspace', icon: <Calculator />, color: 'bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800 text-zinc-900 dark:text-white', action: () => navigateToPage(0) },
+                { name: 'Workspace', icon: <Calculator />, color: 'bg-gradient-to-br from-zinc-200 to-zinc-400 dark:from-zinc-700 dark:to-zinc-800 text-zinc-900 dark:text-white', action: () => navigateToPage(0) },
                 { name: 'Mail', icon: <Mail />, color: 'bg-gradient-to-br from-rose-400 to-rose-600', action: () => { navigateToPage(1); setTimeout(() => scrollToSection('contact'), 500); } },
                 { name: 'Settings', icon: <Settings />, color: 'bg-gradient-to-br from-zinc-400 to-zinc-500', action: toggleTheme },
             ]
@@ -497,7 +497,7 @@ const AppLibraryPage = ({
                         placeholder="App Library" 
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="block w-full pl-9 pr-4 py-2.5 rounded-2xl bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-md border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 active:outline-none active:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal shadow-sm transition-all"
+                        className="block w-full pl-9 pr-4 py-2.5 rounded-2xl bg-zinc-200/60 dark:bg-zinc-800/50 backdrop-blur-md border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 active:outline-none active:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal transition-all"
                     />
                 </div>
             </div>
@@ -509,7 +509,7 @@ const AppLibraryPage = ({
                             <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wide ml-4">
                                 {section.category}
                             </h3>
-                            <div className="bg-white/40 dark:bg-zinc-800/40 backdrop-blur-xl rounded-[2rem] p-5 border border-white/20 dark:border-white/5 shadow-sm">
+                            <div className="bg-zinc-200/60 dark:bg-zinc-800/40 backdrop-blur-xl rounded-[2rem] p-5 border border-white/20 dark:border-white/5 ">
                                 <div className="grid grid-cols-4 gap-4">
                                     {section.items.map((app, i) => (
                                         <motion.button 
@@ -541,9 +541,9 @@ const AppLibraryPage = ({
                     ))}
                 </div>
 
-                <div className="mt-8 p-6 rounded-[2rem] bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between backdrop-blur-md">
+                <div className="mt-8 p-6 rounded-[2rem] bg-zinc-200/60 dark:bg-zinc-900/50 border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between backdrop-blur-md">
                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-white dark:bg-zinc-800 rounded-2xl flex items-center justify-center shadow-sm">
+                        <div className="w-12 h-12 bg-white dark:bg-zinc-800 rounded-2xl flex items-center justify-center">
                             <Smartphone size={24} className="text-zinc-500 dark:text-zinc-400" />
                         </div>
                         <div>
@@ -711,7 +711,7 @@ const HomePage = ({
                   </AnimatePresence>
 
                   <div className="flex justify-between items-end">
-                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-lg`}>
+                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm hover:bg-zinc-700 transition-all`}>
                         View Project
                     </button>
 
@@ -762,7 +762,7 @@ const HomePage = ({
 
                   <div>
                      <h3 className="text-3xl font-bold mb-2">Tech<br/>Stack</h3>
-                     <p className="text-white/70 text-xs leading-relaxed mb-4">
+                     <p className="text-white/60 text-xs leading-relaxed mb-4">
                         React, Node, Docker, & Modern UI systems.
                      </p>
                      
@@ -878,7 +878,7 @@ const HomePage = ({
                 </div>
             </BentoCard>
 
-            <BentoCard colSpan="md:col-span-12" className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between min-h-[100px] px-8 py-3 gap-6">
+            <BentoCard colSpan="md:col-span-12" className="bg-zinc-200/60 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between min-h-[100px] px-8 py-3 gap-6">
               <div className="flex items-center gap-4">
                   <div className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -1016,8 +1016,8 @@ export default function App() {
 
   return (
     
-   <div className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#fdfbf7] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}>
-  <div className="w-full h-full md:px-5 bg-[#fdfbf7] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
+   <div className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#F5F5F5] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}>
+  <div className="w-full h-full md:px-5 bg-[#F5F5F5] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
         <StatusBar />
         
         <Modal 
@@ -1080,7 +1080,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-23 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 ring-1 ring-black/5 dark:ring-white/10">
+        <div className="absolute bottom-23 left-1/2 -translate-x-1/2 flex gap-2 z-50 pointer-events-none bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20">
             {[0, 1, 2].map((idx) => (
                 <button
                 key={idx} 
@@ -1088,7 +1088,7 @@ export default function App() {
                     if (idx === page) return;
                     setPage([idx, idx > page ? 1 : -1]);
                 }}
-                className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 shadow-sm pointer-events-auto hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
+                className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300  pointer-events-auto hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
                 aria-label={`Go to page ${idx + 1}`}
                 />
             ))}

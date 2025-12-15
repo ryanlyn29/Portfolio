@@ -93,6 +93,8 @@ const PlaylistContent = () => {
         setIsPlaying(!isPlaying);
     }
   };
+
+  const [liked, setLiked] = useState(false);
   
   
   useEffect(() => {
@@ -101,6 +103,7 @@ const PlaylistContent = () => {
         if (isPlaying) videoRef.current.play();
     }
   }, [currentVideoIndex]);
+  
 
   return (
     <div className="flex flex-col lg:flex-row h-full lg:h-[650px]">
@@ -115,7 +118,7 @@ const PlaylistContent = () => {
                     ref={videoRef}
                     src={currentVideo.video}
                     poster={currentVideo.poster}
-                    className="absolute inset-0 w-full h-full object-contain z-10"
+                    className="absolute inset-0 scale-101 w-full h-full object-contain z-10"
                     playsInline
                     onEnded={() => setIsPlaying(false)}
                  />
@@ -135,8 +138,17 @@ const PlaylistContent = () => {
                             </div>
                         </div>
                         <div className="flex gap-3 text-white/70">
-                            <Heart className="hover:text-green-500 cursor-pointer transition-colors" />
-                            <MoreHorizontal className="hover:text-white cursor-pointer transition-colors" />
+                        <Heart
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setLiked((prev) => !prev);
+                          }}
+                          className={`
+                            cursor-pointer transition-colors
+                            ${liked ? "text-green-500 fill-green-500" : "text-zinc-400"}
+                            hover:text-green-500 transition-colors
+                          `}/>                            
+                          <MoreHorizontal className="hover:text-white cursor-pointer transition-colors" />
                         </div>
                      </div>
                  </div>
@@ -173,7 +185,7 @@ const PlaylistContent = () => {
                                 : 'hover:bg-zinc-200/50 dark:hover:bg-zinc-900'
                         }`}
                      >
-                         <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 shadow-sm group-hover:shadow-md transition-shadow">
+                         <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0  transition-shadow">
                              <img src={item.poster} className={`w-full h-full object-cover transition-opacity ${currentVideoIndex === index ? 'opacity-40' : ''}`} alt={item.title} />
                              
                              
@@ -306,7 +318,7 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
 
         
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900/50 p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+          <div className="bg-zinc-100 dark:bg-zinc-900/50 p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800">
             <div className="flex items-center gap-2 text-zinc-900 dark:text-white mb-6">
               <Calendar size={18} className="text-zinc-400" />
               <span className="font-mono text-sm font-bold">{project.year}</span>
@@ -327,10 +339,10 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
               href={project.liveUrl} 
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 bg-zinc-900 dark:bg-white text-white dark:text-black font-bold rounded-full text-md hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-lg hover:shadow-xl active:scale-95 group"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-zinc-900 dark:bg-white text-white dark:text-black font-bold rounded-full text-sm hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all  active:scale-95 group"
             >
               <ExternalLink size={18} className="" />
-              View Live Project
+              View Project
             </a>
           </div>
           
@@ -431,7 +443,7 @@ const AboutContent = () => (
        </div>
 
        <div className="md:col-span-5 space-y-6">
-           <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+           <div className="p-6 rounded-3xl bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
               <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 mb-6">Connect</h4>
               <ul className="space-y-4">
                  <li className="flex items-center gap-3 text-zinc-900 dark:text-white">
@@ -448,8 +460,8 @@ const AboutContent = () => (
                  </li>
               </ul>
               
-              <button className="w-full mt-8 py-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-full font-bold text-sm transition-colors flex items-center justify-center gap-2 group">
-                 <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
+              <button className="w-full mt-8 py-3 cursor-pointer bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-full font-bold text-sm transition-colors flex items-center justify-center gap-2 group">
+                 <Download size={16} className="" />
                  Download Resume
               </button>
            </div>
@@ -493,7 +505,7 @@ const SkillsContent = () => {
               <span>System Status: Optimal</span>
            </div>
            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative">
-              Technical Stack
+              Technical <span className='text-zinc-500'>Stack</span>
            </h2>
         </div>
     </div>
@@ -527,7 +539,7 @@ const SkillsContent = () => {
         </div>
 
         
-        <div className="mt-16 p-8 md:p-10 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden group">
+        <div className="mt-16 p-8 md:p-10 rounded-3xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800  relative overflow-hidden group">
             <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-blue-500/5 to-transparent" />
             
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">

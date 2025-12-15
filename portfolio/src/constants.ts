@@ -9,7 +9,7 @@ export const PROJECTS: Project[] = [
     longDescription: 'As a Build Team Member at INIT and ShellHacks participant, I collaborated in an agile workflow to design and deploy interactive web applications. This role focused heavily on component modularity, responsive state management, and engaging in technical workshops covering backend architecture. Additionally, as a member of Code Crunch and ColorStack, I actively engage in algorithm optimization and technical interview preparation.',
     role: 'Team Member',
     year: '2025',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/ryanlyn29/WhiteFlow',
     image: '/images/INITBuild.png',
     gallery: [
         '/videos/WhiteFlowDemo.mp4',
@@ -29,7 +29,7 @@ export const PROJECTS: Project[] = [
     longDescription: 'WhiteFlow is a custom SPA framework designed for sub-millisecond collaboration. We architected a "Zoomable Infinite Canvas" utilizing a Command Pattern undo/redo system and a custom requestAnimationFrame physics loop. The system features a real-time collaboration engine built on Socket.io namespaces to broadcast updates for drawing and object movement across distributed clients, all synchronized via Redis caching.',
     role: 'Lead Architect',
     year: '2025',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/ryanlyn29/WhiteFlow',
     image: '/images/WhiteFlowHome.png',
     gallery: [
         '/videos/WhiteFlowDemo.mp4',
@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
     longDescription: 'AgentGuard facilitates the security auditing of LLM agents. The platform features an asynchronous vulnerability scanning workflow using a polling architecture to track long-running Gemini audits. We engineered an "Auto-Remediation" UI that triggers GenAI models to generate hardened system prompts, visualizing score trends and security posture improvements via Recharts.',
     role: 'Frontend Developer',
     year: '2025',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/4shivv/Sharkbyte_2025',
     image: '/images/AgentGuardHome.png',
     gallery: [
         '/videos/AgentGuardDemo.mp4',
@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
     longDescription: 'Clinix bridges the gap between patient data and AI guidance. We developed a modular React frontend for secure appointment scheduling and insurance estimates, backed by a FastAPI service handling data validation. The entire application was containerized using Docker to ensure consistent execution environments across development and production deployments.',
     role: 'Frontend Developer',
     year: '2025',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/HitMonrillo/Clinix',
     image: '/images/ClinixHome.png',
     gallery: [
         '/videos/ClinixDemo.mp4',
