@@ -652,7 +652,7 @@ const WhiteFlowVisual = () => {
 };
 
 const ClinixVisual = () => {
-    const [blobs, setBlobs] = useState([
+    const [blobs] = useState([
         { id: 1, color: "from-blue-600 to-blue-500/80" },
         { id: 2, color: "from-red-700 to-red-600/90" },
         { id: 3, color: "from-green-600 to-green-500/80" },
@@ -787,7 +787,6 @@ const HomePage = ({
 }: any) => {
     const currentProject = PROJECTS[heroIndex];
     
-    const isDarkTheme = ['2', '4'].includes(currentProject.id);
 
     const nextProject = (e: React.MouseEvent) => {
         e.stopPropagation();

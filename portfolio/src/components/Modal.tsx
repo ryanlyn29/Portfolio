@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  X, Calendar, ChevronRight, MapPin, Briefcase, GraduationCap, 
-  Play, Pause, Heart, MoreHorizontal, Music2, BarChart2, 
-  ExternalLink, User, Layers, Download, Github, Linkedin, Mail 
+  X, Calendar, MapPin, GraduationCap, 
+  Play, Pause, Heart, BarChart2, 
+  ExternalLink, User, Download, Github, Linkedin, Mail 
 } from 'lucide-react';
 import type { Project } from '../types';
 import { SKILLS, VIDEO_ITEMS, PROJECTS } from '../constants';
@@ -20,7 +20,7 @@ interface ModalProps {
   isFullScreen?: boolean;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, type, data, onNavigate, layoutId }) => {
+export const Modal: React.FC<ModalProps> = ({ onClose, type, data, onNavigate, layoutId }) => {
   const finalLayoutId = layoutId || (type === 'project' && data ? `hero-card-${data.id}` : `hero-card-${type}`);
 
   return (
