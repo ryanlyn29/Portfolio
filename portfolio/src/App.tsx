@@ -7,7 +7,9 @@ import {
   ArrowUpRight, Plus, ChevronLeft, ChevronRight,
   Github, Code2, Linkedin, User, Layers, Mail, Copy, CheckCircle,
   Calendar as CalendarIcon, Cloud, Calculator, CheckSquare, Music, Twitter,
-  Search, Grid, Settings, Smartphone, Wifi, BatteryFull, X
+  Search, Grid, Settings, Smartphone, Wifi, BatteryFull, X,
+  ShieldCheck, Heart, Terminal, MousePointer2, Cpu, Database, Layout, Globe,
+  Move, TextCursor
 } from 'lucide-react';
 import { Modal } from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -498,7 +500,7 @@ const AppLibraryPage = ({
                         placeholder="App Library" 
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="block w-full pl-9 pr-4 py-2.5 rounded-2xl bg-zinc-200/60 dark:bg-zinc-800/50 backdrop-blur-md border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 active:outline-none active:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal transition-all"
+                        className="block w-full pl-9 pr-4 py-2.5 rounded-2xl bg-zinc-200/60 dark:bg-[#1C1C1E] backdrop-blur-md border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0 active:outline-none active:ring-0 text-zinc-900 dark:text-white placeholder-zinc-500 text-sm font-normal transition-all"
                     />
                 </div>
             </div>
@@ -510,7 +512,7 @@ const AppLibraryPage = ({
                             <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wide ml-4">
                                 {section.category}
                             </h3>
-                            <div className="bg-zinc-200/60 dark:bg-zinc-800/40 backdrop-blur-xl rounded-[2rem] p-5 border border-white/20 dark:border-white/5 ">
+                            <div className="bg-zinc-200/60 dark:bg-[#1C1C1E] backdrop-blur-xl rounded-[2rem] p-5">
                                 <div className="grid grid-cols-4 gap-4">
                                     {section.items.map((app, i) => (
                                         <motion.button 
@@ -542,7 +544,7 @@ const AppLibraryPage = ({
                     ))}
                 </div>
 
-                <div className="mt-8 p-6 rounded-[2rem] bg-zinc-200/60 dark:bg-zinc-900/50 border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between backdrop-blur-md">
+                <div className="mt-8 p-6 rounded-[2rem] bg-zinc-200/60 dark:bg-[#1C1C1E]  flex items-center justify-between backdrop-blur-md">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-white dark:bg-zinc-800 rounded-2xl flex items-center justify-center">
                             <Smartphone size={24} className="text-zinc-500 dark:text-zinc-400" />
@@ -561,6 +563,219 @@ const AppLibraryPage = ({
     );
 };
 
+const WhiteFlowVisual = () => {
+    return (
+        <div className="absolute inset-0 bg-[#FBFBF2] dark:bg-[#FBFBF2] flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            <div className="relative z-10 w-full h-full">
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    <motion.path
+                        d="M 100 100 Q 200 50, 300 150 T 450 100" 
+                        fill="transparent"
+                        stroke="#e2d5ff"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                    />
+                     <motion.path
+                        d="M 50 300 C 100 400, 200 250, 300 350" 
+                        fill="transparent"
+                        stroke="#ffc9c9"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
+                    />
+                </svg>
+
+                <motion.div 
+                    className="absolute z-10"
+                    style={{ top: '30%', left: '20%' }}
+                    animate={{ x: [0, 100, 200, 150, 0], y: [0, -50, 0, 50, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <div className="relative">
+                        <MousePointer2 className="w-6 h-6 transform rotate-2 drop-shadow-md text-[#5C1F1F] fill-[#ffc9c9]" />
+                        <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#ffc9c9] text-[#5C1F1F] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
+                            Alex
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <motion.div 
+                    className="absolute z-10"
+                    style={{ top: '20%', right: '30%' }}
+                    animate={{ x: [0, 50, 100, 0], opacity: [1, 0.8, 1] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                >
+                     <div className="relative flex flex-col items-center">
+                        <TextCursor size={15} className="w-6 h-6 text-[#2E2172]" />
+                        <div className="mt-1 px-2 py-0.5 bg-[#e2d5ff] text-[#2E2172] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
+                            Maya
+                        </div>
+                    </div>
+                </motion.div>
+
+                <motion.div 
+                    className="absolute z-10"
+                    style={{ bottom: '30%', right: '20%' }}
+                    animate={{ x: [0, -60, -20, 0], y: [0, 40, -20, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                >
+                    <div className="relative">
+                        <MousePointer2 className="w-6 h-6 transform -rotate-12 drop-shadow-md text-[#444] fill-[#ccdeff]" />
+                        <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#dce8ff] text-[#444] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
+                            Leo
+                        </div>
+                    </div>
+                </motion.div>
+
+                 <motion.div 
+                    className="absolute z-10"
+                    style={{ bottom: '20%', left: '15%' }}
+                    animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                >
+                    <div className="relative flex flex-col items-center">
+                        <Move className="w-6 h-6 text-[#a6feb0] drop-shadow-md" />
+                        <div className="mt-1 px-2 py-0.5 bg-[#cbffd1] text-[#214B2A] text-[10px] font-bold rounded-md shadow-sm whitespace-nowrap">
+                            Sofia
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </div>
+    );
+};
+
+const ClinixVisual = () => {
+    const [blobs, setBlobs] = useState([
+        { id: 1, color: "from-blue-600 to-blue-500/80" },
+        { id: 2, color: "from-red-700 to-red-600/90" },
+        { id: 3, color: "from-green-600 to-green-500/80" },
+        { id: 4, color: "from-purple-600 to-purple-500/80" },
+        { id: 5, color: "from-pink-600 to-pink-500/80" },
+    ]);
+    
+    const isMounted = useRef(true);
+
+    const generateRandomStyle = () => {
+        const baseWidth = 100 + Math.random() * 150; 
+        const baseHeight = 100 + Math.random() * 120;
+        return {
+            x: Math.random() * 100 - 20, 
+            y: Math.random() * 100 - 20, 
+            width: baseWidth,
+            height: baseHeight,
+        };
+    };
+
+    const [blobStyles, setBlobStyles] = useState<any[]>([]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        setBlobStyles(blobs.map(() => generateRandomStyle()));
+
+        const interval = setInterval(() => {
+            if (isMounted.current) {
+                setBlobStyles(blobs.map(() => generateRandomStyle()));
+            }
+        }, 4000);
+
+        return () => {
+            isMounted.current = false;
+            clearInterval(interval);
+        };
+    }, []);
+
+    return (
+        <div className="absolute inset-0 bg-[#EDEAE0] dark:bg-[#1B1B1B] overflow-hidden">
+            {blobs.map((blob, i) => (
+                <motion.div 
+                    key={blob.id}
+                    className={`absolute rounded-full blur-[60px] bg-gradient-to-br ${blob.color} mix-blend-multiply dark:mix-blend-screen opacity-80`}
+                    animate={{
+                        left: `${blobStyles[i]?.x}%`,
+                        top: `${blobStyles[i]?.y}%`,
+                        width: blobStyles[i]?.width,
+                        height: blobStyles[i]?.height,
+                    }}
+                    transition={{ duration: 4, ease: "easeInOut" }}
+                />
+            ))}
+            
+            <div className="absolute inset-0 flex -top-1/6 items-center justify-center z-10 pointer-events-none">
+                <div className="p-5 bg-white dark:bg-[#010B13] backdrop-blur-2xl rounded-[1.5rem]">
+                    <Heart size={54} className="text-rose-400 fill-rose-400 dark:fill-rose-400" />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const ProjectVisual = ({ project }: { project: any }) => {
+    switch(project.id) {
+        case '1': 
+            return (
+                <div className="absolute inset-0 bg-[#ea580c] flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+                    
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                         <h1 className="text-[10rem] font-black text-black/5 absolute -top-10 -right-10 leading-none tracking-tighter">
+                            INIT
+                        </h1>
+                        <span className="text-[6rem] font-black text-black/5 absolute top-1/4 -left-4 -translate-y-1/2 leading-none tracking-tighter">
+                            BUILD
+                        </span>
+                        
+                        <span className="text-[8rem] font-black text-black/5 absolute top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2 leading-none tracking-tighter z-0">
+                            BUILD
+                        </span>
+                    </div>
+
+                    <div className="absolute top-1/3 z-10 flex flex-col items-center justify-center">
+                        <div className="p-5 bg-black rounded-[1.5rem] backdrop-blur-sm">
+                             <Terminal size={48} className="text-white opacity-95" />
+                        </div>
+                    </div>
+                </div>
+            );
+        case '2':
+            return <WhiteFlowVisual />;
+        case '3':
+            return (
+                <div className="absolute inset-0 bg-[#00356B] -top-1/4 flex items-center justify-center overflow-hidden">
+                    <div className="relative z-10 w-4/5 max-w-sm">
+                        <div className="bg-[#1e293b] rounded-xl border border-slate-700 shadow-2xl overflow-hidden">
+                            <div className="h-6 bg-[#0f172a] flex items-center gap-1.5 px-3 border-b border-slate-700">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                            </div>
+                            <div className="p-4 space-y-2">
+                                <div className="flex items-center gap-2 text-green-400 font-mono text-xs">
+                                    <ShieldCheck size={14} />
+                                    <span>System Secure</span>
+                                </div>
+                                <div className="space-y-1">
+                                    <div className="h-1.5 w-3/4 bg-slate-600 rounded-full opacity-50" />
+                                    <div className="h-1.5 w-1/2 bg-slate-600 rounded-full opacity-30" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        
+        case '4': 
+            return <ClinixVisual />;    
+        default:
+            return <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800" />;
+    }
+}
 
 
 const HomePage = ({ 
@@ -571,16 +786,8 @@ const HomePage = ({
     emailCopied 
 }: any) => {
     const currentProject = PROJECTS[heroIndex];
-    const textColor = currentProject.textColor || 'text-white';
-    const tagBg = currentProject.textColor ? 'bg-zinc-900/10 text-zinc-900 border-zinc-900/10' : 'bg-black/40 text-zinc-300 border-white/10';
-    const buttonBg = currentProject.textColor ? 'bg-zinc-900 text-white' : 'bg-white text-black';
-    const arrowBg = currentProject.textColor ? 'bg-black/5 hover:bg-black/10' : 'bg-white/10 hover:bg-white/30';
-    const indicatorActive = currentProject.textColor ? 'bg-zinc-900' : 'bg-white';
-    const indicatorInactive = currentProject.textColor ? 'bg-zinc-300' : 'bg-zinc-600';
-    const descriptionColor = currentProject.textColor ? 'text-zinc-600' : 'text-zinc-200';
-    const gradient = currentProject.overlayGradient || 'from-black via-black/40 to-transparent';
     
-    const textShadowClass = currentProject.textColor ? '' : 'drop-shadow-md';
+    const isDarkTheme = ['2', '4'].includes(currentProject.id);
 
     const nextProject = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -642,100 +849,82 @@ const HomePage = ({
               rowSpan="md:row-span-2" 
               noPadding={true}
               layoutId={`hero-card-${currentProject.id}`}
-              className="relative group min-h-[420px] cursor-pointer"
+              className="relative group min-h-[460px] cursor-pointer bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800"
               onClick={() => openModal('project', currentProject, `hero-card-${currentProject.id}`)}
             >
               <AnimatePresence mode="wait">
-                <motion.img 
-                    key={currentProject.image}
-                    src={currentProject.image}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    alt={currentProject.title} 
-                    className="absolute inset-0 w-full h-full object-cover scale-102 z-0"
-                  />
-              </AnimatePresence>
-
-              <AnimatePresence mode="wait">
                   <motion.div
                     key={currentProject.id}
-                    className={`absolute inset-0 bg-gradient-to-t ${gradient} z-10`}
+                    className="absolute inset-0 z-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                  />
+                    transition={{ duration: 0.4 }}
+                  >
+                     <ProjectVisual project={currentProject} />
+                  </motion.div>
               </AnimatePresence>
               
-              <div className={`relative z-20 flex flex-col justify-between h-full p-8 ${textColor}`}>
-                <div className="">
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                        key={currentProject.id}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <span className={`inline-block px-2 py-1 mb-2 text-[10px] font-bold uppercase tracking-widest rounded-md ${currentProject.textColor ? 'bg-zinc-900/10' : 'bg-white/20 backdrop-blur-md'}`}>
+              <div className="relative z-20 flex flex-col justify-between h-full p-4">
+                 <div className="flex justify-between items-start">
+                     <AnimatePresence mode="wait">
+                        <motion.div 
+                            key={currentProject.id}
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="px-3 py-1.5 rounded-full bg-white/20 dark:bg-[#242124] backdrop-blur-xl   text-xs font-semibold text-zinc-900 dark:text-white shadow-sm ring-1 ring-black/5"
+                        >
                             Featured Project
-                        </span>
-                        <h2 className={`text-4xl font-bold leading-none tracking-tight mb-2 ${textShadowClass}`}>
-                        {currentProject.title}
-                        </h2>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-                
-                <div>
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                        key={currentProject.id}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                        <p className={`text-sm leading-relaxed mb-6 line-clamp-3 font-medium ${descriptionColor} ${textShadowClass}`}>
-                            {currentProject.description}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mb-6">
-                            {currentProject.tags.slice(0, 3).map((tag: string, i: number) => (
-                                <span key={i} className={`text-[10px] font-mono px-2 py-1 rounded-sm border ${tagBg}`}>
-                                {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </motion.div>
-                  </AnimatePresence>
+                        </motion.div>
+                     </AnimatePresence>
+                 </div>
 
-                  <div className="flex justify-between items-end">
-                    <button className={`${buttonBg} px-8 py-3 cursor-pointer rounded-full font-bold text-sm ${Number(currentProject.id) %2 !== 0 ? 'hover:bg-zinc-300' :'hover:bg-zinc-700'} transition-all`}>
-                        View Project
-                    </button>
-
-                    <div className="flex gap-2">
-                        <button onClick={prevProject} className={`p-2  cursor-pointer rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
-                            <ChevronLeft size={16} />
-                        </button>
-                        <button onClick={nextProject} className={`p-2 cursor-pointer rounded-full backdrop-blur-md transition-colors ${arrowBg}`}>
-                            <ChevronRight size={16} />
-                        </button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-2 mt-8 justify-center">
-                      {PROJECTS.map((_, i) => (
-                          <div 
-                            key={i} 
-                            className={`w-2 h-2 rounded-full transition-colors ${i === heroIndex ? indicatorActive : indicatorInactive}`}
-                          />
-                      ))}
-                  </div>
-                </div>
+                 <motion.div 
+                    layoutId={`info-panel-${currentProject.id}`}
+                    className="p-6 rounded-[1.5rem] bg-white dark:bg-[#1B1B1B] backdrop-blur-xl"
+                 >
+                     <span className="absolute right-6 top-6 text-zinc-300 text-xs">
+                        {currentProject.id} / 4
+                    </span>
+                    <AnimatePresence mode="wait">
+                         <motion.div
+                             key={currentProject.id}
+                             initial={{ opacity: 0, y: 10 }}
+                             animate={{ opacity: 1, y: 0 }}
+                             exit={{ opacity: 0, y: -10 }}
+                             transition={{ duration: 0.2 }}
+                         >
+                            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+                                {currentProject.title}
+                            </h2>
+                            <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400 line-clamp-2 mb-4">
+                                {currentProject.description}
+                            </p>
+                            
+                            <div className="flex items-center justify-between">
+                                <button className="px-5 py-2.5 cursor-pointer bg-zinc-900 dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-transform">
+                                    View Details
+                                </button>
+                                
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={prevProject} 
+                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-colors"
+                                    >
+                                        <ChevronLeft size={16} />
+                                    </button>
+                                    <button 
+                                        onClick={nextProject} 
+                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-colors"
+                                    >
+                                        <ChevronRight size={16} />
+                                    </button>
+                                </div>
+                            </div>
+                         </motion.div>
+                    </AnimatePresence>
+                 </motion.div>
               </div>
             </BentoCard>
 
@@ -744,42 +933,63 @@ const HomePage = ({
               rowSpan="md:row-span-2" 
               noPadding={true} 
               layoutId="hero-card-skills"
-              className="bg-violet-600 relative overflow-hidden group min-h-[420px] cursor-pointer"
+              className="bg-white dark:bg-[#1B1B1B] border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group min-h-[420px] cursor-pointer"
               onClick={() => openModal('skills', null, 'hero-card-skills')}
             >
-              <img 
-                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-110 transition-transform duration-700" 
-                  alt="Tech Background"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
               
-              <div className="relative z-20 h-full flex flex-col justify-between p-6 text-white">
-                  <div className="flex justify-between items-start">
-                     <Layers className="text-white/80" size={24} />
-                     <div className="p-1.5 bg-white/20 backdrop-blur-md rounded-full">
-                         <Plus size={14} />
+              <div className="absolute top-0 right-0 p-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 p-24 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="relative z-20 h-full flex flex-col p-6">
+                  <div className="flex justify-between items-start mb-6">
+                     <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+                        <Layers className="text-zinc-700 dark:text-zinc-300" size={20} />
+                     </div>
+                     <div className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold rounded-md uppercase tracking-wider">
+                         Active
                      </div>
                   </div>
 
-                  <div>
-                     <h3 className="text-3xl font-bold mb-2">Tech<br/>Stack</h3>
-                     <p className="text-white/60 text-xs leading-relaxed mb-4">
-                        React, Node, Docker, & Modern UI systems.
-                     </p>
+                  <div className="flex-1">
+                     <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-1">Tech Stack</h3>
+                     <p className="text-zinc-500 text-xs mb-6">Core technologies & tools</p>
                      
-                     <div className="grid grid-cols-3 gap-2">
-                        {[1,2,3,4,5,6].map(i => (
-                           <div key={i} className="aspect-square bg-white/10 rounded-md backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                              <Code2 size={16} className="text-white/60" />
-                           </div>
-                        ))}
+                     <div className="space-y-3">
+                         {[
+                             { name: 'React', icon: <Code2 size={14} />, color: 'bg-blue-500' },
+                             { name: 'Node.js', icon: <Database size={14} />, color: 'bg-green-500' },
+                             { name: 'Docker', icon: <Layout size={14} />, color: 'bg-sky-500' },
+                             { name: 'TypeScript', icon: <Cpu size={14} />, color: 'bg-blue-600' }
+                         ].map((tech, i) => (
+                             <div key={i} className="flex items-center justify-between p-2 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors group/item">
+                                 <div className="flex items-center gap-3">
+                                     <div className={`w-1.5 h-1.5 rounded-full ${tech.color}`} />
+                                     <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{tech.name}</span>
+                                 </div>
+                                 <div className="opacity-0 group-hover/item:opacity-100 text-zinc-400 transition-opacity">
+                                     {tech.icon}
+                                 </div>
+                             </div>
+                         ))}
                      </div>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                      <div className="flex -space-x-2">
+                          {[1,2,3].map(i => (
+                              <div key={i} className="w-6 h-6 rounded-full bg-zinc-100 dark:bg-zinc-800 border-2 border-white dark:border-black flex items-center justify-center text-[8px] font-bold text-zinc-500">
+                                  <Globe size={10} />
+                              </div>
+                          ))}
+                      </div>
+                      <span className="text-[10px] font-medium text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors flex items-center gap-1">
+                          View All <ChevronRight size={10} />
+                      </span>
                   </div>
               </div>
             </BentoCard>
 
-            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#18181B] border border-zinc-800 flex flex-col items-center justify-center p-4 min-h-[200px]">
+            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#1B1B1B] border border-zinc-800 flex flex-col items-center justify-center p-4 min-h-[200px]">
                 <div className="flex flex-row items-center justify-center w-full h-full gap-5">
                     <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
@@ -927,6 +1137,7 @@ export default function App() {
   const [emailCopied, setEmailCopied] = useState(false);
   
   const [[page, direction], setPage] = useState([1, 0]); 
+  const [isSwiping, setIsSwiping] = useState(false);
   
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -950,10 +1161,8 @@ export default function App() {
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
-  const lastSwipeTime = useRef(0);
   const onWheel = useCallback((e: React.WheelEvent) => {
-      const now = Date.now();
-      if (now - lastSwipeTime.current < 500) return; 
+      if (isSwiping) return;
 
       const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
       const threshold = 20;
@@ -962,16 +1171,18 @@ export default function App() {
           if (e.deltaX > 0) {
               if (page < 2) {
                   setPage([page + 1, 1]);
-                  lastSwipeTime.current = now;
+                  setIsSwiping(true);
+                  setTimeout(() => setIsSwiping(false), 500);
               }
           } else {
               if (page > 0) {
                   setPage([page - 1, -1]);
-                  lastSwipeTime.current = now;
+                  setIsSwiping(true);
+                  setTimeout(() => setIsSwiping(false), 500);
               }
           }
       }
-  }, [page]);
+  }, [page, isSwiping]);
 
   const variants = {
     enter: (direction: number) => ({
@@ -1093,7 +1304,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-25 w-full flex justify-center gap-2 z-50 pointer-events-none">
+        <div className="absolute bottom-25 left-[49.5%] flex justify-center gap-2 z-50 pointer-events-none">
             <div className="flex gap-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto">
                 {[0, 1, 2].map((idx) => (
                     <button

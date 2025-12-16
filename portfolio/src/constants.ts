@@ -19,11 +19,11 @@ export const PROJECTS: Project[] = [
     themeColor: '#d97706',
     tags: ['Agile', 'Teamwork', 'Algorithms'],
   
-    overlayGradient: 'from-black via-black/80 to-transparent'
+    overlayGradient: 'from-black via-black/30 to-transparent'
   },
   {
     id: '2',
-    title: 'WhiteFlow',
+    title: 'Whiteflow',
     category: 'Real-Time Collaboration',
     description: 'High-performance collaborative canvas engine using Socket.io and custom state management.',
     longDescription: 'WhiteFlow is a custom SPA framework designed for sub-millisecond collaboration. We architected a "Zoomable Infinite Canvas" utilizing a Command Pattern undo/redo system and a custom requestAnimationFrame physics loop. The system features a real-time collaboration engine built on Socket.io namespaces to broadcast updates for drawing and object movement across distributed clients, all synchronized via Redis caching.',
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
     ],
     themeColor: '#0ea5e9',
     tags: ['React', 'PostgreSQL', 'Gemini', 'Redis', 'Tailwind CSS', 'Gemini API', 'JWT'],
-    overlayGradient: 'from-black via-black/80 to-transparent'
+    overlayGradient: 'from-black via-black/30 to-transparent'
   },
   {
     id: '4',
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
     image: '/images/ClinixHome.png',
     gallery: [
         '/videos/ClinixDemo.mp4',
-        '/images/ClinicMobileMenu.png',
+        '/images/ClinixCheckinChat.png',
         '/images/ClinixChat.png'
     ],
     themeColor: '#7F3535',
@@ -89,6 +89,8 @@ export const SKILLS: Skill[] = [
   { name: 'Docker', level: 85, category: 'Tech' },
   { name: 'Java', level: 80, category: 'Tech' },
   { name: 'HTML', level: 80, category: 'Tech' },
+  { name: 'JavaScript', level: 90, category: 'Tech' },
+  { name: 'TypeScript', level: 90, category: 'Tech' },
   { name: 'CSS', level: 80, category: 'Tech' },
   { name: 'Tailwind CSS', level: 80, category: 'Tech' },
   { name: 'PostgreSQL', level: 85, category: 'Tech' },
@@ -98,7 +100,7 @@ export const SKILLS: Skill[] = [
 export const VIDEO_ITEMS = [
   {
     id: 'v1',
-    title: "WhiteFlow Demo",
+    title: "Whiteflow Demo",
     channel: "Ryan Lyncee",
     subs: "Lead Architect",
     video: "/videos/WhiteFlowDemo.mp4",
