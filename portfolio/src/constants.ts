@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     id: '2',
     title: 'Whiteflow',
     category: 'Real-Time Collaboration',
-    description: 'High-performance collaborative canvas engine using Socket.io and custom state management.',
+    description: 'High-performance collaborative canvas system using Socket.io and custom state management.',
     longDescription: 'WhiteFlow is a custom SPA framework designed for sub-millisecond collaboration. We architected a "Zoomable Infinite Canvas" utilizing a Command Pattern undo/redo system and a custom requestAnimationFrame physics loop. The system features a real-time collaboration engine built on Socket.io namespaces to broadcast updates for drawing and object movement across distributed clients, all synchronized via Redis caching.',
     role: 'Lead Architect',
     year: '2025',

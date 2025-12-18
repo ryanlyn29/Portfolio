@@ -965,7 +965,7 @@ const HomePage = ({
                   </motion.div>
               </AnimatePresence>
               
-              <div className="relative z-20 flex flex-col justify-between h-full p-4">
+              <div className="relative z-20 flex flex-col justify-between h-full p-6">
                  <div className="flex justify-between items-start">
                      <AnimatePresence mode="wait">
                         <motion.div 
