@@ -175,7 +175,7 @@ const AboutContent = () => (
        <img 
         src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" 
         alt="Workspace" 
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover opacity-60"
       />
       <div className="absolute inset-0 bg-black/20" />
       

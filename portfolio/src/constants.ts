@@ -108,7 +108,7 @@ export const VIDEO_ITEMS = [
     duration: "2:30",
     plays: "Featured",
     textColor: 'text-zinc-900',
-    overlayGradient: 'from-[#fdfbf7] via-[#fdfbf7]/90 to-transparent'
+    overlayGradient: 'from-[#FCF1E6]/90 via-[#FEF6EE]/95 to-transparent'
   },
   {
     id: 'v2',

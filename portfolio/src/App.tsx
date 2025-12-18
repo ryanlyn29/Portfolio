@@ -904,10 +904,9 @@ const HomePage = ({
               id="about"
               colSpan="md:col-span-6" 
               layoutId="hero-card-about"
-              className="relative overflow-hidden bg-[#F57D28] text-white group cursor-pointer border-none !p-8 transform-gpu"
+              className="relative overflow-hidden bg-[#ed8033] text-white group cursor-pointer border-none !p-8 transform-gpu"
               onClick={() => openModal('about', null, 'hero-card-about')}
             >
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
                 
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div className="flex justify-between items-start">
@@ -1149,10 +1148,9 @@ const HomePage = ({
             <BentoCard 
               colSpan="md:col-span-5" 
               id="contact" 
-              className="bg-[#F85671] text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
+              className="bg-[#e95c73] text-white min-h-[320px] group cursor-pointer border-none !p-8 relative overflow-hidden"
               onClick={copyEmail}
             >
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay" />
                 
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div className="flex justify-between items-start">
@@ -1404,7 +1402,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-25 left-[50%] flex justify-center gap-2 z-50 pointer-events-none">
+        <div className="absolute bottom-25 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-50 pointer-events-none">
             <div className="flex gap-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto">
                 {[0, 1, 2].map((idx) => (
                     <button
@@ -1420,7 +1418,7 @@ export default function App() {
             </div>
         </div>
 
-        <div className="absolute bottom-6 w-full flex justify-center z-50 pointer-events-none">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-6 w-full flex justify-center z-50 pointer-events-none">
             <NavBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onNavigate={handleNavClick} />
         </div>
       </div>
