@@ -564,91 +564,119 @@ const AppLibraryPage = ({
 };
 
 const WhiteFlowVisual = () => {
-    return (
-        <div className="absolute inset-0 bg-[#FBFBF2] dark:bg-[#FBFBF2] flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div className="relative z-10 w-full h-full">
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                    <motion.path
-                        d="M 100 100 Q 200 50, 300 150 T 450 100" 
-                        fill="transparent"
-                        stroke="#e2d5ff"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                    />
-                     <motion.path
-                        d="M 50 300 C 100 400, 200 250, 300 350" 
-                        fill="transparent"
-                        stroke="#ffc9c9"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
-                    />
-                </svg>
+return (
+  <div className="absolute inset-0 bg-[#FBFBF2] dark:bg-[#eeeee6] flex items-center justify-center overflow-hidden">
 
-                <motion.div 
-                    className="absolute z-10"
-                    style={{ top: '30%', left: '20%' }}
-                    animate={{ x: [0, 100, 200, 150, 0], y: [0, -50, 0, 50, 0] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    <div className="relative">
-                        <MousePointer2 className="w-6 h-6 transform rotate-2 drop-shadow-md text-[#5C1F1F] fill-[#ffc9c9]" />
-                        <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#ffc9c9] text-[#5C1F1F] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
-                            Alex
-                        </div>
-                    </div>
-                </motion.div>
-                
-                <motion.div 
-                    className="absolute z-10"
-                    style={{ top: '20%', right: '30%' }}
-                    animate={{ x: [0, 50, 100, 0], opacity: [1, 0.8, 1] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                >
-                     <div className="relative flex flex-col items-center">
-                        <TextCursor size={15} className="w-6 h-6 text-[#2E2172]" />
-                        <div className="mt-1 px-2 py-0.5 bg-[#e2d5ff] text-[#2E2172] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
-                            Maya
-                        </div>
-                    </div>
-                </motion.div>
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-                <motion.div 
-                    className="absolute z-10"
-                    style={{ bottom: '30%', right: '20%' }}
-                    animate={{ x: [0, -60, -20, 0], y: [0, 40, -20, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                >
-                    <div className="relative">
-                        <MousePointer2 className="w-6 h-6 transform -rotate-12 drop-shadow-md text-[#444] fill-[#ccdeff]" />
-                        <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#dce8ff] text-[#444] text-[10px] font-bold rounded-full shadow-sm whitespace-nowrap">
-                            Leo
-                        </div>
-                    </div>
-                </motion.div>
+   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+  <motion.div
+    initial={{ scale: 0.95, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.4, ease: 'easeOut' }}
+    className="relative"
+  >
+    <motion.div
+      className="absolute inset-0 rounded-[1.75rem] bg-indigo-400/10 blur-xl"
+      animate={{ opacity: [0.25, 0.45, 0.25] }}
+      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+    />
 
-                 <motion.div 
-                    className="absolute z-10"
-                    style={{ bottom: '20%', left: '15%' }}
-                    animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                >
-                    <div className="relative flex flex-col items-center">
-                        <Move className="w-6 h-6 text-[#a6feb0] drop-shadow-md" />
-                        <div className="mt-1 px-2 py-0.5 bg-[#cbffd1] text-[#214B2A] text-[10px] font-bold rounded-md shadow-sm whitespace-nowrap">
-                            Sofia
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
+    <div className="relative p-5 rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
+      <Layers
+        size={44}
+        strokeWidth={1.4}
+        className="text-[#ffffff]"
+      />
+    </div>
+  </motion.div>
+</div>
+
+    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <motion.path
+        d="M 100 100 Q 200 50, 300 150 T 450 100"
+        fill="transparent"
+        stroke="#e2d5ff"
+        strokeWidth="8"
+        strokeLinecap="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+      />
+      <motion.path
+        d="M 50 300 C 100 400, 200 250, 300 350"
+        fill="transparent"
+        stroke="#ffc9c9"
+        strokeWidth="4"
+        strokeLinecap="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
+      />
+    </svg>
+
+    <div className="relative z-10 w-full h-full">
+
+      <motion.div
+        className="absolute"
+        style={{ top: '30%', left: '20%' }}
+        animate={{ x: [0, 100, 200, 150, 0], y: [0, -50, 0, 50, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="relative">
+          <MousePointer2 className="w-6 h-6 rotate-2 drop-shadow-md text-[#5C1F1F] fill-[#ffc9c9]" />
+          <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#ffc9c9] text-[#5C1F1F] text-[10px] font-bold rounded-full">
+            Alex
+          </div>
         </div>
-    );
+      </motion.div>
+
+      <motion.div
+        className="absolute"
+        style={{ top: '20%', right: '30%' }}
+        animate={{ x: [0, 50, 100, 0], opacity: [1, 0.8, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="flex flex-col items-center">
+          <TextCursor size={15} className="text-[#2E2172]" />
+          <div className="mt-1 px-2 py-0.5 bg-[#e2d5ff] text-[#2E2172] text-[10px] font-bold rounded-full">
+            Maya
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute"
+        style={{ bottom: '30%', right: '20%' }}
+        animate={{ x: [0, -60, -20, 0], y: [0, 40, -20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      >
+        <div className="relative">
+          <MousePointer2 className="w-6 h-6 -rotate-12 drop-shadow-md text-[#444] fill-[#ccdeff]" />
+          <div className="absolute top-6 left-3 px-2 py-0.5 bg-[#dce8ff] text-[#444] text-[10px] font-bold rounded-full">
+            Leo
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute"
+        style={{ bottom: '20%', left: '15%' }}
+        animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <div className="flex flex-col items-center">
+          <Move className="w-6 h-6 text-[#a6feb0]" />
+          <div className="mt-1 px-2 py-0.5 bg-[#cbffd1] text-[#214B2A] text-[10px] font-bold rounded-md">
+            Sofia
+          </div>
+        </div>
+      </motion.div>
+
+    </div>
+  </div>
+);
+
 };
 
 const ClinixVisual = () => {
@@ -707,11 +735,32 @@ const ClinixVisual = () => {
                 />
             ))}
             
-            <div className="absolute inset-0 flex -top-1/6 items-center justify-center z-10 pointer-events-none">
-                <div className="p-5 bg-white dark:bg-[#010B13] backdrop-blur-2xl rounded-[1.5rem]">
-                    <Heart size={54} className="text-rose-400 fill-rose-400 dark:fill-rose-400" />
+          
+            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="relative"
+            >
+            
+                <motion.div
+                className="absolute inset-0 rounded-full bg-rose-400/15 blur-2xl"
+                animate={{ opacity: [0.25, 0.45, 0.25] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+
+            
+                <div className="relative p-5 rounded-[1.6rem] bg-white/80 dark:bg-[#100C08]/80 backdrop-blur-xl border border-black/5 shadow-lg">
+                <Heart
+                    size={42}
+                    strokeWidth={1.6}
+                    className="text-rose-500 fill-rose-500"
+                />
                 </div>
+            </motion.div>
             </div>
+
         </div>
     );
 };
@@ -720,26 +769,44 @@ const ProjectVisual = ({ project }: { project: any }) => {
     switch(project.id) {
         case '1': 
             return (
-                <div className="absolute inset-0 bg-[#ea580c] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[#dbc7a6] flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                     
                     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                         <h1 className="text-[10rem] font-black text-black/5 absolute -top-10 -right-10 leading-none tracking-tighter">
+                         <h1 className="text-[10rem] font-black text-[#F97316]/15 absolute -top-10 -right-10 leading-none tracking-tighter">
                             INIT
                         </h1>
-                        <span className="text-[6rem] font-black text-black/5 absolute top-1/4 -left-4 -translate-y-1/2 leading-none tracking-tighter">
-                            BUILD
-                        </span>
                         
-                        <span className="text-[8rem] font-black text-black/5 absolute top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2 leading-none tracking-tighter z-0">
+                        
+                        <span className="text-[8rem] font-black text-[#F97316]/15 absolute top-1/2 left-[25%] -translate-x-1/2 -translate-y-1/2 leading-none tracking-tighter z-0">
                             BUILD
                         </span>
                     </div>
 
-                    <div className="absolute top-1/3 z-10 flex flex-col items-center justify-center">
-                        <div className="p-5 bg-black rounded-[1.5rem] backdrop-blur-sm">
-                             <Terminal size={48} className="text-white opacity-95" />
+                   
+                    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                        className="relative"
+                    >
+                        
+                        <motion.div
+                        className="absolute inset-0 rounded-[1.75rem] bg-orange-500/15 blur-2xl"
+                        animate={{ opacity: [0.25, 0.45, 0.25] }}
+                        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+
+                    
+                        <div className="relative p-5 rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
+                        <Terminal
+                            size={44}
+                            strokeWidth={1.6}
+                            className="text-white"
+                        />
                         </div>
+                    </motion.div>
                     </div>
                 </div>
             );
@@ -747,27 +814,61 @@ const ProjectVisual = ({ project }: { project: any }) => {
             return <WhiteFlowVisual />;
         case '3':
             return (
-                <div className="absolute inset-0 bg-[#00356B] -top-1/4 flex items-center justify-center overflow-hidden">
-                    <div className="relative z-10 w-4/5 max-w-sm">
-                        <div className="bg-[#1e293b] rounded-xl border border-slate-700 shadow-2xl overflow-hidden">
-                            <div className="h-6 bg-[#0f172a] flex items-center gap-1.5 px-3 border-b border-slate-700">
-                                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                            </div>
-                            <div className="p-4 space-y-2">
-                                <div className="flex items-center gap-2 text-green-400 font-mono text-xs">
-                                    <ShieldCheck size={14} />
-                                    <span>System Secure</span>
-                                </div>
-                                <div className="space-y-1">
-                                    <div className="h-1.5 w-3/4 bg-slate-600 rounded-full opacity-50" />
-                                    <div className="h-1.5 w-1/2 bg-slate-600 rounded-full opacity-30" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <div className="absolute inset-0 bg-[#060B18] overflow-hidden flex items-center justify-center">
+
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+      <div className="absolute inset-0 pointer-events-none select-none">
+        <span className="absolute top-12 right-10 text-[7rem] font-black tracking-tighter text-blue-500/10">
+          AGENT
+        </span>
+        <span className="absolute bottom-10 right-14 text-[6rem] font-black tracking-tighter text-blue-500/10">
+          GUARD
+        </span>
+      </div>
+
+      <div className="relative z-10">
+        <motion.div
+          className="absolute inset-0 rounded-full bg-blue-500/10 blur-2xl"
+          animate={{ opacity: [0.2, 0.45, 0.2] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+       
+        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="relative"
+        >
+           
+            <motion.div
+            className="absolute inset-0 rounded-[1.75rem] bg-blue-500/18 blur-2xl"
+            animate={{ opacity: [0.25, 0.5, 0.25] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            
+            <div className="relative p-5 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
+            <ShieldCheck
+                size={44}
+                strokeWidth={1.6}
+                className="text-blue-400"
+            />
+            </div>
+        </motion.div>
+        </div>
+
+      </div>
+
+      <div className="absolute bottom-8 left-8 flex items-center gap-2 text-[10px] font-mono text-green-400">
+        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+        SECURE
+      </div>
+
+    </div>
+
             );
         
         case '4': 
@@ -881,7 +982,7 @@ const HomePage = ({
 
                  <motion.div 
                     layoutId={`info-panel-${currentProject.id}`}
-                    className="p-6 rounded-[1.5rem] bg-white dark:bg-[#1B1B1B] backdrop-blur-xl"
+                    className="p-6 rounded-[1.8rem] bg-white dark:bg-[#1B1B1B] backdrop-blur-xl"
                  >
                      <span className="absolute right-6 top-6 text-zinc-300 text-xs">
                         {currentProject.id} / 4
