@@ -582,7 +582,7 @@ return (
       transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
     />
 
-    <div className="relative p-5 rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
+    <div className="relative p-5 mb-4 rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
       <Layers
         size={44}
         strokeWidth={1.4}
@@ -751,7 +751,7 @@ const ClinixVisual = () => {
                 />
 
             
-                <div className="relative p-5 rounded-[1.6rem] bg-white/80 dark:bg-[#100C08]/80 backdrop-blur-xl border border-black/5 shadow-lg">
+                <div className="relative p-5 mb-4 rounded-[1.6rem] bg-white/80 dark:bg-[#100C08]/80 backdrop-blur-xl border border-black/5 shadow-lg">
                 <Heart
                     size={42}
                     strokeWidth={1.6}
@@ -799,7 +799,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                         />
 
                     
-                        <div className="relative p-5 rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
+                        <div className="relative p-5 mb-4 rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
                         <Terminal
                             size={44}
                             strokeWidth={1.6}
@@ -814,60 +814,60 @@ const ProjectVisual = ({ project }: { project: any }) => {
             return <WhiteFlowVisual />;
         case '3':
             return (
-                    <div className="absolute inset-0 bg-[#060B18] overflow-hidden flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#1f3f96]  dark:bg-[#0d1e4e] overflow-hidden flex items-center justify-center">
 
-      <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+                <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <span className="absolute top-12 right-10 text-[7rem] font-black tracking-tighter text-blue-500/10">
-          AGENT
-        </span>
-        <span className="absolute bottom-10 right-14 text-[6rem] font-black tracking-tighter text-blue-500/10">
-          GUARD
-        </span>
-      </div>
+                <div className="absolute inset-0 pointer-events-none select-none">
+                    <span className="absolute top-8 -right-30 text-[7rem] font-black tracking-tighter text-blue-500/10">
+                    AGENT
+                    </span>
+                    <span className="absolute bottom-10 right-14 text-[6rem] font-black tracking-tighter text-blue-500/10">
+                    GUARD
+                    </span>
+                </div>
 
-      <div className="relative z-10">
-        <motion.div
-          className="absolute inset-0 rounded-full bg-blue-500/10 blur-2xl"
-          animate={{ opacity: [0.2, 0.45, 0.2] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        />
+                <div className="relative z-10">
+                    <motion.div
+                    className="absolute inset-0 rounded-full bg-blue-500/10 blur-2xl"
+                    animate={{ opacity: [0.2, 0.45, 0.2] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                    />
 
-       
-        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="relative"
-        >
-           
-            <motion.div
-            className="absolute inset-0 rounded-[1.75rem] bg-blue-500/18 blur-2xl"
-            animate={{ opacity: [0.25, 0.5, 0.25] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            />
+                
+                    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                        className="relative"
+                    >
+                    
+                        <motion.div
+                        className="absolute inset-0 rounded-[1.75rem] bg-blue-500/18 blur-2xl"
+                        animate={{ opacity: [0.25, 0.5, 0.25] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                        />
 
-            
-            <div className="relative p-5 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
-            <ShieldCheck
-                size={44}
-                strokeWidth={1.6}
-                className="text-blue-400"
-            />
-            </div>
-        </motion.div>
-        </div>
+                        
+                        <div className="relative p-5 mb-4 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
+                        <ShieldCheck
+                            size={44}
+                            strokeWidth={1.6}
+                            className="text-blue-400"
+                        />
+                        </div>
+                    </motion.div>
+                    </div>
 
-      </div>
+                </div>
 
-      <div className="absolute bottom-8 left-8 flex items-center gap-2 text-[10px] font-mono text-green-400">
-        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-        SECURE
-      </div>
+                <div className="absolute bottom-8 left-8 flex items-center gap-2 text-[10px] font-mono text-green-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    SECURE
+                </div>
 
-    </div>
+                </div>
 
             );
         
@@ -1033,7 +1033,7 @@ const HomePage = ({
               rowSpan="md:row-span-2" 
               noPadding={true} 
               layoutId="hero-card-skills"
-              className="bg-white dark:bg-[#1B1B1B] border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group min-h-[420px] cursor-pointer"
+              className="bg-zinc-200/60 dark:bg-[#1B1B1B] border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group min-h-[420px] cursor-pointer"
               onClick={() => openModal('skills', null, 'hero-card-skills')}
             >
               
@@ -1061,7 +1061,7 @@ const HomePage = ({
                              { name: 'Docker', icon: <Layout size={14} />, color: 'bg-sky-500' },
                              { name: 'TypeScript', icon: <Cpu size={14} />, color: 'bg-blue-600' }
                          ].map((tech, i) => (
-                             <div key={i} className="flex items-center justify-between p-2 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors group/item">
+                             <div key={i} className="flex items-center justify-between p-2 rounded-2xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors group/item">
                                  <div className="flex items-center gap-3">
                                      <div className={`w-1.5 h-1.5 rounded-full ${tech.color}`} />
                                      <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{tech.name}</span>
@@ -1404,7 +1404,7 @@ export default function App() {
         </AnimatePresence>
         </div>
 
-        <div className="absolute bottom-25 left-[49.5%] flex justify-center gap-2 z-50 pointer-events-none">
+        <div className="absolute bottom-25 left-[50%] flex justify-center gap-2 z-50 pointer-events-none">
             <div className="flex gap-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto">
                 {[0, 1, 2].map((idx) => (
                     <button
