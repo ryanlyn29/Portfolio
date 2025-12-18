@@ -582,7 +582,7 @@ return (
       transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
     />
 
-    <div className="relative p-5 mb-4 rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
+    <div className="relative p-5 mb-20 md:mb-4  rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
       <Layers
         size={44}
         strokeWidth={1.4}
@@ -751,7 +751,7 @@ const ClinixVisual = () => {
                 />
 
             
-                <div className="relative p-5 mb-4 rounded-[1.6rem] bg-white/80 dark:bg-[#100C08]/80 backdrop-blur-xl border border-black/5 shadow-lg">
+                <div className="relative p-5 mb-20 md:mb-4  rounded-[1.6rem] bg-white/80 dark:bg-[#100C08]/80 backdrop-blur-xl border border-black/5">
                 <Heart
                     size={42}
                     strokeWidth={1.6}
@@ -799,7 +799,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                         />
 
                     
-                        <div className="relative p-5 mb-4 rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
+                        <div className="relative p-5 mb-20 md:mb-4  rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
                         <Terminal
                             size={44}
                             strokeWidth={1.6}
@@ -822,7 +822,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                     <span className="absolute top-8 -right-30 text-[7rem] font-black tracking-tighter text-blue-500/10">
                     AGENT
                     </span>
-                    <span className="absolute bottom-10 right-14 text-[6rem] font-black tracking-tighter text-blue-500/10">
+                    <span className="absolute bottom-10 -left-5 text-[6rem] font-black tracking-tighter text-blue-500/10">
                     GUARD
                     </span>
                 </div>
@@ -850,7 +850,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                         />
 
                         
-                        <div className="relative p-5 mb-4 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
+                        <div className="relative p-5 mb-20 md:mb-4 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
                         <ShieldCheck
                             size={44}
                             strokeWidth={1.6}

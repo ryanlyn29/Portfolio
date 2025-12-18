@@ -180,7 +180,7 @@ const AboutContent = () => (
       <div className="absolute inset-0 bg-black/20" />
       
        <div className="absolute bottom-0 left-0 p-8 md:p-12">
-          <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-2 drop-shadow-md">
+          <h2 className="text-5xl md:text-7xl font-bold dark:text-white tracking-tight mb-2 drop-shadow-md">
             Ryan Lyncee
           </h2>
           <p className="text-xl text-white/90 font-medium drop-shadow-sm">
