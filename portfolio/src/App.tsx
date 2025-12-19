@@ -773,14 +773,12 @@ const ProjectVisual = ({ project }: { project: any }) => {
                     <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                     
                     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                         <h1 className="text-[10rem] font-black text-[#F97316]/15 absolute -top-10 -right-10 leading-none tracking-tighter">
+                         <h1 className="text-[10rem] font-black text-[#6B4423]/80 absolute -top-10 -right-10 leading-none tracking-tighter">
                             INIT
                         </h1>
                         
                         
-                        <span className="text-[8rem] font-black text-[#F97316]/15 absolute top-1/2 left-[25%] -translate-x-1/2 -translate-y-1/2 leading-none tracking-tighter z-0">
-                            BUILD
-                        </span>
+                       
                     </div>
 
                    
@@ -814,17 +812,15 @@ const ProjectVisual = ({ project }: { project: any }) => {
             return <WhiteFlowVisual />;
         case '3':
             return (
-                <div className="absolute inset-0 bg-[#1f3f96]  dark:bg-[#0d1e4e] overflow-hidden flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#1f3f96]  dark:bg-[#142e77] overflow-hidden flex items-center justify-center">
 
                 <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
                 <div className="absolute inset-0 pointer-events-none select-none">
-                    <span className="absolute top-8 -right-30 text-[7rem] font-black tracking-tighter text-blue-500/10">
+                    <span className="absolute top-8 -right-30 text-[7rem] font-black tracking-tighter text-blue-500/30">
                     AGENT
                     </span>
-                    <span className="absolute bottom-10 -left-5 text-[6rem] font-black tracking-tighter text-blue-500/10">
-                    GUARD
-                    </span>
+                    
                 </div>
 
                 <div className="relative z-10">
