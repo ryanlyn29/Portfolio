@@ -894,12 +894,7 @@ const HomePage = ({
         setHeroIndex((prev: number) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
       };
 
-    const infoPanelDarkBg: Record<string, string> = {
-      '1': '#1b1510', 
-      '2': '#121212',
-      '3': '#0b1225', 
-      '4': '#100c08',
-    };
+  
 
     return (
         <div id="hero" className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 flex-1 content-start">
