@@ -567,7 +567,7 @@ const WhiteFlowVisual = () => {
 return (
   <div className="absolute inset-0 bg-[#FBFBF2] dark:bg-[#eeeee6] flex items-center justify-center overflow-hidden">
 
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808033,transparent_1px),linear-gradient(to_bottom,#80808033,transparent_1px)] bg-[size:24px_24px]" />
 
    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
   <motion.div
@@ -582,7 +582,7 @@ return (
       transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
     />
 
-    <div className="relative p-5 mb-20 md:mb-4  rounded-[1.5rem] bg-[#100C08] backdrop-blur-xl border border-black/5">
+    <div className="relative p-5 mb-20 md:mb-4  rounded-[1.5rem] bg-[#1B1B1B] backdrop-blur-xl border border-black/5">
       <Layers
         size={44}
         strokeWidth={1.4}
@@ -731,7 +731,7 @@ const ClinixVisual = () => {
                         width: blobStyles[i]?.width,
                         height: blobStyles[i]?.height,
                     }}
-                    transition={{ duration: 4, ease: "easeInOut" }}
+                    transition={{ duration: 4, ease: "easeOut" }}
                 />
             ))}
             
@@ -773,7 +773,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                     <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                     
                     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-                         <h1 className="text-[10rem] font-black text-[#6B4423]/80 absolute -top-10 -right-10 leading-none tracking-tighter">
+                         <h1 className="text-[10rem] font-black text-[#6F4E37] absolute -top-10 -right-10 leading-none tracking-tighter">
                             INIT
                         </h1>
                         
@@ -797,7 +797,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                         />
 
                     
-                        <div className="relative p-5 mb-20 md:mb-4  rounded-[1.6rem] bg-[#100C08] backdrop-blur-xl border border-white/10 shadow-lg">
+                        <div className="relative p-5 mb-20 md:mb-4  rounded-[1.6rem] bg-[#1A1110] backdrop-blur-xl border border-white/10 ">
                         <Terminal
                             size={44}
                             strokeWidth={1.6}
@@ -846,7 +846,7 @@ const ProjectVisual = ({ project }: { project: any }) => {
                         />
 
                         
-                        <div className="relative p-5 mb-20 md:mb-4 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10 shadow-xl">
+                        <div className="relative p-5 mb-20 md:mb-4 rounded-[1.6rem] bg-[#0B1225]/90 backdrop-blur-xl border border-white/10">
                         <ShieldCheck
                             size={44}
                             strokeWidth={1.6}
@@ -893,6 +893,13 @@ const HomePage = ({
         e.stopPropagation();
         setHeroIndex((prev: number) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
       };
+
+    const infoPanelDarkBg: Record<string, string> = {
+      '1': '#1b1510', 
+      '2': '#121212',
+      '3': '#0b1225', 
+      '4': '#100c08',
+    };
 
     return (
         <div id="hero" className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 flex-1 content-start">
@@ -968,17 +975,37 @@ const HomePage = ({
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="px-3 py-1.5 rounded-full bg-white/20 dark:bg-[#242124] backdrop-blur-xl   text-xs font-semibold text-zinc-900 dark:text-white shadow-sm ring-1 ring-black/5"
+                            className={`px-3 py-1.5 rounded-full bg-white ${
+                                      currentProject.id === '1'
+                                        ? 'dark:bg-[#1b1510]'
+                                        : currentProject.id === '2'
+                                        ? 'dark:bg-[#121212]'
+                                        : currentProject.id === '3'
+                                        ? 'dark:bg-[#0b1225]'
+                                        : 'dark:bg-[#100c08]'
+                                      } 
+                                      backdrop-blur-xl   text-xs font-semibold text-zinc-900 dark:text-white`}
                         >
                             Featured Project
                         </motion.div>
                      </AnimatePresence>
                  </div>
 
-                 <motion.div 
+                  <motion.div
                     layoutId={`info-panel-${currentProject.id}`}
-                    className="p-6 rounded-[1.8rem] bg-white dark:bg-[#1B1B1B] backdrop-blur-xl"
-                 >
+                    className={`p-6 rounded-[1.8rem] backdrop-blur-xl transition-colors duration-300
+                      bg-white
+                      ${
+                        currentProject.id === '1'
+                          ? 'dark:bg-[#1b1510]'
+                          : currentProject.id === '2'
+                          ? 'dark:bg-[#121212]'
+                          : currentProject.id === '3'
+                          ? 'dark:bg-[#0b1225]'
+                          : 'dark:bg-[#100c08]'
+                      }
+                    `}
+                  >
                      <span className="absolute right-6 top-6 text-zinc-300 text-xs">
                         {currentProject.id} / 4
                     </span>
@@ -998,7 +1025,7 @@ const HomePage = ({
                             </p>
                             
                             <div className="flex items-center justify-between">
-                                <button className="px-5 py-2.5 cursor-pointer bg-zinc-900 dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-transform">
+                                <button className="px-5 py-2.5 cursor-pointer bg-[zinc-900] dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-transform">
                                     View Details
                                 </button>
                                 

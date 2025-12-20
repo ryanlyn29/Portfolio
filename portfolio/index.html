@@ -39,31 +39,35 @@
         width: 0;
         height: 0;
       }
-            .custom-scrollbar-show {
+      
+      .custom-scrollbar-show {
         overflow-y: auto;
-
         scrollbar-width: thin;
         scrollbar-color: rgb(78, 75, 75) transparent;
       }
 
       .custom-scrollbar-show::-webkit-scrollbar {
         width: 6px;              
-        height: 6px;              
+        height: 6px;    
+                  
       }
 
       .custom-scrollbar-show::-webkit-scrollbar-track {
         
         background-color: transparent;
+        margin-top:50px;
+        margin-bottom:20px;
       }
 
       .custom-scrollbar-show::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.35);
+        background-color: rgba(0, 0, 0, 0.224);
         border-radius: 999px;
 
         border: 2px solid transparent;
         background-clip: content-box;
 
-        min-height: 40px;        
+        min-height: 40px;       
+        
       }
 
       .dark .custom-scrollbar-show::-webkit-scrollbar-thumb {

@@ -23,13 +23,29 @@ interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({ onClose, type, data, onNavigate, layoutId }) => {
   const finalLayoutId = layoutId || (type === 'project' && data ? `hero-card-${data.id}` : `hero-card-${type}`);
 
+    useEffect(() => {
+    if (type === 'project' && data) {
+      const urls = [
+        data.image,
+        ...(data.gallery ?? []).filter(
+          (src: string) => !src.endsWith('.mp4')
+        ),
+      ];
+
+      urls.forEach((src: string) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [type, data]);
+  
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8 h-full">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
         onClick={onClose}
         className="absolute inset-0 bg-zinc-200/60 dark:bg-black/60 backdrop-blur-xl"
       />
@@ -62,6 +78,18 @@ export const Modal: React.FC<ModalProps> = ({ onClose, type, data, onNavigate, l
 
 const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?: (type: ModalType, data: any, layoutId?: string) => void }) => {
   if (!project) return null;
+  useEffect(() => {
+    if (!project) return;
+
+    const urls = [
+      project.image,
+      ...(project.gallery ?? []).filter(src => !src.endsWith('.mp4'))
+    ];
+    urls.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [project]);
 
   return (
     <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] font-sans">
@@ -69,7 +97,10 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
           <img 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover scale-101 transition-transform duration-1000 group-hover:scale-105" 
+            loading="eager"      
+            decoding="async"
+            fetchPriority="high" 
+className="w-full h-full object-cover transition-transform duration-700 will-change-transform group-hover:scale-105"
           />
        </div>
        
@@ -121,7 +152,12 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
                                 {isVideo ? (
                                     <video src={media} controls className="w-full h-auto" />
                                 ) : (
-                                    <img src={media} alt="Project screenshot" className="w-full h-auto" />
+                                    <img 
+                                      src={media} 
+                                      alt="Project screenshot" 
+                                      loading="lazy"
+                                      decoding="async"
+                                      className="w-full h-full object-cover" />
                                 )}
                             </div>
                           );
@@ -152,7 +188,11 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
                                 onClick={() => onNavigate('project', p, `hero-card-${p.id}`)} 
                                 className="group flex items-center gap-4 p-3 rounded-2xl bg-[#F5F5F5] dark:bg-zinc-800 hover:bg-[#E5E4E2] dark:hover:bg-zinc-800 transition-all cursor-pointer  hover:shadow-md"
                             >
-                               <img src={p.image} className="w-16 h-16 rounded-xl object-cover bg-zinc-200 dark:bg-zinc-900" alt={p.title} />
+                               <img src={p.image} 
+                                loading="lazy"
+                                decoding="async"
+                                className="w-16 h-16 rounded-xl object-cover bg-zinc-200 dark:bg-zinc-900" 
+                                alt={p.title} />
                                <div>
                                   <h5 className="font-bold text-zinc-900 dark:text-white text-sm group-hover:text-blue-500 transition-colors">{p.title}</h5>
                                   <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mt-0.5">{p.category}</p>
@@ -169,104 +209,163 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
   );
 };
 
-const AboutContent = () => (
-  <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] min-h-full">
-    <div className="relative h-[40vh] w-full overflow-hidden shrink-0">
-       <img 
-        src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" 
-        alt="Workspace" 
-        className="w-full h-full object-cover opacity-60"
-      />
-      <div className="absolute inset-0 bg-black/20" />
+const AboutContent = () => {
+  useEffect(() => {
+    const img = new Image();
+    img.src =
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=70&auto=format&fit=crop";
+  }, []);
+
+  return (
+    <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] font-sans">
+     
+      <div className="w-full h-[40vh] md:h-[50vh] min-h-[250px] bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=70&auto=format&fit=crop"
+          alt="Workspace"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+
       
-       <div className="absolute bottom-0 left-0 p-8 md:p-12">
-          <h2 className="text-5xl md:text-7xl font-bold dark:text-white tracking-tight mb-2 drop-shadow-md">
-            Ryan Lyncee
-          </h2>
-          <p className="text-xl text-white/90 font-medium drop-shadow-sm">
-            Frontend Engineer & Designer
-          </p>
-       </div>
-    </div>
-
-    <div className="max-w-5xl mx-auto p-8 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-12">
-       <div className="md:col-span-8 space-y-12">
-          <section>
-            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6">Biography</h3>
-            <div className="prose dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-300 text-lg leading-relaxed space-y-6">
-                <p>
-                    I’m a Computer Engineering student at Florida International University, graduating in 2028, with a 3.96 GPA. I’ve been on the Dean’s List during my time at FIU.
-                </p>
-                <p>
-                    I mostly work with JavaScript, TypeScript, and Java, and I spend a lot of time building websites with React and Node.js. I like working on projects that involve things like Socket.io and Redis, and I use Docker and Figma as part of my workflow.
-                </p>
+      <div className="max-w-5xl mx-auto px-6 md:px-12 py-12">
+        
+        <div className="flex flex-col md:flex-row gap-8 justify-between items-start border-b border-zinc-200 dark:border-zinc-800 pb-10 mb-10">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight">
+              Ryan Lyncee
+            </h1>
+            <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 font-medium text-lg">
+              <User size={20} />
+              <span>Frontend Engineer & Designer</span>
             </div>
-          </section>
-          
-          <section>
-             <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6">Experience</h3>
-             <div className="space-y-8 border-l-2 border-zinc-200 dark:border-zinc-800 ml-3 pl-8 relative">
-                {[
-                  { 
-                    role: 'Independent Contributor (AI Research)', 
-                    company: 'Handshake AI Fellowship', 
-                    year: '2025 – Present', 
-                    desc: 'Evaluated AI system outputs across varied input types, identifying inconsistencies. Performed comparative reviews of model configurations to refine review criteria.' 
-                  },
-                  { 
-                    role: 'Frontend Developer', 
-                    company: 'INIT (Build Program)', 
-                    year: '2025', 
-                    desc: 'Led frontend architecture for WhiteFlow. Architected a custom SPA framework using the History API and optimized Canvas rendering for real-time collaboration.' 
-                  }
-                ].map((job, i) => (
-                   <div key={i} className="relative">
-                      <span className="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-zinc-900 border-4 border-zinc-200 dark:border-zinc-800" />
-                      <h4 className="font-bold text-lg text-zinc-900 dark:text-white">{job.role}</h4>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-2">{job.company} • {job.year}</p>
-                      <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">{job.desc}</p>
-                   </div>
-                ))}
-             </div>
-          </section>
-       </div>
+          </div>
+        </div>
 
-       <div className="md:col-span-4 space-y-8">
-           <div className="p-8 rounded-[2rem] bg-zinc-100 dark:bg-zinc-800/50">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-6">Contact & Info</h4>
-              <ul className="space-y-5">
-                 <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
-                    <MapPin size={20} className="text-zinc-400 shrink-0 mt-0.5" />
-                    <span>Miami, FL (EST)</span>
-                 </li>
-                 <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
-                    <GraduationCap size={20} className="text-zinc-400 shrink-0 mt-0.5" />
-                    <span>Florida International University</span>
-                 </li>
-                 <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
-                    <Mail size={20} className="text-zinc-400 shrink-0 mt-0.5" />
-                    <a href="mailto:ryanlyncee29@gmail.com" className="hover:text-blue-500 transition-colors">ryanlyncee29@gmail.com</a>
-                 </li>
-              </ul>
-              
-              <div className="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-700/50 flex gap-4">
-                  <a href="https://github.com/ryanlyn29" className="p-3 rounded-full bg-white dark:bg-zinc-700 hover:bg-gray-200 dark:hover:bg-zinc-600 transition-transform text-zinc-900 dark:text-white">
-                      <Github size={20} />
-                  </a>
-                  <a href="https://www.linkedin.com/in/ryanlyncee" className="p-3 rounded-full bg-[#0077b5] hover:bg-[#0c6392] transition-transform text-white">
-                      <Linkedin size={20} />
-                  </a>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <div className="lg:col-span-8 space-y-16">
+            <section>
+              <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6">
+                Biography
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-300 text-lg leading-relaxed space-y-6">
+                <p>
+                  I’m a Computer Engineering student at Florida International
+                  University, graduating in 2028, with a 3.96 GPA. I’ve been on
+                  the Dean’s List during my time at FIU.
+                </p>
+                <p>
+                  I primarily work with JavaScript, TypeScript, and Java, and I
+                  spend most of my time building interfaces with React and
+                  Node.js. I enjoy working on systems involving Socket.io,
+                  Redis, and real-time collaboration, and I regularly use
+                  Docker and Figma as part of my workflow.
+                </p>
               </div>
-              
-              <button className="w-full mt-6 py-3.5 cursor-pointer bg-zinc-900 dark:bg-white hover:opacity-90 text-white dark:text-black rounded-full font-bold text-sm transition-all active:scale-95 flex items-center justify-center gap-2">
-                 <Download size={16} />
-                 Download Resume
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6">
+                Experience
+              </h3>
+
+              <div className="space-y-8 border-l-2 border-zinc-200 dark:border-zinc-800 ml-3 pl-8 relative">
+                {[
+                  {
+                    role: 'Independent Contributor (AI Research)',
+                    company: 'Handshake AI Fellowship',
+                    year: '2025 – Present',
+                    desc:
+                      'Evaluated AI system outputs across varied input types, identifying inconsistencies. Performed comparative reviews of model configurations to refine review criteria.',
+                  },
+                  {
+                    role: 'Frontend Developer',
+                    company: 'INIT (Build Program)',
+                    year: '2025',
+                    desc:
+                      'Led frontend architecture for WhiteFlow. Architected a custom SPA framework using the History API and optimized Canvas rendering for real-time collaboration.',
+                  },
+                ].map((job, i) => (
+                  <div key={i} className="relative">
+                    <span className="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-white dark:bg-zinc-900 border-4 border-zinc-200 dark:border-zinc-800" />
+                    <h4 className="font-bold text-lg text-zinc-900 dark:text-white">
+                      {job.role}
+                    </h4>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-2">
+                      {job.company} • {job.year}
+                    </p>
+                    <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                      {job.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+         
+          <div className="lg:col-span-4 space-y-10">
+            <div className="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-800/50">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-6">
+                Contact & Info
+              </h4>
+
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
+                  <MapPin size={20} className="text-zinc-400 shrink-0 mt-0.5" />
+                  <span>Miami, FL (EST)</span>
+                </li>
+                <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
+                  <GraduationCap
+                    size={20}
+                    className="text-zinc-400 shrink-0 mt-0.5"
+                  />
+                  <span>Florida International University</span>
+                </li>
+                <li className="flex items-start gap-3 text-zinc-700 dark:text-zinc-200 font-medium">
+                  <Mail size={20} className="text-zinc-400 shrink-0 mt-0.5" />
+                  <a
+                    href="mailto:ryanlyncee29@gmail.com"
+                    className="hover:text-blue-500 transition-colors"
+                  >
+                    ryanlyncee29@gmail.com
+                  </a>
+                </li>
+              </ul>
+
+              <div className="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-700/50 flex gap-4">
+                <a
+                  href="https://github.com/ryanlyn29"
+                  className="p-3 rounded-full bg-white dark:bg-zinc-700 hover:bg-gray-200 dark:hover:bg-zinc-600 transition-transform text-zinc-900 dark:text-white"
+                >
+                  <Github size={20} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/ryanlyncee"
+                  className="p-3 rounded-full bg-[#0077b5] hover:bg-[#0c6392] transition-transform text-white"
+                >
+                  <Linkedin size={20} />
+                </a>
+              </div>
+
+              <button className="w-full mt-6 py-3.5 bg-zinc-900 dark:bg-white hover:opacity-90 text-white dark:text-black rounded-full font-bold text-sm transition-all active:scale-95 flex items-center justify-center gap-2">
+                <Download size={16} />
+                Download Resume
               </button>
-           </div>
-       </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 const SkillsContent = () => {
   return (
