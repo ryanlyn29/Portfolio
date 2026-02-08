@@ -1446,10 +1446,6 @@ export default function App() {
                             openModal={openModal} 
                             copyEmail={copyEmail} 
                             emailCopied={emailCopied}
-<<<<<<< HEAD
-=======
-                            handleNavClick={handleNavClick}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
                         />
                     )}
                     {page === 2 && (
