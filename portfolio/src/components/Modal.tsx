@@ -11,13 +11,11 @@ import { SKILLS, VIDEO_ITEMS, PROJECTS } from '../constants';
 type ModalType = 'project' | 'about' | 'skills' | 'playlist';
 
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
   type: ModalType | null;
   data: any; 
   onNavigate?: (type: ModalType, data: any, layoutId?: string) => void;
   layoutId?: string;
-  isFullScreen?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({ onClose, type, data, onNavigate, layoutId }) => {
@@ -45,27 +43,33 @@ export const Modal: React.FC<ModalProps> = ({ onClose, type, data, onNavigate, l
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
         onClick={onClose}
         className="absolute inset-0 bg-zinc-200/60 dark:bg-black/60 backdrop-blur-xl"
       />
       <motion.div
         layoutId={finalLayoutId}
-        className="relative w-full max-w-6xl h-full md:h-[90vh] bg-[#fbfbfd] dark:bg-[#1c1c1e] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform-gpu ring-1 ring-black/5 dark:ring-white/10"
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+        transition={{ 
+          duration: 0.4, 
+          ease: [0.4, 0, 0.2, 1],
+          layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+        }}
+        className="relative w-full max-w-6xl h-full md:h-[90vh] bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col transform-gpu ring-1 ring-zinc-200/50 dark:ring-zinc-800/50"
       >
-        <button 
+        <motion.button 
           onClick={onClose}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
           className="absolute top-6 right-6 z-50 p-2.5 cursor-pointer hover:bg-[#E6E6E6] dark:hover:bg-zinc-800 rounded-full bg-[#F5F5F5] dark:bg-zinc-800/80 backdrop-blur-md text-zinc-800 dark:text-zinc-200 transition-all"
         >
           <X size={20} />
-        </button>
+        </motion.button>
 
         <div
-          className={`flex-1 ${
-            type === 'project' || type === 'about' || type === 'skills'
-              ? 'custom-scrollbar-show'
-              : 'custom-scrollbar'
-          }`}
+          className="flex-1 overflow-y-auto custom-scrollbar-show"
         >           {type === 'about' && <AboutContent />}
            {type === 'skills' && <SkillsContent />}
            {type === 'playlist' && <PlaylistContent />}
@@ -92,8 +96,8 @@ const ProjectContent = ({ project, onNavigate }: { project: Project, onNavigate?
   }, [project]);
 
   return (
-    <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] font-sans">
-       <div className="w-full h-[40vh] md:h-[55vh] min-h-[300px] bg-zinc-100 dark:bg-zinc-900 relative group overflow-hidden">
+    <div className="w-full bg-white dark:bg-zinc-900 font-sans">
+       <div className="w-full h-[40vh] md:h-[55vh] min-h-[300px] bg-[#F6F6F6] dark:bg-zinc-900 relative group overflow-hidden">
           <img 
             src={project.image} 
             alt={project.title} 
@@ -111,7 +115,7 @@ className="w-full h-full object-cover transition-transform duration-700 will-cha
                       <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300">
                         {project.category}
                       </span>
-                      <span className="text-zinc-500 dark:text-zinc-400 text-sm font-medium flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                      <span className="text-zinc-500 dark:text-zinc-400 text-sm font-medium flex items-center gap-1.5 bg-[#F6F6F6] dark:bg-zinc-800 px-3 py-1 rounded-full">
                         <Calendar size={12} /> {project.year}
                       </span>
                   </div>
@@ -126,9 +130,15 @@ className="w-full h-full object-cover transition-transform duration-700 will-cha
               
               <div className="flex gap-3 pt-2">
                  {project.liveUrl && (
-                   <a href={project.liveUrl} target="_blank" className="px-6 py-3 rounded-full bg-[#0071e3] hover:bg-[#0077ED] text-white font-semibold text-sm transition-all active:scale-95 flex items-center gap-2 ">
+                   <motion.a 
+                     href={project.liveUrl} 
+                     target="_blank" 
+                     whileHover={{ scale: 1.05 }}
+                     whileTap={{ scale: 0.95 }}
+                     className="px-6 py-3 rounded-full bg-[#0071e3] hover:bg-[#0077ED] text-white font-semibold text-sm transition-all flex items-center gap-2 "
+                   >
                       Visit Site <ExternalLink size={16} />
-                   </a>
+                   </motion.a>
                  )}
               </div>
           </div>
@@ -148,7 +158,7 @@ className="w-full h-full object-cover transition-transform duration-700 will-cha
                        {project.gallery?.map((media, i) => {
                           const isVideo = media.endsWith('.mp4');
                           return (
-                            <div key={i} className="rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                            <div key={i} className="rounded-3xl overflow-hidden bg-[#F6F6F6] dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 shadow-sm">
                                 {isVideo ? (
                                     <video src={media} controls className="w-full h-auto" />
                                 ) : (
@@ -167,7 +177,7 @@ className="w-full h-full object-cover transition-transform duration-700 will-cha
               </div>
 
               <div className="lg:col-span-4 space-y-10">
-                 <div className="p-6 rounded-3xl bg-[#F5F5F5] dark:bg-zinc-800/80  border-zinc-100 dark:border-zinc-800">
+                 <div className="p-6 rounded-3xl bg-[#F6F6F6] dark:bg-zinc-800/80  border-zinc-200/50 dark:border-zinc-800">
                     <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4">Technologies</h4>
                     <div className="flex flex-wrap gap-2">
                        {project.tags.map(tag => (
@@ -186,12 +196,12 @@ className="w-full h-full object-cover transition-transform duration-700 will-cha
                             <div 
                                 key={p.id} 
                                 onClick={() => onNavigate('project', p, `hero-card-${p.id}`)} 
-                                className="group flex items-center gap-4 p-3 rounded-2xl bg-[#F5F5F5] dark:bg-zinc-800 hover:bg-[#E5E4E2] dark:hover:bg-zinc-800 transition-all cursor-pointer  hover:shadow-md"
+                                className="group flex items-center gap-4 p-3 rounded-2xl bg-[#F6F6F6] dark:bg-zinc-800 hover:bg-[#F0F0F0] dark:hover:bg-zinc-800 transition-all cursor-pointer  hover:shadow-md"
                             >
                                <img src={p.image} 
                                 loading="lazy"
                                 decoding="async"
-                                className="w-16 h-16 rounded-xl object-cover bg-zinc-200 dark:bg-zinc-900" 
+                                className="w-16 h-16 rounded-xl object-cover bg-[#F0F0F0] dark:bg-zinc-900" 
                                 alt={p.title} />
                                <div>
                                   <h5 className="font-bold text-zinc-900 dark:text-white text-sm group-hover:text-blue-500 transition-colors">{p.title}</h5>
@@ -217,9 +227,9 @@ const AboutContent = () => {
   }, []);
 
   return (
-    <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] font-sans">
+    <div className="w-full bg-white dark:bg-zinc-900 font-sans">
      
-      <div className="w-full h-[40vh] md:h-[50vh] min-h-[250px] bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden">
+      <div className="w-full h-[40vh] md:h-[50vh] min-h-[250px] bg-[#F6F6F6] dark:bg-zinc-900 relative overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=70&auto=format&fit=crop"
           alt="Workspace"
@@ -311,7 +321,7 @@ const AboutContent = () => {
 
          
           <div className="lg:col-span-4 space-y-10">
-            <div className="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-800/50">
+            <div className="p-8 rounded-3xl bg-[#F6F6F6] dark:bg-zinc-800/50">
               <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-6">
                 Contact & Info
               </h4>
@@ -369,26 +379,24 @@ const AboutContent = () => {
 
 const SkillsContent = () => {
   return (
-   <div className="w-full bg-[#fbfbfd] dark:bg-[#1c1c1e] min-h-full flex flex-col custom-scrollbar-show">
-    <div className="relative h-[40vh] w-full bg-[#050505] shrink-0 overflow-hidden flex flex-col justify-end p-8 md:p-12 border-b border-zinc-800">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)]
-          bg-[size:24px_24px]"></div>
+   <div className="w-full bg-[#F6F6F6] dark:bg-zinc-900 min-h-full flex flex-col custom-scrollbar-show">
+    <div className="relative h-[40vh] w-full bg-[#F6F6F6] dark:bg-zinc-950 shrink-0 overflow-hidden flex flex-col justify-end p-8 md:p-12 border-b border-zinc-200 dark:border-zinc-800">
         
         <div className="relative z-10 max-w-5xl mx-auto w-full">
-           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs font-medium mb-6 border border-white/10 backdrop-blur-md">
+           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-200 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 text-xs font-medium mb-6 border border-zinc-300 dark:border-white/10">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
               <span className="tracking-wide">System Status: Optimal</span>
            </div>
-           <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
+           <h2 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight">
               Technical Stack
            </h2>
-           <p className="text-zinc-400 mt-4 text-lg max-w-xl leading-relaxed">
+           <p className="text-zinc-600 dark:text-zinc-400 mt-4 text-lg max-w-xl leading-relaxed">
                A curated collection of tools and technologies I use to build digital products.
            </p>
         </div>
     </div>
 
-    <div className="flex-1 p-8 md:p-12 bg-[#fbfbfd] dark:bg-[#1c1c1e]">
+    <div className="flex-1 p-8 md:p-12 bg-[#F6F6F6] dark:bg-zinc-900">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {['Tech', 'Design', 'Soft'].map((category) => (
                 <div key={category} className="space-y-6">
@@ -405,7 +413,7 @@ const SkillsContent = () => {
                                     <span className="font-bold text-zinc-900 dark:text-white text-lg">{skill.name}</span>
                                     <span className="text-xs font-mono font-medium text-zinc-400">{skill.level}%</span>
                                 </div>
-                                <div className="w-full h-2.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                <div className="w-full h-2.5 bg-[#F6F6F6] dark:bg-zinc-800 rounded-full overflow-hidden">
                                     <motion.div 
                                         initial={{ width: 0 }}
                                         animate={{ width: `${skill.level}%` }}
@@ -495,7 +503,7 @@ const PlaylistContent = () => {
                 <h3 className="text-xl font-bold text-white mb-4">Up Next</h3>
              </div>
 
-             <div className="flex-1 overflow-y-auto custom-scrollbar px-2 pb-4">
+             <div className="flex-1 overflow-y-auto custom-scrollbar-show px-2 pb-4">
                  <div className="flex flex-col gap-1">
                      {VIDEO_ITEMS.map((item, index) => (
                          <div 

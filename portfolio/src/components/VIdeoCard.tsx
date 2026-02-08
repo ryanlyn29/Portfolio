@@ -24,7 +24,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
     <BentoCard 
       colSpan="md:col-span-7" 
       noPadding={true} 
-      className="min-h-[320px] group relative border border-zinc-100 bg-zinc-900 dark:bg-[#111] cursor-pointer"
+      className="min-h-[320px] group relative bg-zinc-900 dark:bg-[#111] cursor-pointer"
       layoutId="hero-card-playlist"
       onClick={onClick}
     >
@@ -59,10 +59,16 @@ export const VideoCard: React.FC<VideoCardProps> = ({ onClick }) => {
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}
-              whileHover={{ scale: 1.1 }}
-              className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              animate={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.15 }}
+              className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-2xl group-hover:opacity-100 transition-all duration-300"
             >
-                <Play size={32} className="fill-black text-black ml-1" />
+                <motion.div
+                  whileHover={{ x: 2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Play size={32} className="fill-black text-black ml-1" />
+                </motion.div>
             </motion.div>
         </div>
     </BentoCard>

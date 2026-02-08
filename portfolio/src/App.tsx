@@ -180,7 +180,7 @@ const ToolsPage = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 content-start w-full max-w-[1920px] mx-auto">
-      <BentoCard colSpan="md:col-span-8" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 min-h-[140px] !p-6">
+      <BentoCard colSpan="md:col-span-8" className="bg-[#F6F6F6] dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800/50 min-h-[140px] !p-6">
         <div className="flex flex-row items-center justify-between w-full h-full">
           <div>
             <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Workspace</h2>
@@ -211,12 +211,12 @@ const ToolsPage = () => {
         </div>
       </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 p-5 !p-5">
+      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-[#F6F6F6] dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800/50 p-5 !p-5">
         <div className="flex justify-between items-center mb-4 px-4 pt-4">
           <span className="font-bold text-lg text-zinc-900 dark:text-white">{monthName}</span>
           <div className="flex items-center gap-2">
             <span className="text-sm text-zinc-400 font-medium">{year}</span>
-            <div className="p-1.5  bg-zinc-100 dark:bg-zinc-800 rounded-full">
+            <div className="p-1.5  bg-[#F6F6F6] dark:bg-zinc-800 rounded-full">
               <CalendarIcon size={14} className="text-zinc-500 dark:text-zinc-400" />
             </div>
           </div>
@@ -241,7 +241,7 @@ const ToolsPage = () => {
                   ${
                     day === today
                       ? 'bg-[#318CE7]  text-white font-bold cursor-pointer'
-                      : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 cursor-pointer'
+                      : 'text-zinc-700 dark:text-zinc-300 hover:bg-[#F0F0F0] dark:hover:bg-zinc-700/50 cursor-pointer'
                   }`}
               >
                 {day}
@@ -251,7 +251,7 @@ const ToolsPage = () => {
         </div>
 
         <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50">
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-[#F6F6F6] dark:bg-zinc-800/50">
             <div className="w-1 h-8 bg-[#318CE7] rounded-full" />
             <div className="flex-1">
               <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wide">Next Up</p>
@@ -277,13 +277,13 @@ const ToolsPage = () => {
             </div>
         </div>
 
-        <div className="flex-1 bg-zinc-200/60 dark:bg-[#1c1c1e] p-6 pt-4">
+        <div className="flex-1 bg-[#F6F6F6] dark:bg-zinc-900/80 p-6 pt-4">
             <div className="space-y-3">
             {tasks.map(task => (
                 <div
                 key={task.id}
                 onClick={() => toggleTask(task.id)}
-                className="group flex items-center gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                className="group flex items-center gap-3 p-3 rounded-xl bg-[#F6F6F6] dark:bg-zinc-800/50 hover:bg-[#F0F0F0] dark:hover:bg-zinc-800 transition-all cursor-pointer"
                 >
                 <div
                     className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all
@@ -338,16 +338,18 @@ const ToolsPage = () => {
             ))}
             </div>
 
-            <button
+            <motion.button
             onClick={addTask}
-            className="mt-4 w-full py-2 cursor-pointer rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-sm font-bold text-zinc-700 dark:text-zinc-200 transition-all"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-4 w-full py-2 cursor-pointer rounded-xl bg-[#F6F6F6] dark:bg-zinc-800 hover:bg-[#F0F0F0] dark:hover:bg-zinc-700 text-sm font-bold text-zinc-700 dark:text-zinc-200 transition-all"
             >
             Add Task
-            </button>
+            </motion.button>
         </div>
         </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white !p-6">
+      <BentoCard colSpan="md:col-span-4" rowSpan="md:row-span-2" className="bg-[#F6F6F6] dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800/50 text-zinc-900 dark:text-zinc-100 !p-6">
         <div className="flex flex-col h-full">
           <div className="flex-1 flex flex-col justify-end items-end mb-6 space-y-1">
             <span className="text-zinc-400 text-xs font-mono">{expression}</span>
@@ -363,7 +365,7 @@ const ToolsPage = () => {
                   ${btn === '='
                     ? 'col-span-2 bg-[#F57D28] hover:bg-[#e06d1a] text-white'
                     : typeof btn === 'number' || btn === '.'
-                      ? 'bg-white dark:bg-[#2c2c2e] hover:bg-[#F7F7F7] dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100'
+                      ? 'bg-[#F6F6F6] dark:bg-[#2c2c2e] hover:bg-[#F0F0F0] dark:hover:bg-[#3a3a3c] text-zinc-900 dark:text-zinc-100'
                       : 'bg-zinc-300 hover:bg-zinc-400/45 dark:bg-[#3a3a3c] dark:hover:bg-[#4a4a4c] text-zinc-900 dark:text-orange-400 font-bold'}
                 `}
               >
@@ -374,7 +376,7 @@ const ToolsPage = () => {
         </div>
       </BentoCard>
 
-      <BentoCard colSpan="md:col-span-4" className="bg-zinc-200/60 dark:bg-[#1c1c1e] border-zinc-200 dark:border-zinc-800 flex flex-col justify-between gap-8 !p-6">
+      <BentoCard colSpan="md:col-span-4" className="bg-[#F6F6F6] dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800/50 flex flex-col justify-between gap-8 !p-6">
         <div className="flex flex-col gap-2 mb-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -505,7 +507,7 @@ const AppLibraryPage = ({
                 </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto custom-scrollbar">
+            <div className="flex-1 overflow-y-auto custom-scrollbar-show">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
                     {filteredApps.map((section, idx) => (
                         <div key={idx} className="flex flex-col gap-3">
@@ -880,7 +882,7 @@ const HomePage = ({
     setHeroIndex, 
     openModal, 
     copyEmail, 
-    emailCopied 
+    emailCopied
 }: any) => {
     const currentProject = PROJECTS[heroIndex];
     
@@ -897,7 +899,38 @@ const HomePage = ({
   
 
     return (
-        <div id="hero" className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pt-12 md:pt-16 pb-32 flex-1 content-start">
+        <div id="hero" className="flex flex-col w-full">
+            <motion.header 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                className="w-full max-w-[1920px] mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-8 md:pb-12"
+            >
+                <div className="flex flex-col gap-8 md:gap-12">
+                    <div className="flex flex-col gap-4 md:gap-6">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                            animate={{ 
+                                opacity: 1, 
+                                y: 0, 
+                                scale: 1
+                            }}
+                            transition={{ 
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 15,
+                                mass: 0.8,
+                                delay: 0.3
+                            }}
+                            className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-zinc-900 dark:text-white max-w-4xl font-inter"
+                        >
+                            hey im ryan 👋
+                        </motion.h1>
+                    </div>
+                </div>
+            </motion.header>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pb-32 flex-1 content-start">
             <BentoCard 
               id="about"
               colSpan="md:col-span-6" 
@@ -946,7 +979,7 @@ const HomePage = ({
               rowSpan="md:row-span-2" 
               noPadding={true}
               layoutId={`hero-card-${currentProject.id}`}
-              className="relative group min-h-[460px] cursor-pointer bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800"
+              className="relative group min-h-[460px] cursor-pointer bg-zinc-100 dark:bg-zinc-900"
               onClick={() => openModal('project', currentProject, `hero-card-${currentProject.id}`)}
             >
               <AnimatePresence mode="wait">
@@ -1020,23 +1053,31 @@ const HomePage = ({
                             </p>
                             
                             <div className="flex items-center justify-between">
-                                <button className="px-5 py-2.5 cursor-pointer bg-[zinc-900] dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-transform">
+                                <motion.button 
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-5 py-2.5 cursor-pointer bg-[zinc-900] dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all"
+                                >
                                     View Details
-                                </button>
+                                </motion.button>
                                 
                                 <div className="flex gap-2">
-                                    <button 
-                                        onClick={prevProject} 
-                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-colors"
+                                    <motion.button 
+                                        onClick={prevProject}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-all"
                                     >
                                         <ChevronLeft size={16} />
-                                    </button>
-                                    <button 
-                                        onClick={nextProject} 
-                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-colors"
+                                    </motion.button>
+                                    <motion.button 
+                                        onClick={nextProject}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="p-2.5 rounded-full cursor-pointer bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white transition-all"
                                     >
                                         <ChevronRight size={16} />
-                                    </button>
+                                    </motion.button>
                                 </div>
                             </div>
                          </motion.div>
@@ -1050,7 +1091,7 @@ const HomePage = ({
               rowSpan="md:row-span-2" 
               noPadding={true} 
               layoutId="hero-card-skills"
-              className="bg-zinc-200/60 dark:bg-[#1B1B1B] border border-zinc-200 dark:border-zinc-800 relative overflow-hidden group min-h-[420px] cursor-pointer"
+              className="bg-[#F6F6F6] dark:bg-[#1B1B1B] relative overflow-hidden group min-h-[420px] cursor-pointer"
               onClick={() => openModal('skills', null, 'hero-card-skills')}
             >
               
@@ -1106,7 +1147,7 @@ const HomePage = ({
               </div>
             </BentoCard>
 
-            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#1B1B1B] border border-zinc-800 flex flex-col items-center justify-center p-4 min-h-[200px]">
+            <BentoCard colSpan="md:col-span-2" noPadding={true} className="bg-[#1B1B1B] flex flex-col items-center justify-center p-4 min-h-[200px]">
                 <div className="flex flex-row items-center justify-center w-full h-full gap-5">
                     <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
@@ -1132,7 +1173,7 @@ const HomePage = ({
 
             <BentoCard 
               colSpan="md:col-span-2" 
-              className="bg-[#6e5494] text-white relative group cursor-pointer border border-[#5d467e] min-h-[200px]"
+              className="bg-[#6e5494] text-white relative group cursor-pointer min-h-[200px]"
               onClick={() => window.open('https://github.com/ryanlyn29', '_blank')}
             >
               <div className="absolute top-4 right-4 p-1.5 bg-white/10 rounded-full border border-white/10 group-hover:bg-white group-hover:text-[#6e5494] transition-colors">
@@ -1147,7 +1188,7 @@ const HomePage = ({
 
              <BentoCard 
               colSpan="md:col-span-2" 
-              className="bg-[#0077b5] text-white relative group cursor-pointer border border-[#005e93] min-h-[200px]"
+              className="bg-[#0077b5] text-white relative group cursor-pointer min-h-[200px]"
               onClick={() => window.open('https://linkedin.com/in/ryanlyncee', '_blank')}
             >
               <div className="absolute top-4 right-4 p-1.5 bg-white/10 rounded-full border border-white/10 group-hover:bg-white group-hover:text-[#0077b5] transition-colors">
@@ -1206,7 +1247,7 @@ const HomePage = ({
                 </div>
             </BentoCard>
 
-            <BentoCard colSpan="md:col-span-12" className="bg-zinc-200/60 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between min-h-[100px] px-8 py-3 gap-6">
+            <BentoCard colSpan="md:col-span-12" className="bg-zinc-200/60 dark:bg-zinc-900 flex flex-col md:flex-row items-center justify-between min-h-[100px] px-8 py-3 gap-6">
               <div className="flex items-center gap-4">
                   <div className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -1234,7 +1275,7 @@ const HomePage = ({
                   <div className="text-xl font-bold text-zinc-900 dark:text-white font-mono">2025</div>
               </div>
             </BentoCard>
-
+            </div>
         </div>
     );
 };
@@ -1303,17 +1344,20 @@ export default function App() {
   const variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
-      opacity: 0
+      opacity: 0,
+      scale: 0.95
     }),
     center: {
       zIndex: 1,
       x: 0,
-      opacity: 1
+      opacity: 1,
+      scale: 1
     },
     exit: (direction: number) => ({
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
-      opacity: 0
+      opacity: 0,
+      scale: 0.95
     })
   };
 
@@ -1359,23 +1403,21 @@ export default function App() {
   return (
     
    <div 
-     className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-[#F5F5F5] dark:bg-[#05050564] backdrop-blur-2xl backdrop-brightness-50 overflow-hidden`}
+     className={`${isDarkMode ? 'dark' : ''} w-full h-screen bg-white dark:bg-zinc-950 overflow-hidden transition-colors duration-500`}
      onWheel={onWheel} 
    >
-    <div className="w-full h-full md:px-5 bg-[#F5F5F5] dark:bg-[#050505] text-zinc-900 dark:text-white transition-colors duration-500 overflow-hidden flex flex-col relative">     
+    <div className="w-full h-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-500 overflow-hidden flex flex-col relative">     
         <StatusBar />
         
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {modalState.isOpen && (
                      <Modal 
                         key={modalState.data?.id || modalState.type}
-                        isOpen={modalState.isOpen} 
                         onClose={closeModal} 
                         type={modalState.type}
                         data={modalState.data}
                         onNavigate={openModal}
                         layoutId={modalState.layoutId}
-                        isFullScreen={true}
                     />
             )}
         </AnimatePresence>
@@ -1391,11 +1433,11 @@ export default function App() {
                 exit="exit"
                 transition={{
                     x: { type: "spring", stiffness: 300, damping: 30 },
-                    opacity: { duration: 0.2 }
+                    opacity: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
                 }}
-                className="w-full h-full overflow-y-auto custom-scrollbar"
+                className="w-full h-full overflow-y-auto custom-scrollbar-show"
             >
-                <div className="w-full h-full max-w-[1920px] mx-auto relative">
+                <div className="w-full h-full max-w-[1920px] mx-auto md:px-5 relative">
                     {page === 0 && <ToolsPage />}
                     {page === 1 && (
                         <HomePage 
@@ -1403,7 +1445,7 @@ export default function App() {
                             setHeroIndex={setHeroIndex} 
                             openModal={openModal} 
                             copyEmail={copyEmail} 
-                            emailCopied={emailCopied} 
+                            emailCopied={emailCopied}
                         />
                     )}
                     {page === 2 && (
@@ -1422,14 +1464,16 @@ export default function App() {
 
         <div className="absolute bottom-25 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-50 pointer-events-none">
             <div className="flex gap-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-2 border-zinc-300 dark:border-zinc-800 p-2 rounded-full shadow-2xl shadow-black/20 pointer-events-auto">
-                {[0, 1, 2].map((idx) => (
-                    <button
+                    {[0, 1, 2].map((idx) => (
+                    <motion.button
                     key={idx} 
                     onClick={() => {
                         if (idx === page) return;
                         setPage([idx, idx > page ? 1 : -1]);
                     }}
-                    className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 hover:scale-125 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`w-2 h-2 rounded-full transition-all cursor-pointer duration-300 focus:outline-none ${page === idx ? 'bg-zinc-500 dark:bg-white w-4' : 'bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-600'}`}
                     aria-label={`Go to page ${idx + 1}`}
                     />
                 ))}
@@ -1437,7 +1481,7 @@ export default function App() {
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 bottom-6 w-full flex justify-center z-50 pointer-events-none">
-            <NavBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onNavigate={handleNavClick} />
+            <NavBar isDarkMode={isDarkMode} toggleTheme={toggleTheme} onNavigate={handleNavClick} currentPage={page} />
         </div>
       </div>
     </div>

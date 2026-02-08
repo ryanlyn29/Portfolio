@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ryan | Portfolio</title>    
+    <title>Ryan | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&display=swap" rel="stylesheet">
     <style>
       html, body {
         margin: 0;
@@ -43,36 +43,70 @@
       .custom-scrollbar-show {
         overflow-y: auto;
         scrollbar-width: thin;
-        scrollbar-color: rgb(78, 75, 75) transparent;
+        scrollbar-color: #d1d5db transparent;
+        /* Prevent scrollbar from reserving layout space */
+        scrollbar-gutter: auto;
       }
 
+      /* Webkit scrollbar styling - overlays content */
       .custom-scrollbar-show::-webkit-scrollbar {
-        width: 6px;              
-        height: 6px;    
-                  
+        width: 8px;
+        height: 8px;
       }
 
       .custom-scrollbar-show::-webkit-scrollbar-track {
-        
         background-color: transparent;
-        margin-top:50px;
-        margin-bottom:20px;
+        margin: 0;
       }
 
       .custom-scrollbar-show::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.224);
+        background-color: #d1d5db;
         border-radius: 999px;
-
         border: 2px solid transparent;
-        background-clip: content-box;
+        background-clip: padding-box;
+        min-height: 40px;
+      }
 
-        min-height: 40px;       
-        
+      .custom-scrollbar-show::-webkit-scrollbar-thumb:hover {
+        background-color: #9ca3af;
+      }
+
+      .dark .custom-scrollbar-show {
+        scrollbar-color: #6b7280 transparent;
       }
 
       .dark .custom-scrollbar-show::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.3);
-}
+        background-color: #6b7280;
+      }
+
+      .dark .custom-scrollbar-show::-webkit-scrollbar-thumb:hover {
+        background-color: #9ca3af;
+      }
+
+      /* Make scrollbar overlay content using negative margin for webkit browsers */
+      /* This ensures the scrollbar sits on top and doesn't push content */
+      @supports selector(::-webkit-scrollbar) {
+        .custom-scrollbar-show {
+          /* Negative margin pulls scrollbar into overlay position */
+          margin-right: 0;
+          /* Padding compensates so content isn't cut off */
+          padding-right: 0;
+        }
+      }
+
+      /* Firefox already has overlay scrollbars with thin width */
+      @-moz-document url-prefix() {
+        .custom-scrollbar-show {
+          margin-right: 0;
+          padding-right: 0;
+          scrollbar-width: thin;
+          scrollbar-color: #d1d5db transparent;
+        }
+        
+        .dark .custom-scrollbar-show {
+          scrollbar-color: #6b7280 transparent;
+        }
+      }
 
     </style>
     <script type="importmap">
