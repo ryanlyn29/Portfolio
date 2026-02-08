@@ -900,10 +900,6 @@ const HomePage = ({
 
     return (
         <div id="hero" className="flex flex-col w-full">
-<<<<<<< HEAD
-=======
-            {/* Header Section */}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
             <motion.header 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -911,10 +907,6 @@ const HomePage = ({
                 className="w-full max-w-[1920px] mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-8 md:pb-12"
             >
                 <div className="flex flex-col gap-8 md:gap-12">
-<<<<<<< HEAD
-=======
-                    {/* Main Content Section */}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
                     <div className="flex flex-col gap-4 md:gap-6">
                         <motion.h1
                             initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -938,10 +930,6 @@ const HomePage = ({
                 </div>
             </motion.header>
 
-<<<<<<< HEAD
-=======
-            {/* Bento Grid Section */}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 md:p-8 pb-32 flex-1 content-start">
             <BentoCard 
               id="about"

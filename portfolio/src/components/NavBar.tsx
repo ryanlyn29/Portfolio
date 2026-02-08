@@ -12,18 +12,10 @@ interface NavBarProps {
 export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavigate, currentPage = 1 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
-<<<<<<< HEAD
   const getActiveIndex = () => {
     if (currentPage === 0) return 3;
     if (currentPage === 1) return 0;
     if (currentPage === 2) return 4;
-=======
-  // Map nav items to pages: hero=1, workspace=0, apps=2
-  const getActiveIndex = () => {
-    if (currentPage === 0) return 3; // workspace
-    if (currentPage === 1) return 0; // hero/home
-    if (currentPage === 2) return 4; // apps
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
     return null;
   };
   
@@ -47,29 +39,14 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
     { id: 'contact', color: '#DC2626' },
   ];
 
-<<<<<<< HEAD
-=======
-  // Enhanced fisheye magnification effect with smooth curve
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
   const getProximityScale = (index: number, hoveredIndex: number | null) => {
     if (hoveredIndex === null) return 1;
     const distance = Math.abs(index - hoveredIndex);
     
-<<<<<<< HEAD
     const maxScale = 1.8;
     const baseScale = 1.0;
     
     const scaleFactor = Math.pow(0.25, distance);
-=======
-    // Fisheye curve: exponential decay for smooth magnification
-    // Maximum scale at hovered item, minimal scaling for adjacent items
-    const maxScale = 1.8; // Maximum magnification
-    const baseScale = 1.0;
-    
-    // Create smooth fisheye curve using exponential decay
-    // Reduced decay factor so adjacent items scale much less
-    const scaleFactor = Math.pow(0.25, distance); // Exponential decay factor (reduced from 0.65)
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
     const scale = baseScale + (maxScale - baseScale) * scaleFactor;
     
     return Math.max(1, scale);
@@ -79,14 +56,8 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
     if (hoveredIndex === null) return 0;
     const distance = Math.abs(index - hoveredIndex);
     
-<<<<<<< HEAD
     const maxLift = -16;
     const liftFactor = Math.pow(0.7, distance);
-=======
-    // Enhanced vertical lift with fisheye curve
-    const maxLift = -16; // Maximum upward movement
-    const liftFactor = Math.pow(0.7, distance); // Exponential decay
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
     const lift = maxLift * liftFactor;
     
     return lift;
@@ -170,10 +141,6 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
                   {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
                 </motion.div>
               </motion.div>
-<<<<<<< HEAD
-=======
-              {/* macOS-style tooltip */}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
               <motion.span 
                 className="absolute -top-10 left-1/2 -translate-x-1/2 bg-zinc-900/90 dark:bg-zinc-100/90 text-white dark:text-zinc-900 text-[10px] font-medium px-2 py-1 rounded-md pointer-events-none whitespace-nowrap shadow-lg"
                 animate={{ 
@@ -185,10 +152,6 @@ export const NavBar: React.FC<NavBarProps> = ({ isDarkMode, toggleTheme, onNavig
               >
                 {item.label}
               </motion.span>
-<<<<<<< HEAD
-=======
-              {/* macOS-style indicator dot */}
->>>>>>> 134e185be9a25735d8bd6ac23be909859a0b3921
               <motion.div 
                 className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-zinc-900 dark:bg-zinc-100"
                 animate={{ 
