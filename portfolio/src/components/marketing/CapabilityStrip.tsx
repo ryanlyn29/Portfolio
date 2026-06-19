@@ -2,18 +2,27 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Atom, FileCode2, Triangle, Wind, Server, Terminal, Figma, Database,
+  Radio, Boxes, Coffee, Leaf, Container, Zap, Cloud, Sparkles,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 const STACK: Array<{ label: string; icon: LucideIcon }> = [
-  { label: 'React',      icon: Atom },
-  { label: 'TypeScript', icon: FileCode2 },
-  { label: 'Next.js',    icon: Triangle },
-  { label: 'Tailwind',   icon: Wind },
-  { label: 'Node',       icon: Server },
-  { label: 'Python',     icon: Terminal },
-  { label: 'Figma',      icon: Figma },
-  { label: 'PostgreSQL', icon: Database },
+  { label: 'React',       icon: Atom },
+  { label: 'TypeScript',  icon: FileCode2 },
+  { label: 'Next.js',     icon: Triangle },
+  { label: 'Tailwind',    icon: Wind },
+  { label: 'Node',        icon: Server },
+  { label: 'Python',      icon: Terminal },
+  { label: 'Figma',       icon: Figma },
+  { label: 'PostgreSQL',  icon: Database },
+  { label: 'Socket.io',   icon: Radio },
+  { label: 'Redis',       icon: Boxes },
+  { label: 'Java',        icon: Coffee },
+  { label: 'Spring Boot', icon: Leaf },
+  { label: 'Docker',      icon: Container },
+  { label: 'FastAPI',     icon: Zap },
+  { label: 'Cloudflare',  icon: Cloud },
+  { label: 'Gemini',      icon: Sparkles },
 ];
 
 export function CapabilityStrip() {

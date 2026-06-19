@@ -53,7 +53,7 @@ const TILES: Tile[] = [
   {
     kind: 'stat',
     label: 'Public repos',
-    value: '20+',
+    value: '10+',
     sub: 'some polished, some learning in public.',
     icon: <Github size={15} />,
     accent: 'bg-violet-50 text-violet-700',

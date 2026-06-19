@@ -1,9 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-  Layers, Radar, LineChart, ShieldCheck, Workflow, PenTool,
-  Gauge, MessageSquare, Box, BookOpen, Rocket, Compass,
-  Database, Server, Cloud, Brain, Bot, BarChart3,
+  Radar, PenTool, Compass, Server, Database, Brain, Bot, Cloud, BarChart3,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -21,36 +19,18 @@ const CARDS: Card[] = [
     icon: Compass, badge: 'Core',    badgeBg: 'bg-yellow-100',  badgeText: 'text-yellow-700' },
   { title: 'Frontend craft',     body: 'React + TS with a taste for small, honest animations and a11y defaults.',
     icon: PenTool, badge: 'Daily',   badgeBg: 'bg-pink-100',    badgeText: 'text-pink-700' },
-  { title: 'Realtime systems',   body: 'Socket.io, Redis, and the undo/redo contracts that keep clients honest.',
-    icon: Radar, badge: 'Built', badgeBg: 'bg-emerald-50',  badgeText: 'text-emerald-700' },
-  { title: 'Performance',        body: 'latency budgets as product decisions — optimistic UI where it counts.',
-    icon: Gauge, badge: 'Budgets',  badgeBg: 'bg-violet-50',   badgeText: 'text-violet-700' },
-  { title: 'Design systems',     body: 'tokens, Figma components, and the boring discipline that makes them stick.',
-    icon: Layers, badge: 'Figma',  badgeBg: 'bg-green-100',   badgeText: 'text-green-700' },
-  { title: 'Analytics instinct', body: 'funnel reads, event taxonomy, and not tracking metrics you won&rsquo;t look at.',
-    icon: LineChart, badge: 'PM',    badgeBg: 'bg-yellow-100',  badgeText: 'text-yellow-700' },
-  { title: 'Trust & safety',     body: 'failure UX, clear state, honest errors — the things security tooling taught me.',
-    icon: ShieldCheck, badge: 'AgentGuard',badgeBg: 'bg-pink-100',    badgeText: 'text-pink-700' },
-  { title: 'Cross-fn comms',     body: 'weekly notes, crisp slack threads, decisions with owners and dates.',
-    icon: MessageSquare, badge: 'Soft', badgeBg: 'bg-emerald-50',  badgeText: 'text-emerald-700' },
-  { title: 'Component API',      body: 'composable interfaces over clever ones — the boring API is the right API.',
-    icon: Box, badge: 'Craft',  badgeBg: 'bg-violet-50',   badgeText: 'text-violet-700' },
-  { title: 'Spec writing',       body: 'short spec, explicit non-goals, every open question in the doc.',
-    icon: BookOpen, badge: 'Docs',   badgeBg: 'bg-[#FEF3C7] text-yellow-800', badgeText: '' },
-  { title: 'Build &amp; learn',      body: 'fast feedback loops, honest retros, and keeping a running CHANGELOG.',
-    icon: Rocket, badge: 'Loop',   badgeBg: 'bg-green-100',   badgeText: 'text-green-700' },
-  { title: 'Agile fluency',      body: 'comfortable in scrum and shape-up; pragmatic about which one fits.',
-    icon: Workflow, badge: 'Team',   badgeBg: 'bg-pink-100',    badgeText: 'text-pink-700' },
-  { title: 'Data &amp; ML',          body: 'Python, Spark SQL, and risk-scoring models that turn raw pipeline logs into decisions.',
-    icon: Brain, badge: 'Python', badgeBg: 'bg-emerald-50',  badgeText: 'text-emerald-700' },
   { title: 'Backend systems',    body: 'Node, Express, FastAPI, and Spring Boot — REST, queues, and auth that hold up.',
     icon: Server, badge: 'APIs',   badgeBg: 'bg-violet-50',   badgeText: 'text-violet-700' },
+  { title: 'Realtime systems',   body: 'Socket.io, Redis, and the undo/redo contracts that keep clients honest.',
+    icon: Radar, badge: 'Built',   badgeBg: 'bg-emerald-50',  badgeText: 'text-emerald-700' },
   { title: 'Databases',          body: 'Postgres, Redis, and Prisma — schema design, caching, and honest migrations.',
     icon: Database, badge: 'Data',  badgeBg: 'bg-yellow-100',  badgeText: 'text-yellow-700' },
-  { title: 'Edge &amp; cloud',       body: 'Cloudflare Workers, Workers AI, and KV — serverless logic that runs at the edge.',
-    icon: Cloud, badge: 'Edge',   badgeBg: 'bg-green-100',   badgeText: 'text-green-700' },
+  { title: 'Data &amp; ML',          body: 'Python, Spark SQL, and risk-scoring models that turn raw pipeline logs into decisions.',
+    icon: Brain, badge: 'Python', badgeBg: 'bg-emerald-50',  badgeText: 'text-emerald-700' },
   { title: 'Applied AI',         body: 'Gemini and LLM integration, prompt hardening, and structured outputs you can trust.',
     icon: Bot, badge: 'LLM',    badgeBg: 'bg-pink-100',    badgeText: 'text-pink-700' },
+  { title: 'Edge &amp; cloud',       body: 'Cloudflare Workers, Workers AI, and KV — serverless logic that runs at the edge.',
+    icon: Cloud, badge: 'Edge',   badgeBg: 'bg-green-100',   badgeText: 'text-green-700' },
   { title: 'Data viz',           body: 'Streamlit and Plotly dashboards that make pipeline health readable for leadership.',
     icon: BarChart3, badge: 'Viz', badgeBg: 'bg-violet-50',   badgeText: 'text-violet-700' },
 ];
@@ -83,7 +63,7 @@ export function BentoGrid() {
             transition={{ duration: 0.4, delay: 0.05 }}
             className="text-4xl md:text-[44px] font-semibold tracking-tight text-[#1C1E26] leading-[1.1]"
           >
-            eighteen things i&apos;ve practiced long enough to build with.
+            nine things i&apos;ve practiced long enough to build with.
           </motion.h2>
         </div>
 

@@ -4,7 +4,7 @@ import { Sparkles, ArrowUpRight, GraduationCap, MapPin, BriefcaseBusiness } from
 export function AskCard() {
   return (
     <section className="relative bg-[#FDFBF7] w-full py-24" id="snapshot">
-      <div className="mx-auto w-full max-w-4xl px-6 lg:px-10">
+      <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,19 +23,19 @@ export function AskCard() {
             </div>
 
             <h2 className="text-3xl md:text-[40px] font-semibold tracking-tight text-[#1C1E26] leading-[1.1]">
-              ryan builds thoughtfully, writes clearly, and asks the right
+              building thoughtfully, writing clearly, and asking the right
               <span className="text-[#4B83C4]"> product questions</span> before anyone reaches for the keyboard.
             </h2>
 
             <p className="mt-6 text-[15px] text-stone-600 leading-relaxed max-w-2xl">
-              applying to product management roles and engineering new-grad programs starting 2028.
+              applying to product management and software engineering internships.
               comfortable owning the problem statement, the spec, and the first commit.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <InfoTile icon={<GraduationCap size={14} />} label="Education" value="FIU · Computer Engineering · 3.84 GPA" />
               <InfoTile icon={<MapPin size={14} />} label="Based in" value="Miami, FL · EST · open to relocation" />
-              <InfoTile icon={<BriefcaseBusiness size={14} />} label="Open to" value="PM internships · SWE new-grad · coffee" />
+              <InfoTile icon={<BriefcaseBusiness size={14} />} label="Open to" value="PM internships · SWE internships · coffee" />
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-3">

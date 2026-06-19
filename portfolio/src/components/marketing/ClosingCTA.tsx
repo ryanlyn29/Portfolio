@@ -20,7 +20,7 @@ export function ClosingCTA() {
               if this looks like the kind of work you&apos;d want on your team — say hi.
             </h2>
             <p className="mt-5 text-[15px] text-stone-600 leading-relaxed max-w-md">
-              currently applying to PM internships and new-grad SWE roles. happy to chat about
+              currently applying to PM and SWE internships. happy to chat about
               realtime systems, design tokens, or why undo/redo is secretly the hardest feature in any app.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -46,7 +46,7 @@ export function ClosingCTA() {
               icon={<Clock size={15} />}
               label="Availability"
               title="Summer 2026 &mdash; open"
-              body="PM internships, SWE new-grad pipelines, or short contracts through september."
+              body="PM and SWE internships, or short contracts through september."
               badge="open"
               badgeColor="bg-green-100 text-green-700"
             />
