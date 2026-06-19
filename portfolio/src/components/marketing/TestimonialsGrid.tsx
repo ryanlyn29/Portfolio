@@ -88,7 +88,7 @@ const PLACEMENT = [
 
 export function TestimonialsGrid() {
   return (
-    <section className="relative bg-[#FDFBF7] w-full py-24">
+    <section className="relative bg-[#FDFBF7] w-full py-24 -mt-1 z-10">
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
         <div className="mb-12 md:mb-16 max-w-2xl">
           <motion.div

@@ -3,14 +3,14 @@ import { Sparkles, ArrowUpRight, GraduationCap, MapPin, BriefcaseBusiness } from
 
 export function AskCard() {
   return (
-    <section className="relative bg-[#FDFBF7] w-full py-24" id="snapshot">
+    <section className="relative bg-[#FDFBF7] w-full py-24 -mt-1 z-10" id="snapshot">
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-30px' }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative bg-blue-100 rounded-3xl p-6 md:p-12"
+          className="relative bg-blue-100 rounded-3xl p-6 md:p-12 shadow-[inset_0_2px_8px_rgba(37,99,235,0.18),inset_0_8px_28px_rgba(0,0,0,0.1)]"
         >
           <div className="relative bg-white rounded-2xl border border-stone-200/50 p-8 md:p-12">
             <div className="flex items-center gap-2 mb-5">

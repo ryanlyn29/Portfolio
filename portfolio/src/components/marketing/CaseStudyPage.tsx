@@ -505,12 +505,16 @@ function GallerySection({ project }: { project: CaseStudy }) {
             className="md:col-span-2 rounded-[25px] pl-5 pt-5 overflow-hidden"
             style={{ backgroundColor: heroFrame }}
           >
-            <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden relative">
+            <div
+              className={`rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden relative ${
+                hero.kind === 'video' ? 'bg-black' : 'bg-white'
+              }`}
+            >
               <MediaFrame
                 media={hero}
                 className="aspect-[16/10]"
                 fallbackIcon={project.cover.icon}
-                fallbackBg="#FAF5EE"
+                fallbackBg={hero.kind === 'video' ? '#000000' : '#FAF5EE'}
               />
               {hero.kind === 'video' && (
                 <span

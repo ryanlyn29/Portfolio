@@ -58,7 +58,6 @@ export function MarketingFooter() {
                 <span className="h-4 w-1 rounded-full -rotate-12 block bg-[#1C1E26]" />
               </span>
               ryan lyncee
-              <span className="opacity-60">~</span>
             </a>
             <p className="mt-4 text-xs text-stone-500 leading-relaxed max-w-[220px]">
               product-minded builder, currently applying to PM roles. based in miami, open to coffee.

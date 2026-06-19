@@ -73,13 +73,13 @@ export function DarkCurveSection({
   belowColor = '#FDFBF7',
 }: DarkCurveSectionProps) {
   return (
-    <section className="relative" style={{ backgroundColor: belowColor }} id="about">
+    <section className="relative -mt-1 z-10" style={{ backgroundColor: belowColor }} id="about">
       <div className="relative bg-[#0B1735]">
         <svg
           viewBox="0 0 1440 120"
           className="absolute top-0 left-0 w-full z-10 pointer-events-none"
           preserveAspectRatio="none"
-          style={{ height: '8vw', minHeight: '60px', color: aboveColor }}
+          style={{ height: '8vw', minHeight: '60px', color: aboveColor, transform: 'translateY(-1px)' }}
           aria-hidden
         >
           <path d="M0,0 L1440,0 L1440,20 C1000,120 400,120 0,20 Z" fill="currentColor" />

@@ -34,8 +34,14 @@ export function MediaFrame({
   const [failed, setFailed] = useState(false);
   const showFallback = !media || failed;
 
+  const isVideo = media?.kind === 'video';
+  const surfaceBg = isVideo ? '#000000' : fallbackBg;
+
   return (
-    <div className={cn('relative w-full overflow-hidden', className)}>
+    <div
+      className={cn('relative w-full overflow-hidden', className)}
+      style={isVideo ? { backgroundColor: surfaceBg } : undefined}
+    >
       {!showFallback && media?.kind === 'image' && (
         <img
           src={media.src}
@@ -63,7 +69,7 @@ export function MediaFrame({
           onError={() => setFailed(true)}
           className="absolute inset-0 w-full h-full"
           style={{
-            objectFit: media.fit ?? 'cover',
+            objectFit: media.fit ?? 'contain',
             objectPosition: media.position ?? 'center',
           }}
           aria-label={media.alt}
@@ -73,7 +79,7 @@ export function MediaFrame({
       {showFallback && (
         <div
           className="absolute inset-0 flex items-center justify-center"
-          style={{ backgroundColor: fallbackBg }}
+          style={{ backgroundColor: surfaceBg }}
           aria-hidden={!!FallbackIcon}
         >
           {FallbackIcon ? (

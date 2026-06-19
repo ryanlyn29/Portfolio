@@ -56,7 +56,7 @@ export function MarketingNav() {
           : 'bg-[#0B1735] border-b border-transparent'
       )}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 lg:px-10 py-3.5">
+      <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 lg:px-10 py-3.5">
         <Link
           to="/"
           className={cn(
@@ -79,11 +79,10 @@ export function MarketingNav() {
           </span>
           <span className="inline-flex items-baseline gap-0.5">
             ryan lyncee
-            <span className="opacity-60">~</span>
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {!isHome && (
             <Link
               to="/"

@@ -226,12 +226,12 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="relative w-full overflow-hidden" style={{ height: 160 }} aria-hidden>
+      <div className="relative w-full overflow-hidden leading-[0] -mb-px" style={{ height: 160 }} aria-hidden>
         <svg
           viewBox="0 0 1440 160"
           className="absolute bottom-0 left-0 w-full block"
           preserveAspectRatio="none"
-          style={{ height: 160 }}
+          style={{ height: 160, transform: 'translateY(2px)' }}
         >
           <path d="M0,0 C360,120 1080,120 1440,0 L1440,200 L0,200 Z" fill="#FDFBF7" />
         </svg>

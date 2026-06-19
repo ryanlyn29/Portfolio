@@ -173,7 +173,7 @@ export function FeatureBlocks() {
   const y = useTransform(scrollYProgress, [0, 1], [24, -24]);
 
   return (
-    <section ref={ref} id="projects" className="relative bg-[#F5EDE3] w-full py-24">
+    <section ref={ref} id="projects" className="relative bg-[#F5EDE3] w-full py-24 -mt-1 z-10">
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
         <div className="mb-16 md:mb-20 max-w-2xl">
           <motion.div
@@ -251,7 +251,7 @@ function FeatureRow({ project, index }: { project: FeatureProject; index: number
             to={`/work/${project.slug}`}
             className="inline-flex items-center gap-2 rounded-full bg-[#1C1E26] text-white px-5 py-2 text-sm font-medium hover:bg-stone-800 transition-colors"
           >
-            Read the case study <ArrowUpRight size={13} />
+            View Project <ArrowUpRight size={13} />
           </Link>
           {project.href && (
             <a

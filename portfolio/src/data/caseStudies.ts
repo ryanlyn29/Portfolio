@@ -383,7 +383,7 @@ const WHITEFLOW: CaseStudy = {
       title: 'Shared undo, silent network, opaque sessions',
       body: 'Fast on paper. Chaotic in practice — especially once more than one person joined the room.',
       frame: '#F5EDE3',
-      media: { src: '/images/WhiteFlowBefore.png', kind: 'image', alt: 'Whiteflow canvas before trust-focused rebuild' },
+      media: { src: '/images/WhiteFlowBefore.png', kind: 'image', alt: 'Whiteflow before — shared undo, unknown session state, and opaque saves' },
     },
     after: {
       label: 'After',
