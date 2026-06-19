@@ -73,8 +73,8 @@ export function DarkCurveSection({
   belowColor = '#FDFBF7',
 }: DarkCurveSectionProps) {
   return (
-    <section className="relative" style={{ backgroundColor: aboveColor }} id="about">
-      <div className="relative bg-[#0B1735] overflow-hidden">
+    <section className="relative" style={{ backgroundColor: belowColor }} id="about">
+      <div className="relative bg-[#0B1735]">
         <svg
           viewBox="0 0 1440 120"
           className="absolute top-0 left-0 w-full z-10 pointer-events-none"
@@ -89,7 +89,7 @@ export function DarkCurveSection({
           viewBox="0 0 1440 120"
           className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
           preserveAspectRatio="none"
-          style={{ height: '8vw', minHeight: '60px', color: belowColor }}
+          style={{ height: '8vw', minHeight: '60px', color: belowColor, transform: 'translateY(1px)' }}
           aria-hidden
         >
           <path d="M0,120 L1440,120 L1440,100 C1000,0 400,0 0,100 Z" fill="currentColor" />

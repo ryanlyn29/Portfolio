@@ -20,6 +20,11 @@ export interface MediaAsset {
   position?: string;
 }
 
+export interface CaseStudySketch {
+  caption: string;
+  media?: MediaAsset;
+}
+
 export interface CaseStudyReview {
   author: string;
   stars: number;
@@ -159,7 +164,7 @@ export interface CaseStudy {
     eyebrow: string;
     title: string;
     body: string;
-    sketches: string[];
+    sketches: CaseStudySketch[];
   };
 
   beforeAfter: {
@@ -229,10 +234,10 @@ const WHITEFLOW: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the finished build.',
     items: [
-      { author: 'Trust under concurrency · self-assessment', stars: 4, body: 'Per-actor undo and visible state made multiplayer feel predictable. Rapid simultaneous edits still need hardening.', date: 'Post-build' },
-      { author: 'Perceived speed · self-assessment',          stars: 5, body: 'Optimistic local rendering keeps edits feeling instant even while reconciliation happens behind the scenes.', date: 'Post-build' },
-      { author: 'Session continuity · self-assessment',       stars: 4, body: 'Redis-backed rooms survive reloads and reconnects; longer-term version history is still a next step.', date: 'Post-build' },
-      { author: 'Honest failure states · self-assessment',    stars: 4, body: 'The live/reconnecting/offline pill removed silent failures. Offline queues could surface more detail.', date: 'Post-build' },
+      { author: 'Trust under concurrency', stars: 4, body: 'Per-actor undo and visible state made multiplayer feel predictable. Rapid simultaneous edits still need hardening.', date: 'Post-build' },
+      { author: 'Perceived speed',          stars: 5, body: 'Optimistic local rendering keeps edits feeling instant even while reconciliation happens behind the scenes.', date: 'Post-build' },
+      { author: 'Session continuity',       stars: 4, body: 'Redis-backed rooms survive reloads and reconnects; longer-term version history is still a next step.', date: 'Post-build' },
+      { author: 'Honest failure states',    stars: 4, body: 'The live/reconnecting/offline pill removed silent failures. Offline queues could surface more detail.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -352,10 +357,22 @@ const WHITEFLOW: CaseStudy = {
     body:
       "Before touching real code I mapped every realtime state the canvas could be in — connected, reconnecting, offline, merging — and drew the smallest UI for each. It kept the rebuild honest: if a state had no sketch, it had no design.",
     sketches: [
-      'Connected state — status dot · cursors · instant feedback',
-      'Reconnecting — amber badge · queued strokes visible · opacity hint',
-      'Offline — dismissible banner · local save indicator · retry affordance',
-      'Merge conflict — two stacked cursors · ownership color tag · no modal',
+      {
+        caption: 'Connected state — status dot · cursors · instant feedback',
+        media: { src: '/images/WhiteFlowWireframeConnected.png', kind: 'image', alt: 'Whiteflow wireframe — connected state with live badge and synced edits', fit: 'contain' },
+      },
+      {
+        caption: 'Reconnecting — amber badge · queued strokes visible · opacity hint',
+        media: { src: '/images/WhiteFlowWireframeReconnecting.png', kind: 'image', alt: 'Whiteflow wireframe — reconnecting with queued local edits', fit: 'contain' },
+      },
+      {
+        caption: 'Offline — dismissible banner · local save indicator · retry affordance',
+        media: { src: '/images/WhiteFlowWireframeOffline.png', kind: 'image', alt: 'Whiteflow wireframe — offline mode with local save and retry', fit: 'contain' },
+      },
+      {
+        caption: 'Merge conflict — two stacked cursors · ownership color tag · no modal',
+        media: { src: '/images/WhiteFlowWireframeMerge.png', kind: 'image', alt: 'Whiteflow wireframe — merge conflict with overlapping cursors', fit: 'contain' },
+      },
     ],
   },
   beforeAfter: {
@@ -366,12 +383,14 @@ const WHITEFLOW: CaseStudy = {
       title: 'Shared undo, silent network, opaque sessions',
       body: 'Fast on paper. Chaotic in practice — especially once more than one person joined the room.',
       frame: '#F5EDE3',
+      media: { src: '/images/WhiteFlowBefore.png', kind: 'image', alt: 'Whiteflow canvas before trust-focused rebuild' },
     },
     after: {
       label: 'After',
       title: 'Per-actor undo, visible network, persistent rooms',
       body: 'Same speed, dramatically different feel — no more second-guessing whether an edit actually saved.',
       frame: '#B5CDEF',
+      media: { src: '/images/WhiteFlowAfter.png', kind: 'image', alt: 'Whiteflow canvas after — live connection, per-user undo, and saved rooms' },
     },
   },
   keyFeatures: {
@@ -471,10 +490,10 @@ const AGENTGUARD: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the hackathon build.',
     items: [
-      { author: 'Verdict-first UX · self-assessment', stars: 4, body: 'Leading with a one-line verdict and score made the tool approachable; the detail is there when you want it.', date: 'Post-build' },
-      { author: 'Auto-remediation · self-assessment', stars: 4, body: 'Gemini-powered rewrites with a diff are the standout feature; they need guardrails before anyone trusts them blindly.', date: 'Post-build' },
-      { author: 'Score trend · self-assessment',      stars: 3, body: 'The trend chart makes iteration feel rewarding, though it only matters once you scan the same prompt repeatedly.', date: 'Post-build' },
-      { author: 'Detection depth · self-assessment',  stars: 3, body: 'Solid coverage of common injection patterns for a 24-hour build; deeper, evolving attacks are future work.', date: 'Post-build' },
+      { author: 'Verdict-first UX', stars: 4, body: 'Leading with a one-line verdict and score made the tool approachable; the detail is there when you want it.', date: 'Post-build' },
+      { author: 'Auto-remediation', stars: 4, body: 'Gemini-powered rewrites with a diff are the standout feature; they need guardrails before anyone trusts them blindly.', date: 'Post-build' },
+      { author: 'Score trend',      stars: 3, body: 'The trend chart makes iteration feel rewarding, though it only matters once you scan the same prompt repeatedly.', date: 'Post-build' },
+      { author: 'Detection depth',  stars: 3, body: 'Solid coverage of common injection patterns for a 24-hour build; deeper, evolving attacks are future work.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -582,10 +601,10 @@ const AGENTGUARD: CaseStudy = {
     body:
       "With 24 hours on the clock, sketching mattered more than usual. I mapped three screens (scan, rewrite, history) and pressure-tested each with a teammate before we committed to layout.",
     sketches: [
-      'Scan view — big verdict · inline highlights · one CTA',
-      'Rewrite view — diff panel · accept/decline/tweak · rationale',
-      'History view — score trend line · list of previous scans · quick reopen',
-      'Empty state — sample prompt · 10-second setup · no login friction',
+      { caption: 'Scan view — big verdict · inline highlights · one CTA' },
+      { caption: 'Rewrite view — diff panel · accept/decline/tweak · rationale' },
+      { caption: 'History view — score trend line · list of previous scans · quick reopen' },
+      { caption: 'Empty state — sample prompt · 10-second setup · no login friction' },
     ],
   },
   beforeAfter: {
@@ -677,10 +696,10 @@ const CLINIX: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the finished build.',
     items: [
-      { author: 'Conversational intake · self-assessment', stars: 4, body: 'Free-text chat replaces the multi-page form well; messy medical phrasing still trips up edge cases.', date: 'Post-build' },
-      { author: 'Structured capture · self-assessment',    stars: 4, body: 'The sidebar keeps clinician-facing data visible while the chat stays human. Mapping to real EMR schemas is future work.', date: 'Post-build' },
-      { author: 'Insurance clarity · self-assessment',     stars: 3, body: 'Plain-English ranges beat a single mystery number, but real payer data would make them far more accurate.', date: 'Post-build' },
-      { author: 'Safety & guardrails · self-assessment',   stars: 3, body: 'The flow routes uncertain cases to a human; red-flag escalation is still on the roadmap.', date: 'Post-build' },
+      { author: 'Conversational intake', stars: 4, body: 'Free-text chat replaces the multi-page form well; messy medical phrasing still trips up edge cases.', date: 'Post-build' },
+      { author: 'Structured capture',    stars: 4, body: 'The sidebar keeps clinician-facing data visible while the chat stays human. Mapping to real EMR schemas is future work.', date: 'Post-build' },
+      { author: 'Insurance clarity',     stars: 3, body: 'Plain-English ranges beat a single mystery number, but real payer data would make them far more accurate.', date: 'Post-build' },
+      { author: 'Safety & guardrails',   stars: 3, body: 'The flow routes uncertain cases to a human; red-flag escalation is still on the roadmap.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -788,10 +807,10 @@ const CLINIX: CaseStudy = {
     body:
       "The hardest moment was deciding what the sidebar shows. Too little and clinicians don't trust it; too much and the patient feels watched. I sketched four variants before landing on a minimal 'confirmed so far' pattern.",
     sketches: [
-      'Welcome state — single input · calm tone · one example prompt',
-      'Active chat — left column · sidebar with confirmed fields',
-      'Cost state — range card · explanation · not a single number',
-      'Schedule state — inline calendar · confirmation · summary export',
+      { caption: 'Welcome state — single input · calm tone · one example prompt' },
+      { caption: 'Active chat — left column · sidebar with confirmed fields' },
+      { caption: 'Cost state — range card · explanation · not a single number' },
+      { caption: 'Schedule state — inline calendar · confirmation · summary export' },
     ],
   },
   beforeAfter: {
@@ -879,10 +898,10 @@ const EDGESCOPE: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the build.',
     items: [
-      { author: 'Legibility · self-assessment',         stars: 4, body: 'The live map makes traffic and anomalies easy to read at a glance. Dense regions can still crowd the canvas.', date: 'Post-build' },
-      { author: 'AI usefulness · self-assessment',      stars: 4, body: 'Llama 3 root-cause summaries are genuinely helpful as plausible explanations — they are suggestions, not ground truth.', date: 'Post-build' },
-      { author: 'Simulation realism · self-assessment', stars: 3, body: 'Geographic latency and anomaly injection feel believable, but it is still a simulation, not real production data.', date: 'Post-build' },
-      { author: 'Edge-native design · self-assessment', stars: 5, body: 'Workers, Workers AI, and KV fit the problem cleanly — analysis runs close to where the data would live.', date: 'Post-build' },
+      { author: 'Legibility',         stars: 4, body: 'The live map makes traffic and anomalies easy to read at a glance. Dense regions can still crowd the canvas.', date: 'Post-build' },
+      { author: 'AI usefulness',      stars: 4, body: 'Llama 3 root-cause summaries are genuinely helpful as plausible explanations — they are suggestions, not ground truth.', date: 'Post-build' },
+      { author: 'Simulation realism', stars: 3, body: 'Geographic latency and anomaly injection feel believable, but it is still a simulation, not real production data.', date: 'Post-build' },
+      { author: 'Edge-native design', stars: 5, body: 'Workers, Workers AI, and KV fit the problem cleanly — analysis runs close to where the data would live.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -960,10 +979,10 @@ const EDGESCOPE: CaseStudy = {
     body:
       'I sketched the core surfaces — the live map, the metrics strip, the anomaly cards, and the AI chat — and how they all share one simulation session.',
     sketches: [
-      'Network map — live nodes · color-coded flows · anomaly markers',
-      'Metrics strip — requests · latency · success rate · errors',
-      'Anomaly card — severity · affected nodes · Analyze with AI',
-      'Chat — ask about a session · grounded in current traffic',
+      { caption: 'Network map — live nodes · color-coded flows · anomaly markers' },
+      { caption: 'Metrics strip — requests · latency · success rate · errors' },
+      { caption: 'Anomaly card — severity · affected nodes · Analyze with AI' },
+      { caption: 'Chat — ask about a session · grounded in current traffic' },
     ],
   },
   beforeAfter: {
@@ -1048,10 +1067,10 @@ const NAVORA: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the pipeline.',
     items: [
-      { author: 'Viewer-agnostic output · self-assessment', stars: 5, body: 'USD files open cleanly in Blender with hierarchy and animation intact. The core promise holds.', date: 'Post-build' },
-      { author: 'Hardware independence · self-assessment',   stars: 5, body: 'No GPU or CUDA needed to simulate — it runs on plain Python, which was the point.', date: 'Post-build' },
-      { author: 'Physics depth · self-assessment',          stars: 3, body: 'Gravity, collisions, and time-stepping work; the physics is intentionally minimal, not a full engine.', date: 'Post-build' },
-      { author: 'Developer ergonomics · self-assessment',   stars: 4, body: 'The entity and writer API is small and readable; docs and examples could go further.', date: 'Post-build' },
+      { author: 'Viewer-agnostic output', stars: 5, body: 'USD files open cleanly in Blender with hierarchy and animation intact. The core promise holds.', date: 'Post-build' },
+      { author: 'Hardware independence',   stars: 5, body: 'No GPU or CUDA needed to simulate — it runs on plain Python, which was the point.', date: 'Post-build' },
+      { author: 'Physics depth',          stars: 3, body: 'Gravity, collisions, and time-stepping work; the physics is intentionally minimal, not a full engine.', date: 'Post-build' },
+      { author: 'Developer ergonomics',   stars: 4, body: 'The entity and writer API is small and readable; docs and examples could go further.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -1129,10 +1148,10 @@ const NAVORA: CaseStudy = {
     body:
       'Navora is a pipeline more than a UI, so the sketch was the data flow: simulate, author USD, hand off to a viewer, with a thin debug UI for control.',
     sketches: [
-      'Sim core — entities · physics step · per-frame state',
-      'USD writer — stage setup · time-sampled transforms · save',
-      'Viewer hand-off — import into Blender / Omniverse',
-      'Debug UI — start/stop · spawn entities · export',
+      { caption: 'Sim core — entities · physics step · per-frame state' },
+      { caption: 'USD writer — stage setup · time-sampled transforms · save' },
+      { caption: 'Viewer hand-off — import into Blender / Omniverse' },
+      { caption: 'Debug UI — start/stop · spawn entities · export' },
     ],
   },
   beforeAfter: {
@@ -1217,10 +1236,10 @@ const WEAVE: CaseStudy = {
     intro:
       'A look at what landed and what I would still harden in the build.',
     items: [
-      { author: 'Architecture clarity · self-assessment',  stars: 5, body: 'Clean separation: Next.js proxies a Spring Boot API, with auth verified server-side. The layering is something I am proud of.', date: 'Post-build' },
-      { author: 'Real-time feel · self-assessment',        stars: 4, body: 'SSE keeps threads updating live; it is simpler than websockets and fits the read-heavy flow well.', date: 'Post-build' },
-      { author: 'Memory features · self-assessment',       stars: 3, body: 'Entity extraction and a searchable library are in place; the living-memory idea has lots of room to grow.', date: 'Post-build' },
-      { author: 'Auth and provisioning · self-assessment', stars: 4, body: 'Firebase tokens verified by the backend with auto-provisioning works smoothly across the stack.', date: 'Post-build' },
+      { author: 'Architecture clarity',  stars: 5, body: 'Clean separation: Next.js proxies a Spring Boot API, with auth verified server-side. The layering is something I am proud of.', date: 'Post-build' },
+      { author: 'Real-time feel',        stars: 4, body: 'SSE keeps threads updating live; it is simpler than websockets and fits the read-heavy flow well.', date: 'Post-build' },
+      { author: 'Memory features',       stars: 3, body: 'Entity extraction and a searchable library are in place; the living-memory idea has lots of room to grow.', date: 'Post-build' },
+      { author: 'Auth and provisioning', stars: 4, body: 'Firebase tokens verified by the backend with auto-provisioning works smoothly across the stack.', date: 'Post-build' },
     ],
   },
   interviews: {
@@ -1298,10 +1317,10 @@ const WEAVE: CaseStudy = {
     body:
       'I mapped the core flows — inbox, thread, library, and search — and how each one calls through to the backend API.',
     sketches: [
-      'Inbox — threads · activity · notifications',
-      'Thread — messages · live SSE updates · entities',
-      'Library — saved knowledge · entities pulled from chats',
-      'Search — one query across threads and library',
+      { caption: 'Inbox — threads · activity · notifications' },
+      { caption: 'Thread — messages · live SSE updates · entities' },
+      { caption: 'Library — saved knowledge · entities pulled from chats' },
+      { caption: 'Search — one query across threads and library' },
     ],
   },
   beforeAfter: {

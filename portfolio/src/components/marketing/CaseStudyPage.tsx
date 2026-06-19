@@ -699,25 +699,34 @@ function WireframesSection({ project }: { project: CaseStudy }) {
               className="relative rounded-2xl border border-stone-200/60 bg-white overflow-hidden"
             >
               <div className="aspect-[16/9] relative bg-[#FAF5EE]">
-                <svg
-                  viewBox="0 0 400 225"
-                  className="absolute inset-0 w-full h-full"
-                  aria-hidden
-                >
-                  <rect x={20} y={20} width={120} height={8} rx={2} fill="#D1D5DB" />
-                  <rect x={20} y={38} width={80} height={6} rx={2} fill="#E5E7EB" />
-                  <rect x={20} y={60} width={360} height={90} rx={6} fill="none" stroke="#D1D5DB" strokeDasharray="4 4" />
-                  <circle cx={50} cy={90} r={10} fill="#E5E7EB" />
-                  <rect x={70} y={84} width={70} height={6} rx={2} fill="#E5E7EB" />
-                  <rect x={70} y={96} width={120} height={4} rx={2} fill="#EEF2F7" />
-                  <rect x={20} y={170} width={90} height={22} rx={11} fill="#1C1E26" />
-                  <rect x={120} y={170} width={90} height={22} rx={11} fill="none" stroke="#D1D5DB" />
-                </svg>
-                <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 border border-stone-200">
+                {s.media ? (
+                  <MediaFrame
+                    media={s.media}
+                    fallbackIcon={project.cover.icon}
+                    className="absolute inset-0"
+                    fallbackBg="#FAF5EE"
+                  />
+                ) : (
+                  <svg
+                    viewBox="0 0 400 225"
+                    className="absolute inset-0 w-full h-full"
+                    aria-hidden
+                  >
+                    <rect x={20} y={20} width={120} height={8} rx={2} fill="#D1D5DB" />
+                    <rect x={20} y={38} width={80} height={6} rx={2} fill="#E5E7EB" />
+                    <rect x={20} y={60} width={360} height={90} rx={6} fill="none" stroke="#D1D5DB" strokeDasharray="4 4" />
+                    <circle cx={50} cy={90} r={10} fill="#E5E7EB" />
+                    <rect x={70} y={84} width={70} height={6} rx={2} fill="#E5E7EB" />
+                    <rect x={70} y={96} width={120} height={4} rx={2} fill="#EEF2F7" />
+                    <rect x={20} y={170} width={90} height={22} rx={11} fill="#1C1E26" />
+                    <rect x={120} y={170} width={90} height={22} rx={11} fill="none" stroke="#D1D5DB" />
+                  </svg>
+                )}
+                <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 border border-stone-200">
                   Sketch {i + 1}
                 </span>
               </div>
-              <div className="p-4 text-sm text-[#1C1E26] leading-snug">{s}</div>
+              <div className="p-4 text-sm text-[#1C1E26] leading-snug">{s.caption}</div>
             </motion.div>
           ))}
         </div>
