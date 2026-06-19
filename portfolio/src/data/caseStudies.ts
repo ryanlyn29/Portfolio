@@ -205,7 +205,7 @@ const WHITEFLOW: CaseStudy = {
       "Whiteflow is a multiplayer canvas I led as part of a four-person team at init build. We started with a simple idea — a shared whiteboard — and kept bumping into the same question: what makes a realtime tool feel trustworthy? When cursors lag, when undo disagrees across clients, when the connection hiccups, users blame the product. I owned architecture and the hard questions behind the UX that keeps trust intact.",
   },
   role: 'Lead engineer · Product lead',
-  timeline: 'Sep – Dec 2024',
+  timeline: 'Sep – Dec 2025',
   skills: [
     'Socket.io realtime',
     'Redis pubsub',

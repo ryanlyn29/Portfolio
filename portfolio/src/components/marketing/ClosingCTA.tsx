@@ -45,8 +45,8 @@ export function ClosingCTA() {
             <SideCard
               icon={<Clock size={15} />}
               label="Availability"
-              title="Summer 2026 &mdash; open"
-              body="PM and SWE internships, or short contracts through september."
+              title="Looking for 2027 opportunities"
+              body="PM and SWE internships, plus opportunities for 2027."
               badge="open"
               badgeColor="bg-green-100 text-green-700"
             />

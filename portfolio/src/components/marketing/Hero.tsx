@@ -179,9 +179,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0 }}
-          className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm px-4 py-1.5 text-sm text-stone-200"
+          className="inline-flex items-center gap-2 rounded-full bg-[#3A5689] px-4 py-1.5 text-sm text-white"
         >
-          <span className="bg-blue-400 text-[#0B1735] text-[10px] font-semibold uppercase rounded-full px-2 py-0.5 tracking-wide">
+          <span className="bg-white text-[#3A5689] text-[10px] font-semibold uppercase rounded-full px-2 py-0.5 tracking-wide">
             Open
           </span>
           <span>to PM &amp; SWE internships</span>
