@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Github, Linkedin, FileText } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { BrandMark } from './BrandMark';
 
 const TEXT_LINKS = [
   { to: '/#about',    label: 'About' },
@@ -64,19 +65,7 @@ export function MarketingNav() {
             onDark ? 'text-white' : 'text-[#1C1E26]'
           )}
         >
-          <span
-            className={cn(
-              'relative inline-flex h-8 w-8 items-center justify-center rounded-lg',
-              onDark ? 'bg-white/95' : 'bg-[#1C1E26]'
-            )}
-          >
-            <span
-              className={cn(
-                'h-4 w-1 rounded-full -rotate-12 block',
-                onDark ? 'bg-[#1C1E26]' : 'bg-white'
-              )}
-            />
-          </span>
+          <BrandMark onDark={onDark} />
           <span className="inline-flex items-baseline gap-0.5">
             ryan lyncee
           </span>

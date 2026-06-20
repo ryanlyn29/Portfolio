@@ -89,10 +89,10 @@ export function DarkCurveSection({
           viewBox="0 0 1440 120"
           className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
           preserveAspectRatio="none"
-          style={{ height: '8vw', minHeight: '60px', color: belowColor, transform: 'translateY(1px)' }}
+          style={{ height: '10vw', minHeight: '72px', color: belowColor, transform: 'translateY(1px)' }}
           aria-hidden
         >
-          <path d="M0,120 L1440,120 L1440,100 C1000,0 400,0 0,100 Z" fill="currentColor" />
+          <path d="M0,120 L1440,120 L1440,20 C1000,120 400,120 0,20 Z" fill="currentColor" />
         </svg>
 
         <div className="relative z-20 max-w-[1200px] mx-auto px-6 py-28 md:py-36">

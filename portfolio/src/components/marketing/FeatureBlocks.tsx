@@ -287,7 +287,7 @@ function ColoredFrameVisual({ project }: { project: FeatureProject }) {
           <div aria-hidden className="absolute inset-0 translate-y-3 translate-x-3 rounded-tl-[24px] bg-[#F5F5F5] border-t border-l border-[#222] z-0" />
           <div aria-hidden className="absolute inset-0 translate-y-1.5 translate-x-1.5 rounded-tl-[24px] bg-[#FAFAFA] border-t border-l border-[#222] z-10" />
 
-          <div className="relative z-20 bg-white rounded-tl-[24px] border-t border-l border-[#222] w-full p-6 sm:p-8 sm:pb-10 flex flex-col">
+          <div className="relative z-20 bg-white rounded-tl-[24px] border-t border-l border-[#222] w-full p-6 sm:p-8 sm:pb-10 flex flex-col shadow-[6px_14px_36px_rgba(28,30,38,0.2),3px_6px_14px_rgba(28,30,38,0.12)]">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-[#1C1E26] text-white">

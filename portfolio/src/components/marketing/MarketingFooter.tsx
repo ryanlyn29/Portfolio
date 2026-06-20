@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, Twitter, ArrowUpRight } from 'lucide-react';
+import { BrandMark } from './BrandMark';
 
 const COLUMNS: Array<{ heading: string; links: Array<{ label: string; href: string; external?: boolean }> }> = [
   {
@@ -54,9 +55,7 @@ export function MarketingFooter() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10">
           <div className="col-span-2 md:col-span-1">
             <a href="#top" className="inline-flex items-center gap-2 text-white font-semibold tracking-tight text-sm">
-              <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/95">
-                <span className="h-4 w-1 rounded-full -rotate-12 block bg-[#1C1E26]" />
-              </span>
+              <BrandMark onDark />
               ryan lyncee
             </a>
             <p className="mt-4 text-xs text-stone-500 leading-relaxed max-w-[220px]">

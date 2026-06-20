@@ -17,7 +17,7 @@ const CERT_COLORS = ['#EBBAC7', '#C4D7D1', '#B5CDEF', '#FEF3C7'];
 
 export function Certifications() {
   return (
-    <section className="relative w-full py-20 md:py-24 -mt-1 z-10" style={{ backgroundColor: '#FDFBF7' }} id="certifications">
+    <section className="relative w-full pt-28 md:pt-32 pb-20 md:pb-24 -mt-1 z-10" style={{ backgroundColor: '#FDFBF7' }} id="certifications">
       <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
         <div className="mb-10 md:mb-12 max-w-2xl">
           <motion.div
