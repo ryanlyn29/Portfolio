@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import type { CaseStudy } from '../../data/caseStudies';
 import { MediaFrame } from './MediaFrame';
+import { frameCardStyle } from '../../lib/frameInsetShadow';
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -133,7 +134,7 @@ function CaseStudyHero({ project }: { project: CaseStudy }) {
       >
         <div
           className="rounded-[25px] pl-6 pt-6 sm:pl-12 sm:pt-12 overflow-hidden"
-          style={{ backgroundColor: project.cover.frames[0] }}
+          style={frameCardStyle(project.cover.frames[0])}
         >
           <div className="relative">
             <div aria-hidden className="absolute inset-0 translate-y-3 translate-x-3 rounded-tl-[24px] bg-[#F5F5F5] border-t border-l border-[#222] z-0" />
@@ -503,7 +504,7 @@ function GallerySection({ project }: { project: CaseStudy }) {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
             className="md:col-span-2 rounded-[25px] pl-5 pt-5 overflow-hidden"
-            style={{ backgroundColor: heroFrame }}
+            style={frameCardStyle(heroFrame)}
           >
             <div
               className={`rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden relative ${
@@ -536,7 +537,7 @@ function GallerySection({ project }: { project: CaseStudy }) {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.45, delay: 0.08 + i * 0.06 }}
                 className="rounded-[25px] pl-4 pt-4 overflow-hidden"
-                style={{ backgroundColor: sideFrames[i] ?? heroFrame }}
+                style={frameCardStyle(sideFrames[i] ?? heroFrame)}
               >
                 <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden">
                   <MediaFrame
@@ -573,7 +574,7 @@ function PainPointsSection({ project }: { project: CaseStudy }) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="rounded-[25px] pl-5 pt-5 overflow-hidden"
-              style={{ backgroundColor: p.frame }}
+              style={frameCardStyle(p.frame)}
             >
               <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] p-6 flex flex-col h-full">
                 <span className="inline-flex w-10 h-10 items-center justify-center rounded-xl bg-stone-50 border border-stone-200/60 text-[#1C1E26]">
@@ -597,10 +598,10 @@ function PainPointsSection({ project }: { project: CaseStudy }) {
 function CompetitiveSection({ project }: { project: CaseStudy }) {
   const swot = project.competitive.swot;
   const blocks = [
-    { title: 'Strengths',     items: swot.strengths,     color: 'bg-[#C4D7D1]', label: 'text-emerald-700' },
-    { title: 'Weaknesses',    items: swot.weaknesses,    color: 'bg-[#EBBAC7]', label: 'text-pink-700' },
-    { title: 'Opportunities', items: swot.opportunities, color: 'bg-[#B5CDEF]', label: 'text-[#4B83C4]' },
-    { title: 'Threats',       items: swot.threats,       color: 'bg-[#FEF3C7]', label: 'text-yellow-700' },
+    { title: 'Strengths',     items: swot.strengths,     frame: '#C4D7D1', label: 'text-emerald-700' },
+    { title: 'Weaknesses',    items: swot.weaknesses,    frame: '#EBBAC7', label: 'text-pink-700' },
+    { title: 'Opportunities', items: swot.opportunities, frame: '#B5CDEF', label: 'text-[#4B83C4]' },
+    { title: 'Threats',       items: swot.threats,       frame: '#FEF3C7', label: 'text-yellow-700' },
   ];
 
   return (
@@ -619,7 +620,8 @@ function CompetitiveSection({ project }: { project: CaseStudy }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`rounded-[25px] pl-5 pt-5 overflow-hidden ${b.color}`}
+              className="rounded-[25px] pl-5 pt-5 overflow-hidden"
+              style={frameCardStyle(b.frame)}
             >
               <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] p-6 h-full">
                 <div className={`text-[11px] font-semibold uppercase tracking-[0.2em] mb-4 ${b.label}`}>
@@ -761,7 +763,7 @@ function BeforeAfterSection({ project }: { project: CaseStudy }) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="rounded-[25px] pl-6 pt-6 sm:pl-8 sm:pt-8 overflow-hidden"
-              style={{ backgroundColor: b.frame }}
+              style={frameCardStyle(b.frame)}
             >
               <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden">
                 <MediaFrame
@@ -809,7 +811,7 @@ function KeyFeaturesSection({ project }: { project: CaseStudy }) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="rounded-[25px] pl-5 pt-5 overflow-hidden"
-              style={{ backgroundColor: f.frame }}
+              style={frameCardStyle(f.frame)}
             >
               <div className="bg-white rounded-tl-[24px] border-t border-l border-[#222] overflow-hidden h-full flex flex-col">
                 <MediaFrame

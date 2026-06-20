@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Check, ArrowUpRight, Github, CircuitBoard, ShieldCheck, Stethoscope, Globe, Boxes, MessagesSquare } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { frameCardStyle } from '../../lib/frameInsetShadow';
 
 interface FeatureProject {
   slug: string;
@@ -280,7 +281,7 @@ function ColoredFrameVisual({ project }: { project: FeatureProject }) {
     <div className="flex justify-center w-full">
       <div
         className="w-full max-w-[500px] rounded-[25px] pl-6 pt-6 sm:pl-10 sm:pt-10 overflow-hidden"
-        style={{ backgroundColor: project.frame }}
+        style={frameCardStyle(project.frame)}
       >
         <div className="relative">
           <div aria-hidden className="absolute inset-0 translate-y-3 translate-x-3 rounded-tl-[24px] bg-[#F5F5F5] border-t border-l border-[#222] z-0" />

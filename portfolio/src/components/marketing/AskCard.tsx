@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowUpRight, GraduationCap, MapPin, BriefcaseBusiness } from 'lucide-react';
+import { frameCardStyle } from '../../lib/frameInsetShadow';
 
 export function AskCard() {
   return (
@@ -10,7 +11,8 @@ export function AskCard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-30px' }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative bg-blue-100 rounded-3xl p-6 md:p-12 shadow-[inset_0_2px_8px_rgba(37,99,235,0.18),inset_0_8px_28px_rgba(0,0,0,0.1)]"
+          className="relative bg-blue-100 rounded-3xl p-6 md:p-12"
+          style={frameCardStyle('#B5CDEF')}
         >
           <div className="relative bg-white rounded-2xl border border-stone-200/50 p-8 md:p-12">
             <div className="flex items-center gap-2 mb-5">
