@@ -1,111 +1,76 @@
-import { Github, Linkedin, Mail, Twitter, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CASE_STUDIES } from '../../data/caseStudies';
 import { BrandMark } from './BrandMark';
-
-const COLUMNS: Array<{ heading: string; links: Array<{ label: string; href: string; external?: boolean }> }> = [
-  {
-    heading: 'Work',
-    links: [
-      { label: 'Whiteflow',  href: 'https://github.com/ryanlyn29/WhiteFlow', external: true },
-      { label: 'AgentGuard', href: 'https://github.com/4shivv/Sharkbyte_2025', external: true },
-      { label: 'Clinix',     href: 'https://github.com/HitMonrillo/Clinix', external: true },
-      { label: 'EdgeScope',  href: 'https://github.com/ryanlyn29/cf_ai_edgescope', external: true },
-      { label: 'Navora',     href: 'https://github.com/ryanlyn29/Navora', external: true },
-      { label: 'Weave',      href: 'https://github.com/ryanlyn29/Weave', external: true },
-    ],
-  },
-  {
-    heading: 'About',
-    links: [
-      { label: 'Bio',         href: '#about' },
-      { label: 'Snapshot',    href: '#snapshot' },
-      { label: 'Stack',       href: '#skills' },
-      { label: 'What I care about', href: '#about' },
-    ],
-  },
-  {
-    heading: 'Resume',
-    links: [
-      { label: 'PDF',         href: '/resume.pdf', external: true },
-      { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/ryanlyncee', external: true },
-    ],
-  },
-  {
-    heading: 'Contact',
-    links: [
-      { label: 'Email',       href: 'mailto:ryanlyncee29@gmail.com' },
-      { label: 'Say hi',      href: '#contact' },
-      { label: 'Schedule',    href: 'mailto:ryanlyncee29@gmail.com?subject=Coffee%20chat' },
-    ],
-  },
-  {
-    heading: 'Social',
-    links: [
-      { label: 'GitHub',      href: 'https://github.com/ryanlyn29', external: true },
-      { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/ryanlyncee', external: true },
-      { label: 'Twitter',     href: 'https://twitter.com', external: true },
-    ],
-  },
-];
 
 export function MarketingFooter() {
   const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#14161C] border-t border-white/10 text-stone-300">
-      <div className="max-w-6xl mx-auto px-6 lg:px-10 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-10">
-          <div className="col-span-2 md:col-span-1">
-            <a href="#top" className="inline-flex items-center gap-2 text-white font-semibold tracking-tight text-sm">
-              <BrandMark onDark />
-              ryan lyncee
-            </a>
-            <p className="mt-4 text-xs text-stone-500 leading-relaxed max-w-[220px]">
-              product-minded builder, currently applying to PM roles. based in miami, open to coffee.
-            </p>
-            <div className="mt-5 flex items-center gap-2">
-              <a href="https://github.com/ryanlyn29" target="_blank" rel="noreferrer" aria-label="GitHub" className="inline-flex w-8 h-8 items-center justify-center rounded-full border border-white/10 text-stone-400 hover:text-white hover:border-white/25 transition-colors">
-                <Github size={14} />
-              </a>
-              <a href="https://www.linkedin.com/in/ryanlyncee" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="inline-flex w-8 h-8 items-center justify-center rounded-full border border-white/10 text-stone-400 hover:text-white hover:border-white/25 transition-colors">
-                <Linkedin size={14} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter" className="inline-flex w-8 h-8 items-center justify-center rounded-full border border-white/10 text-stone-400 hover:text-white hover:border-white/25 transition-colors">
-                <Twitter size={14} />
-              </a>
-              <a href="mailto:ryanlyncee29@gmail.com" aria-label="Email" className="inline-flex w-8 h-8 items-center justify-center rounded-full border border-white/10 text-stone-400 hover:text-white hover:border-white/25 transition-colors">
-                <Mail size={14} />
-              </a>
+    <footer className="border-t border-white/10 bg-[#111111] text-paper">
+      <div className="site-container py-20 md:py-24">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <BrandMark size={36} />
+              <div>
+                <p className="text-sm font-semibold text-paper">Ryan Lyncee</p>
+                <p className="text-sm text-white/60">Computer Engineering · FIU · Miami</p>
+              </div>
             </div>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/60">
+              I build software where product clarity and technical depth meet — from edge systems
+              to full-stack prototypes.
+            </p>
           </div>
 
-          {COLUMNS.map((col) => (
-            <div key={col.heading}>
-              <div className="text-xs font-semibold text-white mb-4">{col.heading}</div>
-              <ul className="flex flex-col gap-2">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <a
-                      href={l.href}
-                      target={l.external ? '_blank' : undefined}
-                      rel={l.external ? 'noreferrer' : undefined}
-                      className="text-xs text-stone-500 hover:text-white transition-colors inline-flex items-center gap-1"
+          <div className="grid min-w-0 gap-8 sm:grid-cols-2">
+            <div>
+              <p className="eyebrow text-white/45">Work</p>
+              <ul className="mt-4 space-y-2">
+                {CASE_STUDIES.map((project) => (
+                  <li key={project.slug}>
+                    <Link
+                      to={`/work/${project.slug}`}
+                      className="text-sm text-white/60 transition-colors hover:text-paper"
                     >
-                      {l.label}
-                      {l.external && <ArrowUpRight size={10} />}
-                    </a>
+                      {project.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
+            <div>
+              <p className="eyebrow text-white/45">Connect</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/ryanlyncee"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white/60 transition-colors hover:text-paper"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/ryanlyn29"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white/60 transition-colors hover:text-paper"
+                  >
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-stone-500">
-          <span>© {year} Ryan Lyncee. Designed &amp; built in react + tailwind.</span>
-          <span className="inline-flex items-center gap-2">
-            made with care
-            <span className="inline-block w-1 h-1 rounded-full bg-stone-600" />
-            miami, fl
-          </span>
+        <div className="mt-16 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Ryan Lyncee</p>
+          <p>Open to internship opportunities</p>
         </div>
       </div>
     </footer>

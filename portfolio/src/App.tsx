@@ -1,19 +1,21 @@
-import { Routes, Route } from 'react-router-dom';
-import { MarketingNav } from './components/marketing/MarketingNav';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { MarketingFooter } from './components/marketing/MarketingFooter';
+import { MarketingNav } from './components/marketing/MarketingNav';
 import { HomePage } from './pages/HomePage';
 import { ProjectPage } from './pages/ProjectPage';
 
 export default function App() {
   return (
-    <div className="bg-[#FDFBF7] text-[#1C1E26] min-h-screen antialiased font-['DM_Sans']">
+    <div className="min-h-screen bg-paper text-ink">
       <MarketingNav />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/work/:slug" element={<ProjectPage />} />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
+      <main id="main-content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/work/:slug" element={<ProjectPage />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Routes>
+      </main>
 
       <MarketingFooter />
     </div>

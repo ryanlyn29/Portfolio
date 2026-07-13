@@ -91,6 +91,8 @@ export interface CaseStudy {
   slug: string;
   name: string;
   tagline: string;
+  /** Primary accent for case study page chrome — eyebrows, rings, highlights. */
+  themeAccent: string;
   cover: {
     /** Three frame colors stacked in the hero — matches the featured card frame style. */
     frames: [string, string, string];
@@ -193,6 +195,7 @@ const WHITEFLOW: CaseStudy = {
   slug: 'whiteflow',
   name: 'Whiteflow',
   tagline: 'Designing Trust into a Realtime Canvas',
+  themeAccent: '#C75B7A',
   cover: {
     frames: ['#EBBAC7', '#B5CDEF', '#C4D7D1'],
     icon: CircuitBoard,
@@ -449,6 +452,7 @@ const AGENTGUARD: CaseStudy = {
   slug: 'agentguard',
   name: 'AgentGuard',
   tagline: 'A 24-hour bet that prompt safety needed a dashboard, not a checklist',
+  themeAccent: '#3D6FEF',
   cover: {
     frames: ['#C4D7D1', '#EBBAC7', '#B5CDEF'],
     icon: ShieldCheck,
@@ -655,6 +659,7 @@ const CLINIX: CaseStudy = {
   slug: 'clinix',
   name: 'Clinix',
   tagline: 'Replacing a multi-step clinic form with a single honest conversation',
+  themeAccent: '#D64545',
   cover: {
     frames: ['#B5CDEF', '#EBBAC7', '#C4D7D1'],
     icon: Stethoscope,
@@ -863,6 +868,7 @@ const EDGESCOPE: CaseStudy = {
   slug: 'edgescope',
   name: 'EdgeScope',
   tagline: 'Real-time edge traffic intelligence — simulated, visualized, and explained by AI',
+  themeAccent: '#0071E3',
   cover: {
     frames: ['#C4D7D1', '#B5CDEF', '#EBBAC7'],
     icon: Globe,
@@ -1032,6 +1038,7 @@ const NAVORA: CaseStudy = {
   slug: 'navora',
   name: 'Navora',
   tagline: 'Headless physics simulation with a USD-first, viewer-agnostic pipeline',
+  themeAccent: '#248A3D',
   cover: {
     frames: ['#EBBAC7', '#C4D7D1', '#B5CDEF'],
     icon: Boxes,
@@ -1201,6 +1208,7 @@ const WEAVE: CaseStudy = {
   slug: 'weave',
   name: 'Weave',
   tagline: 'A messaging platform that remembers, organizes, and surfaces what matters',
+  themeAccent: '#8944AB',
   cover: {
     frames: ['#B5CDEF', '#EBBAC7', '#C4D7D1'],
     icon: MessagesSquare,

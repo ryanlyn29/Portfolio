@@ -1,43 +1,191 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-html {
-  scroll-behavior: smooth;
-  background-color: #FDFBF7;
-}
+  --color-ink: #111111;
+  --color-muted: #6b6b6b;
+  --color-paper: #ffffff;
+  --color-surface: #fafafa;
+  --color-surface-strong: #f5f5f5;
+  --color-line: #ededed;
+  --color-line-strong: #e0e0e0;
+  --color-action: #111111;
+  --color-accent: #4d80d1;
 
-body {
-  margin: 0;
-  font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 14px;
-  color: #1C1E26;
-  background-color: #FDFBF7;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+  --color-canvas-soft: #f5f5f7;
+  --color-heading-accent: #1f7a52;
 
-::selection {
-  background-color: #B5CDEF;
-  color: #0B1735;
+  /* Legacy aliases — keep CaseStudyPage working */
+  --color-navy: #111111;
+  --color-navy-soft: #f5f5f5;
+  --color-powder: #f5f5f5;
+  --color-sage: #f0f0f0;
+  --color-clay: #ebebeb;
+  --color-butter: #e8e8e8;
 }
 
 @layer base {
-  :root { color-scheme: light; }
-  h1, h2, h3, h4, h5 {
-    letter-spacing: -0.02em;
-    font-weight: 600;
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 7rem;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: "cv01" on, "cv09" on, "cv11" on;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    @apply transition-colors duration-200;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-action);
+    outline-offset: 3px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+
+  .eyebrow-accent {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-accent;
+  }
+
+  .heading-accent {
+    color: var(--color-heading-accent);
+  }
+
+  .display-heading {
+    @apply font-display font-semibold tracking-[-0.03em] text-ink;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-ink px-5 py-2.5 text-sm font-semibold text-paper;
+  }
+
+  .btn-primary:hover {
+    @apply bg-[#2a2a2a];
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-line bg-surface-strong px-5 py-2.5 text-sm font-semibold text-ink;
+  }
+
+  .btn-secondary:hover {
+    @apply border-line-strong bg-line;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-ink;
+  }
+
+  .btn-ghost:hover {
+    @apply border-line-strong bg-surface;
+  }
+
+  .surface-card {
+    @apply rounded-3xl border border-line bg-paper;
+  }
+
+  .surface-card-accent-ring {
+    @apply ring-8 ring-[#B5CDEF];
+  }
+
+  .surface-panel {
+    @apply rounded-[28px] bg-surface-strong;
+  }
+
+  .pill-tag {
+    @apply inline-flex items-center rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-muted;
+  }
+
+  .list-row {
+    @apply flex min-h-12 items-center gap-3 rounded-[10px] border border-line bg-surface-strong px-4 py-3 text-sm font-medium text-ink;
+  }
+
+  .list-row:hover {
+    @apply border-line-strong bg-line;
+  }
+
+  .project-index-card {
+    background: #ffffff;
+    border: 1px solid #e5e5ea;
+    border-radius: 1.25rem;
+    transition: border-color 180ms ease;
+  }
+
+  .project-index-card:hover {
+    border-color: color-mix(in srgb, var(--project-accent, #d1d1d6) 18%, #e5e5ea);
+  }
+
+  .app-store-icon {
+    border-radius: 22%;
+  }
+
+  .case-study-page .eyebrow-accent {
+    color: var(--case-study-accent);
+  }
+
+  .case-study-page .text-accent {
+    color: var(--case-study-accent);
+  }
+
+  .case-study-accent-ring {
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--case-study-accent) 38%, #ffffff);
+  }
+
+  .case-study-page .case-study-accent-fill {
+    background-color: var(--case-study-accent);
+    color: #ffffff;
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 0.32;
+    transform: scale(1.08);
+  }
+}
+
+@layer utilities {
+  .node-glow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: node-pulse 3.5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .node-glow {
+      animation: none;
+    }
   }
 }
