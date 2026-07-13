@@ -216,7 +216,10 @@ export function MarketingNav() {
             >
               GitHub
             </a>
-            <a href={location.pathname === '/' ? '#contact' : '/#contact'} className={ctaClass}>
+            <a
+              href={location.pathname === '/' ? '#contact' : '/#contact'}
+              className={`max-md:hidden ${ctaClass}`}
+            >
               Get in touch
             </a>
           </div>
@@ -246,6 +249,15 @@ export function MarketingNav() {
                 );
               })}
               <li className={scrolled ? 'border-t border-white/10 pt-2' : 'border-t border-line pt-2'}>
+                <a
+                  href={location.pathname === '/' ? '#contact' : '/#contact'}
+                  className={mobileNavLinkClass(activeHref === '#contact')}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Get in touch
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://github.com/ryanlyn29"
                   target="_blank"

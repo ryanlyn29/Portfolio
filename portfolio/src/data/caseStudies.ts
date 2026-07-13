@@ -195,7 +195,7 @@ const WHITEFLOW: CaseStudy = {
   slug: 'whiteflow',
   name: 'Whiteflow',
   tagline: 'Designing Trust into a Realtime Canvas',
-  themeAccent: '#C75B7A',
+  themeAccent: '#1f7a52',
   cover: {
     frames: ['#EBBAC7', '#B5CDEF', '#C4D7D1'],
     icon: CircuitBoard,

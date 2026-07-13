@@ -141,6 +141,80 @@
     border-color: color-mix(in srgb, var(--project-accent, #d1d1d6) 18%, #e5e5ea);
   }
 
+  .surface-card.project-feature-card {
+    --feature-bg: #08122a;
+    --feature-border: #152844;
+    --feature-elevated: #0c1a38;
+    --feature-surface: #183255;
+    --feature-surface-hover: #20406a;
+    --feature-accent: #6ee7a8;
+    --feature-accent-bright: color-mix(in srgb, var(--feature-accent) 38%, #ffffff);
+    background-color: var(--feature-bg);
+    border-color: var(--feature-border);
+    color: #ffffff;
+  }
+
+  .project-feature-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em];
+    color: var(--feature-accent-bright);
+  }
+
+  .project-feature-heading {
+    @apply font-semibold tracking-[-0.03em] text-white;
+  }
+
+  .project-feature-body {
+    @apply text-[#a8b8d0];
+  }
+
+  .project-feature-media-frame {
+    @apply rounded-2xl p-2 sm:p-3;
+    background-color: var(--feature-elevated);
+  }
+
+  .project-feature-media-inner {
+    @apply rounded-xl border-0;
+    background-color: var(--feature-surface);
+  }
+
+  .project-feature-divider {
+    border-color: var(--feature-border);
+  }
+
+  .project-feature-label {
+    color: #7a8ba8;
+  }
+
+  .project-feature-value {
+    color: #ffffff;
+  }
+
+  .project-feature-tag {
+    @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium;
+    background-color: #243d62;
+    color: #f0f4fa;
+  }
+
+  .project-feature-btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors;
+    background-color: #ffffff;
+    color: #08122a;
+  }
+
+  .project-feature-btn-primary:hover {
+    background-color: #e8eef8;
+  }
+
+  .project-feature-btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors;
+    background-color: var(--feature-surface);
+    color: #ffffff;
+  }
+
+  .project-feature-btn-secondary:hover {
+    background-color: var(--feature-surface-hover);
+  }
+
   .app-store-icon {
     border-radius: 22%;
   }

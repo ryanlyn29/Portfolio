@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -213,44 +213,69 @@ function AccentText({ children }: { children: ReactNode }) {
   return <span className="heading-accent">{children}</span>;
 }
 
+const FEATURE_PRIMARY_BTN = 'project-feature-btn-primary';
+const FEATURE_SECONDARY_BTN = 'project-feature-btn-secondary';
+
 function ProjectMedia({
   project,
   compact = false,
+  feature = false,
 }: {
   project: CaseStudy;
   compact?: boolean;
+  feature?: boolean;
 }) {
+  const frameClass = feature
+    ? 'project-feature-media-frame'
+    : 'rounded-2xl border border-line bg-surface p-2 sm:p-3';
+
   return (
-    <div className="rounded-2xl border border-line bg-surface p-2 sm:p-3">
+    <div className={frameClass}>
       <MediaFrame
         media={project.cover.media}
         fallbackIcon={project.cover.icon}
-        className={`${compact ? 'aspect-[16/11]' : 'aspect-[16/10]'} rounded-xl bg-surface-strong`}
+        className={`${compact ? 'aspect-[16/11]' : 'aspect-[16/10]'} ${
+          feature ? 'project-feature-media-inner' : 'rounded-xl bg-surface-strong'
+        }`}
       />
     </div>
   );
 }
 
-function ProjectMeta({ project }: { project: CaseStudy }) {
+function ProjectMeta({ project, feature = false }: { project: CaseStudy; feature?: boolean }) {
+  const dividerClass = feature ? 'project-feature-divider' : 'border-line';
+  const labelClass = feature ? 'project-feature-label' : 'text-muted';
+  const valueClass = feature ? 'project-feature-value' : 'text-ink';
+
   return (
-    <dl className="grid grid-cols-2 gap-4 border-t border-line pt-5 text-sm">
+    <dl className={`grid grid-cols-2 gap-4 border-t pt-5 text-sm ${dividerClass}`}>
       <div>
-        <dt className="eyebrow text-muted">Role</dt>
-        <dd className="mt-1.5 font-medium text-ink">{project.role}</dd>
+        <dt className={`eyebrow ${labelClass}`}>Role</dt>
+        <dd className={`mt-1.5 font-medium ${valueClass}`}>{project.role}</dd>
       </div>
       <div>
-        <dt className="eyebrow text-muted">Timeline</dt>
-        <dd className="mt-1.5 font-medium text-ink">{project.timeline}</dd>
+        <dt className={`eyebrow ${labelClass}`}>Timeline</dt>
+        <dd className={`mt-1.5 font-medium ${valueClass}`}>{project.timeline}</dd>
       </div>
     </dl>
   );
 }
 
-function ProjectTags({ project, count = 4 }: { project: CaseStudy; count?: number }) {
+function ProjectTags({
+  project,
+  count = 4,
+  feature = false,
+}: {
+  project: CaseStudy;
+  count?: number;
+  feature?: boolean;
+}) {
+  const tagClass = feature ? 'project-feature-tag' : 'pill-tag';
+
   return (
     <ul className="flex flex-wrap gap-2" aria-label={`${project.name} skills`}>
       {project.skills.slice(0, count).map((skill) => (
-        <li key={skill} className="pill-tag">
+        <li key={skill} className={tagClass}>
           {skill}
         </li>
       ))}
@@ -263,26 +288,31 @@ function LeadProjectCard({ project }: { project: CaseStudy }) {
   const category = PROJECT_CATEGORIES[project.slug];
 
   return (
-    <article className="surface-card surface-card-accent-ring overflow-hidden">
+    <article
+      className="surface-card project-feature-card overflow-hidden"
+      style={{ '--feature-accent': project.themeAccent } as CSSProperties}
+    >
       <div className="grid gap-8 p-5 sm:p-6 lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-8">
-        <ProjectMedia project={project} />
+        <ProjectMedia project={project} feature />
 
         <div className="flex flex-col">
-          <span className="pill-tag w-fit text-[11px] uppercase tracking-wider text-muted">
+          <span className="project-feature-eyebrow">
             {category ?? 'Featured'}
           </span>
-          <h3 className="display-heading mt-4 text-3xl sm:text-4xl">{project.name}</h3>
-          <p className="mt-3 text-base leading-relaxed text-muted">{project.tagline}</p>
+          <h3 className="project-feature-heading mt-4 text-3xl sm:text-4xl">
+            {project.name}
+          </h3>
+          <p className="project-feature-body mt-3 text-base leading-relaxed">{project.tagline}</p>
 
           <div className="mt-6">
-            <ProjectMeta project={project} />
+            <ProjectMeta project={project} feature />
           </div>
           <div className="mt-5">
-            <ProjectTags project={project} />
+            <ProjectTags project={project} feature />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to={`/work/${project.slug}`} className={`btn-primary ${FOCUS}`}>
+            <Link to={`/work/${project.slug}`} className={`${FEATURE_PRIMARY_BTN} ${FOCUS}`}>
               View project <ArrowRight size={16} aria-hidden />
             </Link>
             {github && (
@@ -290,7 +320,7 @@ function LeadProjectCard({ project }: { project: CaseStudy }) {
                 href={github.href}
                 target="_blank"
                 rel="noreferrer"
-                className={`btn-secondary ${FOCUS}`}
+                className={`${FEATURE_SECONDARY_BTN} ${FOCUS}`}
               >
                 GitHub <ArrowUpRight size={15} aria-hidden />
               </a>
@@ -307,34 +337,38 @@ function FeaturedProjectCard({ project, index }: { project: CaseStudy; index: nu
   const category = PROJECT_CATEGORIES[project.slug];
 
   return (
-    <article className="surface-card flex h-full flex-col p-5 sm:p-6">
-      <ProjectMedia project={project} compact />
+    <article
+      className="surface-card project-feature-card flex h-full flex-col p-5 sm:p-6"
+      style={{ '--feature-accent': project.themeAccent } as CSSProperties}
+    >
+      <ProjectMedia project={project} compact feature />
 
       <div className="flex flex-1 flex-col pt-6">
-        <span className="eyebrow-accent">{category ?? `Project ${String(index + 1).padStart(2, '0')}`}</span>
-        <h3 className="display-heading mt-3 text-2xl sm:text-3xl">{project.name}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted">{project.tagline}</p>
+        <span className="project-feature-eyebrow">
+          {category ?? `Project ${String(index + 1).padStart(2, '0')}`}
+        </span>
+        <h3 className="project-feature-heading mt-3 text-2xl sm:text-3xl">
+          {project.name}
+        </h3>
+        <p className="project-feature-body mt-2 text-sm leading-relaxed">{project.tagline}</p>
 
         <div className="mt-5">
-          <ProjectMeta project={project} />
+          <ProjectMeta project={project} feature />
         </div>
         <div className="mt-4">
-          <ProjectTags project={project} count={3} />
+          <ProjectTags project={project} count={3} feature />
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            to={`/work/${project.slug}`}
-            className={`btn-ghost w-fit ${FOCUS}`}
-          >
-            View project <ArrowUpRight size={15} aria-hidden />
+          <Link to={`/work/${project.slug}`} className={`${FEATURE_PRIMARY_BTN} ${FOCUS}`}>
+            View project <ArrowRight size={16} aria-hidden />
           </Link>
           {github && (
             <a
               href={github.href}
               target="_blank"
               rel="noreferrer"
-              className={`btn-ghost w-fit ${FOCUS}`}
+              className={`${FEATURE_SECONDARY_BTN} ${FOCUS}`}
             >
               GitHub <ArrowUpRight size={15} aria-hidden />
             </a>
@@ -578,9 +612,9 @@ export function HomePage() {
           aria-labelledby="about-heading"
           className="relative z-[3] px-4 pt-16 pb-16 sm:px-6 md:pt-24 md:pb-20 lg:px-8"
         >
-        <div className="surface-card surface-card-accent-ring relative z-10 mx-auto max-w-[1200px] px-6 py-16 sm:px-10 md:py-20 lg:px-14">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <div>
+        <div className="relative z-10 mx-auto max-w-[1200px] lg:rounded-3xl lg:border lg:border-line lg:bg-paper lg:px-14 lg:py-20 lg:ring-8 lg:ring-[#B5CDEF]">
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
               <p className="eyebrow-accent">About</p>
               <h2
                 id="about-heading"
@@ -604,7 +638,10 @@ export function HomePage() {
 
             </div>
 
-            <div aria-label="Experience" className="border-t border-line lg:border-t-0 lg:border-l lg:pl-12 lg:pt-0">
+            <div
+              aria-label="Experience"
+              className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:bg-transparent lg:p-0 lg:pl-12"
+            >
               <p className="eyebrow text-muted">Experience</p>
               {EXPERIENCE.map((item) => (
                 <article
@@ -624,8 +661,11 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="mt-14 grid gap-10 border-t border-line pt-12 lg:grid-cols-2 lg:gap-16">
-            <div aria-label="Activities">
+          <div className="mt-5 grid gap-5 lg:mt-14 lg:grid-cols-2 lg:gap-16 lg:border-t lg:border-line lg:pt-12">
+            <div
+              aria-label="Activities"
+              className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0"
+            >
               <p className="eyebrow text-muted">Activities</p>
               {ACTIVITIES.map((item) => (
                 <article
@@ -644,7 +684,10 @@ export function HomePage() {
               ))}
             </div>
 
-            <div aria-labelledby="certifications-heading">
+            <div
+              aria-labelledby="certifications-heading"
+              className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0"
+            >
               <p id="certifications-heading" className="eyebrow-accent">
                 Certifications
               </p>
@@ -768,8 +811,8 @@ export function HomePage() {
           height={300}
           className="top-1/2 -translate-y-1/2"
         />
-        <div className="surface-card surface-card-accent-ring relative z-10 mx-auto max-w-[1200px] px-6 py-14 sm:px-10 md:py-16 lg:px-14">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16">
+        <div className="relative z-10 mx-auto max-w-[1200px] lg:rounded-3xl lg:border lg:border-line lg:bg-paper lg:px-14 lg:py-16 lg:ring-8 lg:ring-[#B5CDEF]">
+          <div className="grid gap-10 rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
             <div>
               <p className="eyebrow-accent">Let&apos;s work together</p>
               <h2
@@ -799,7 +842,7 @@ export function HomePage() {
             </div>
           </div>
 
-          <dl className="mt-10 grid gap-4 border-t border-line pt-10 lg:grid-cols-3">
+          <dl className="mt-5 grid gap-4 rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:mt-10 lg:grid-cols-3 lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-t lg:bg-transparent lg:p-0 lg:pt-10">
             <div className="surface-panel p-5">
               <dt className="eyebrow text-muted">Availability</dt>
               <dd className="mt-2">

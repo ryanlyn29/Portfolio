@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  ExternalLink,
   Play,
   Quote,
   Sparkles,
@@ -48,38 +47,65 @@ export function CaseStudyPage({ project, prev, next }: CaseStudyPageProps) {
   );
 }
 
-function ProjectMedia({ project }: { project: CaseStudy }) {
+const FEATURE_PRIMARY_BTN = 'project-feature-btn-primary';
+const FEATURE_SECONDARY_BTN = 'project-feature-btn-secondary';
+
+function ProjectMedia({
+  project,
+  feature = false,
+}: {
+  project: CaseStudy;
+  feature?: boolean;
+}) {
+  const frameClass = feature
+    ? 'project-feature-media-frame'
+    : 'rounded-2xl border border-line bg-surface p-2 sm:p-3';
+
   return (
-    <div className="rounded-2xl border border-line bg-surface p-2 sm:p-3">
+    <div className={frameClass}>
       <MediaFrame
         media={project.cover.media}
         fallbackIcon={project.cover.icon}
-        className="aspect-[16/10] rounded-xl bg-surface-strong"
+        className={`aspect-[16/10] ${
+          feature ? 'project-feature-media-inner' : 'rounded-xl bg-surface-strong'
+        }`}
       />
     </div>
   );
 }
 
-function ProjectMeta({ project }: { project: CaseStudy }) {
+function ProjectMeta({ project, feature = false }: { project: CaseStudy; feature?: boolean }) {
+  const dividerClass = feature ? 'project-feature-divider' : 'border-line';
+  const labelClass = feature ? 'project-feature-label' : 'text-muted';
+  const valueClass = feature ? 'project-feature-value' : 'text-ink';
+
   return (
-    <dl className="grid grid-cols-2 gap-4 border-t border-line pt-5 text-sm">
+    <dl className={`grid grid-cols-2 gap-4 border-t pt-5 text-sm ${dividerClass}`}>
       <div>
-        <dt className="eyebrow text-muted">Role</dt>
-        <dd className="mt-1.5 font-medium text-ink">{project.role}</dd>
+        <dt className={`eyebrow ${labelClass}`}>Role</dt>
+        <dd className={`mt-1.5 font-medium ${valueClass}`}>{project.role}</dd>
       </div>
       <div>
-        <dt className="eyebrow text-muted">Timeline</dt>
-        <dd className="mt-1.5 font-medium text-ink">{project.timeline}</dd>
+        <dt className={`eyebrow ${labelClass}`}>Timeline</dt>
+        <dd className={`mt-1.5 font-medium ${valueClass}`}>{project.timeline}</dd>
       </div>
     </dl>
   );
 }
 
-function ProjectTags({ project }: { project: CaseStudy }) {
+function ProjectTags({
+  project,
+  feature = false,
+}: {
+  project: CaseStudy;
+  feature?: boolean;
+}) {
+  const tagClass = feature ? 'project-feature-tag' : 'pill-tag';
+
   return (
     <ul className="flex flex-wrap gap-2" aria-label={`${project.name} skills`}>
       {project.skills.map((skill) => (
-        <li key={skill} className="pill-tag">
+        <li key={skill} className={tagClass}>
           {skill}
         </li>
       ))}
@@ -95,33 +121,36 @@ function CaseStudyHero({ project }: { project: CaseStudy }) {
           <ArrowLeft size={15} aria-hidden /> Back to projects
         </Link>
 
-        <div className="surface-card case-study-accent-ring overflow-hidden">
+        <div
+          className="surface-card project-feature-card overflow-hidden"
+          style={{ '--feature-accent': project.themeAccent } as CSSProperties}
+        >
           <div className="grid gap-8 p-5 sm:p-6 lg:grid-cols-2 lg:items-start lg:gap-10 lg:p-8">
-            <ProjectMedia project={project} />
+            <ProjectMedia project={project} feature />
 
             <div className="flex flex-col">
-              <span className="pill-tag w-fit text-[11px] uppercase tracking-wider text-muted">
+              <span className="project-feature-eyebrow">
                 Case study · {project.timeline}
               </span>
 
-              <h1 className="display-heading mt-4 text-3xl sm:text-4xl lg:text-[2.75rem]">
+              <h1 className="project-feature-heading mt-4 text-3xl sm:text-4xl lg:text-[2.75rem]">
                 {project.name}
               </h1>
 
-              <p className="mt-3 text-base leading-relaxed text-muted sm:text-lg">
+              <p className="project-feature-body mt-3 text-base leading-relaxed sm:text-lg">
                 {project.tagline}
               </p>
 
               <div className="mt-6">
-                <ProjectMeta project={project} />
+                <ProjectMeta project={project} feature />
               </div>
 
               <div className="mt-5">
-                <ProjectTags project={project} />
+                <ProjectTags project={project} feature />
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#about" className={`btn-primary ${FOCUS}`}>
+                <a href="#about" className={`${FEATURE_PRIMARY_BTN} ${FOCUS}`}>
                   Read case study <ArrowRight size={16} aria-hidden />
                 </a>
                 {project.links.map((link) => (
@@ -130,9 +159,9 @@ function CaseStudyHero({ project }: { project: CaseStudy }) {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className={`btn-secondary ${FOCUS}`}
+                    className={`${FEATURE_SECONDARY_BTN} ${FOCUS}`}
                   >
-                    {link.label} <ExternalLink size={15} aria-hidden />
+                    {link.label} <ArrowUpRight size={15} aria-hidden />
                   </a>
                 ))}
               </div>
