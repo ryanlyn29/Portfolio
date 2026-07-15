@@ -142,16 +142,12 @@
   }
 
   .surface-card.project-feature-card {
-    --feature-bg: #08122a;
-    --feature-border: #152844;
-    --feature-elevated: #0c1a38;
-    --feature-surface: #183255;
-    --feature-surface-hover: #20406a;
-    --feature-accent: #6ee7a8;
-    --feature-accent-bright: color-mix(in srgb, var(--feature-accent) 38%, #ffffff);
+    --feature-accent: #2563eb;
+    --feature-accent-bright: var(--feature-accent);
+    --feature-bg: color-mix(in srgb, var(--feature-accent) 11%, #ffffff);
     background-color: var(--feature-bg);
-    border-color: var(--feature-border);
-    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--feature-accent) 20%, #ffffff);
+    color: var(--color-ink);
   }
 
   .project-feature-eyebrow {
@@ -160,59 +156,60 @@
   }
 
   .project-feature-heading {
-    @apply font-semibold tracking-[-0.03em] text-white;
+    @apply font-semibold tracking-[-0.03em] text-ink;
   }
 
   .project-feature-body {
-    @apply text-[#a8b8d0];
+    @apply text-muted;
   }
 
   .project-feature-media-frame {
-    @apply rounded-2xl p-2 sm:p-3;
-    background-color: var(--feature-elevated);
+    @apply overflow-hidden rounded-[18px] border bg-white p-0;
+    border-color: rgba(0, 0, 0, 0.08);
   }
 
   .project-feature-media-inner {
-    @apply rounded-xl border-0;
-    background-color: var(--feature-surface);
+    @apply rounded-none border-0 bg-white;
   }
 
   .project-feature-divider {
-    border-color: var(--feature-border);
+    border-color: color-mix(in srgb, var(--feature-accent) 24%, #ffffff);
   }
 
   .project-feature-label {
-    color: #7a8ba8;
+    @apply text-muted;
   }
 
   .project-feature-value {
-    color: #ffffff;
+    @apply text-ink;
   }
 
   .project-feature-tag {
     @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium;
-    background-color: #243d62;
-    color: #f0f4fa;
+    background-color: #ffffff;
+    color: color-mix(in srgb, var(--feature-accent) 68%, #1d1d1f);
   }
 
   .project-feature-btn-primary {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors;
-    background-color: #ffffff;
-    color: #08122a;
+    background-color: var(--color-ink);
+    color: var(--color-paper);
   }
 
   .project-feature-btn-primary:hover {
-    background-color: #e8eef8;
+    background-color: #2a2a2a;
   }
 
   .project-feature-btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors;
-    background-color: var(--feature-surface);
-    color: #ffffff;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border px-5 py-2.5 text-sm font-semibold transition-colors;
+    background-color: #ffffff;
+    border-color: color-mix(in srgb, var(--feature-accent) 30%, #ffffff);
+    color: color-mix(in srgb, var(--feature-accent) 58%, #1d1d1f);
   }
 
   .project-feature-btn-secondary:hover {
-    background-color: var(--feature-surface-hover);
+    background-color: color-mix(in srgb, var(--feature-accent) 9%, #ffffff);
+    border-color: var(--feature-accent);
   }
 
   .app-store-icon {

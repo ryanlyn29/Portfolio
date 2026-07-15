@@ -66,6 +66,7 @@ function ProjectMedia({
       <MediaFrame
         media={project.cover.media}
         fallbackIcon={project.cover.icon}
+        bordered={!feature}
         className={`aspect-[16/10] ${
           feature ? 'project-feature-media-inner' : 'rounded-xl bg-surface-strong'
         }`}

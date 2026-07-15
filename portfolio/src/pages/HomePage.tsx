@@ -3,19 +3,34 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   ArrowUpRight,
+  Atom,
   Award,
   BarChart3,
+  Boxes,
   BrainCircuit,
+  Cloud,
   Code2,
+  Coffee,
   Compass,
+  Container,
   Database,
+  FileCode2,
+  Figma,
   FlaskConical,
   Globe,
+  Leaf,
   Mail,
   MapPin,
   Radar,
+  Radio,
   Server,
+  Sparkles,
+  Terminal,
+  Triangle,
+  Wind,
+  Zap,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { MediaFrame } from '../components/marketing/MediaFrame';
 import { CircuitHero } from '../components/marketing/CircuitHero';
 import {
@@ -44,24 +59,24 @@ const SNAPSHOT_META = [
   },
 ] as const;
 
-const TOOLS = [
-  'React',
-  'TypeScript',
-  'Next.js',
-  'Tailwind',
-  'Node',
-  'Python',
-  'Figma',
-  'PostgreSQL',
-  'Socket.io',
-  'Redis',
-  'Java',
-  'Spring Boot',
-  'Docker',
-  'FastAPI',
-  'Cloudflare',
-  'Gemini',
-] as const;
+const TOOLS: Array<{ label: string; icon: LucideIcon }> = [
+  { label: 'React', icon: Atom },
+  { label: 'TypeScript', icon: FileCode2 },
+  { label: 'Next.js', icon: Triangle },
+  { label: 'Tailwind', icon: Wind },
+  { label: 'Node', icon: Server },
+  { label: 'Python', icon: Terminal },
+  { label: 'Figma', icon: Figma },
+  { label: 'PostgreSQL', icon: Database },
+  { label: 'Socket.io', icon: Radio },
+  { label: 'Redis', icon: Boxes },
+  { label: 'Java', icon: Coffee },
+  { label: 'Spring Boot', icon: Leaf },
+  { label: 'Docker', icon: Container },
+  { label: 'FastAPI', icon: Zap },
+  { label: 'Cloudflare', icon: Cloud },
+  { label: 'Gemini', icon: Sparkles },
+];
 
 const PROJECT_CATEGORIES: Record<string, string> = {
   whiteflow: 'Realtime collaboration',
@@ -234,6 +249,7 @@ function ProjectMedia({
       <MediaFrame
         media={project.cover.media}
         fallbackIcon={project.cover.icon}
+        bordered={!feature}
         className={`${compact ? 'aspect-[16/11]' : 'aspect-[16/10]'} ${
           feature ? 'project-feature-media-inner' : 'rounded-xl bg-surface-strong'
         }`}
@@ -500,6 +516,14 @@ export function HomePage() {
             height={180}
             className="top-1/2 -translate-y-1/2"
           />
+          <img
+            src="/images/ryan-bot.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="pointer-events-none absolute bottom-full right-8 z-20 hidden w-[210px] translate-y-[3px] select-none object-contain lg:block xl:right-12 xl:w-[230px]"
+          />
           <dl className="surface-card surface-card-accent-ring relative z-10 grid overflow-hidden md:grid-cols-3 md:divide-x md:divide-line">
             {SNAPSHOT_META.map((point, index) => (
               <div
@@ -538,11 +562,15 @@ export function HomePage() {
           Technical stack
         </h2>
         <ul className="mt-5 flex flex-wrap gap-2">
-          {TOOLS.map((tool) => (
-            <li key={tool} className="pill-tag">
-              {tool}
-            </li>
-          ))}
+          {TOOLS.map((tool) => {
+            const Icon = tool.icon;
+            return (
+              <li key={tool.label} className="btn-secondary px-4 py-2.5">
+                <Icon size={16} aria-hidden className="shrink-0" />
+                {tool.label}
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -550,7 +578,7 @@ export function HomePage() {
       <section
         id="projects"
         aria-labelledby="projects-heading"
-        className="bg-canvas-soft py-16 md:py-24"
+        className="bg-paper py-16 md:py-24"
       >
         <div className="site-container">
         <header className="grid gap-6 md:grid-cols-[minmax(0,0.32fr)_1fr] md:gap-12">
@@ -613,6 +641,14 @@ export function HomePage() {
           className="relative z-[3] px-4 pt-16 pb-16 sm:px-6 md:pt-24 md:pb-20 lg:px-8"
         >
         <div className="relative z-10 mx-auto max-w-[1200px] lg:rounded-3xl lg:border lg:border-line lg:bg-paper lg:px-14 lg:py-20 lg:ring-8 lg:ring-[#B5CDEF]">
+          <img
+            src="/images/ryan-bot-sitting.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="pointer-events-none absolute right-10 top-0 z-20 hidden w-[165px] -translate-y-[71%] select-none object-contain lg:block xl:right-14 xl:w-[180px]"
+          />
           <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
               <p className="eyebrow-accent">About</p>
@@ -790,7 +826,7 @@ export function HomePage() {
             {metrics.map((metric, index) => (
               <div
                 key={metric.label}
-                className={`px-4 py-7 sm:px-6 ${index % 2 === 1 ? 'border-l border-line' : ''} ${index > 1 ? 'border-t border-line lg:border-t-0' : ''} ${index > 0 ? 'lg:border-l lg:border-line' : ''} ${index >= 4 ? 'lg:border-t lg:border-line' : ''}`}
+                className={`px-4 py-7 sm:px-6 ${index === metrics.length - 1 ? 'col-span-2' : ''} ${index % 2 === 1 ? 'border-l border-line' : ''} ${index > 1 ? 'border-t border-line lg:border-t-0' : ''} ${index > 0 ? 'lg:border-l lg:border-line' : ''} ${index >= 4 ? 'lg:border-t lg:border-line' : ''}`}
               >
                 <dt className="display-heading text-3xl sm:text-4xl">{metric.value}</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-muted">{metric.label}</dd>

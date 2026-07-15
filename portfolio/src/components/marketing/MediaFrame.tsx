@@ -9,6 +9,7 @@ type MediaFrameProps = {
   fallbackIcon: LucideIcon;
   fallbackBg?: string;
   className?: string;
+  bordered?: boolean;
 };
 
 function resolveMedia(media: MediaInput) {
@@ -33,6 +34,7 @@ export function MediaFrame({
   fallbackIcon: Icon,
   fallbackBg = 'var(--color-surface)',
   className = '',
+  bordered = true,
 }: MediaFrameProps) {
   const [failed, setFailed] = useState(false);
   const asset = resolveMedia(media);
@@ -43,7 +45,7 @@ export function MediaFrame({
 
   return (
     <div
-      className={`relative overflow-hidden border border-line bg-surface ${className}`}
+      className={`relative overflow-hidden bg-surface ${bordered ? 'border border-line' : ''} ${className}`}
       style={showFallback ? { backgroundColor: fallbackBg } : undefined}
     >
       {showFallback ? (
